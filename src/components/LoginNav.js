@@ -2,16 +2,20 @@ import React from 'react';
 import { View, Pressable, StyleSheet, Text } from 'react-native';
 
 const LoginNav = ({ navigation }) => {
-  // console.log(navigation);
-  const handlePress = () => {
-    navigation.navigate('Login');
+  const handleSignInPress = () => {
+    navigation.navigate('Sign In');
   };
+  const handleSignUpPress = () => {
+    navigation.navigate('Sign Up');
+  };
+
   return (
-    <View style={styles.container}>
-      <Pressable onPress={handlePress} style={styles.signInBtn}>
+    <View style={styles.loginNaveContainer}>
+      <Pressable onPress={handleSignInPress} style={styles.signInBtn}>
         <Text style={styles.btnTxt}>SIGN IN</Text>
       </Pressable>
-      <Pressable style={styles.signUpBtn}>
+
+      <Pressable onPress={handleSignUpPress} style={styles.signUpBtn}>
         <Text style={styles.btnTxt}>SIGN UP</Text>
       </Pressable>
     </View>
@@ -19,7 +23,7 @@ const LoginNav = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  loginNaveContainer: {
     alignSelf: 'flex-end',
     position: 'absolute',
     bottom: 0,
