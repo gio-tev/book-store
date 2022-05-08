@@ -4,16 +4,14 @@ import DATA from '../../api/book.json';
 import BookDetailsItem from '../components/BookDetailsItem';
 // import Header from '../components/Header';
 
-const BookDetails = ({ navigation }) => {
+const BookDetails = () => {
   return (
     <View>
       <View style={styles.booksontainer}>
         <FlatList
           // numColumns={1}
           data={DATA}
-          renderItem={({ item }) => (
-            <BookDetailsItem item={item} navigation={navigation} />
-          )}
+          renderItem={({ item }) => <BookDetailsItem item={item} />}
           keyExtractor={item => item.id}
         />
       </View>

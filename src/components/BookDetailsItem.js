@@ -1,17 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Pressable, Text, Image } from 'react-native';
-import { AppContext } from '../store/AppContext';
 
-const HomeItem = ({ item, navigation }) => {
-  const { dispatch } = useContext(AppContext);
+import { Ionicons } from '@expo/vector-icons';
+import ModalComp from './Modal';
+
+const HomeItem = ({ item }) => {
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleMorePress = () => {};
   const handleAddPress = () => {
-    dispatch({ type: 'ADD_TO_CART', payload: item });
+    setModalVisible(!modalVisible);
   };
 
   return (
     <View style={styles.container}>
+      <ModalComp
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        item={item}
+      />
+
       <Image source={{ uri: item.cover }} style={styles.img} />
 
       <View style={styles.titlesBtnsContainer}>
@@ -41,6 +49,7 @@ const HomeItem = ({ item, navigation }) => {
             <Text style={styles.btnTxt}>More</Text>
           </Pressable>
           <Pressable style={styles.btn} onPress={handleAddPress}>
+            <Ionicons name="add" size={24} color="#FFF" style={styles.icon} />
             <Text style={styles.btnTxt}>Add To Cart</Text>
           </Pressable>
         </View>
@@ -57,7 +66,6 @@ const styles = StyleSheet.create({
   },
   img: {
     width: '35%',
-    // alignSelf: 'center',
     height: 200,
   },
   titlesBtnsContainer: {
@@ -94,22 +102,22 @@ const styles = StyleSheet.create({
   btnsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // marginTop: 20,
-    // position: 'absolute',
-    // bottom: 15,
-    // left: 15,
   },
   btn: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#6200EE',
-    paddingHorizontal: 15,
-    paddingVertical: 7,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     borderRadius: 100,
   },
   btnTxt: {
     fontFamily: 'Montserrat_700Bold',
-    // fontFamily: 'Montserrat_500Medium',
     fontSize: 14,
     color: '#fff',
+  },
+  icon: {
+    marginLeft: -5,
   },
 });
 
