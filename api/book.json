@@ -6,7 +6,8 @@
     "publisher": "Indus House",
     "isbn": "746fs4222",
     "year": 1983,
-    "cover": "//training.pyther.com/books/0746066928_cover_image.jpg"
+    "cost": "$75",
+    "cover": "https://training.pyther.com/books/9780746066928_cover_image.jpg"
   },
   {
     "id": "2",
@@ -14,8 +15,9 @@
     "author": "Taks",
     "publisher": "Mara House",
     "isbn": "73fs4222",
+    "cost": "$54",
     "year": 1978,
-    "cover": "//training.pyther.com/books/1409509202_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781409509202_cover_image.jpg"
   },
   {
     "id": "3",
@@ -23,8 +25,9 @@
     "author": "Mat",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$44",
     "year": 1999,
-    "cover": "//training.pyther.com/books/1409509233_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781409509233_cover_image.jpg"
   },
   {
     "id": "4",
@@ -32,8 +35,9 @@
     "author": "Manish",
     "publisher": "Indus Books",
     "isbn": "76fs4222",
+    "cost": "$23",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1409523352_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781409523352_cover_image.jpg"
   },
   {
     "id": "5",
@@ -41,8 +45,9 @@
     "author": "Vivek",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 2010,
-    "cover": "//training.pyther.com/books/1409598596_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781409598596_cover_image.jpg"
   },
   {
     "id": "6",
@@ -50,8 +55,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474914338_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474914338_cover_image.jpg"
   },
   {
     "id": "7",
@@ -59,8 +65,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474941044_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474941044_cover_image.jpg"
   },
   {
     "id": "8",
@@ -68,8 +75,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474950589_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474950589_cover_image.jpg"
   },
   {
     "id": "9",
@@ -77,8 +85,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474950855_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474950855_cover_image.jpg"
   },
   {
     "id": "10",
@@ -86,8 +95,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474959940_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474959940_cover_image.jpg"
   },
   {
     "id": "11",
@@ -95,8 +105,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474966849_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474966849_cover_image.jpg"
   },
   {
     "id": "12",
@@ -104,8 +115,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474968942_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474969802_cover_image.jpg"
   },
   {
     "id": "13",
@@ -113,8 +125,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474969802_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474970495_cover_image.jpg"
   },
   {
     "id": "14",
@@ -122,8 +135,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474970495_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474972208_cover_image.jpg"
   },
   {
     "id": "15",
@@ -131,8 +145,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474972208_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474977111_cover_image.jpg"
   },
   {
     "id": "16",
@@ -140,8 +155,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474977111_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474978439_cover_image.jpg"
   },
   {
     "id": "17",
@@ -149,8 +165,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474973439_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474981323_cover_image.jpg"
   },
   {
     "id": "18",
@@ -158,8 +175,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474981323_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474981323_cover_image.jpg"
   },
   {
     "id": "19",
@@ -167,8 +185,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474981354_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474981354_cover_image.jpg"
   },
   {
     "id": "20",
@@ -176,8 +195,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474985420_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474985420_cover_image.jpg"
   },
   {
     "id": "21",
@@ -185,8 +205,9 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474986694_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474986694_cover_image.jpg"
   },
   {
     "id": "22",
@@ -194,7 +215,8 @@
     "author": "Tulsidas",
     "publisher": "Indus House",
     "isbn": "746fs4222",
+    "cost": "$48",
     "year": 1983,
-    "cover": "//training.pyther.com/books/1474991513_cover_image.jpg"
+    "cover": "https://training.pyther.com/books/9781474991513_cover_image.jpg"
   }
 ]

@@ -12,31 +12,35 @@ const SignUp = ({ navigation }) => {
   const appCtx = useContext(AppContext);
 
   const [newUser, setNewUser] = useState({
-    Name: '',
-    Email: '',
-    Phone: '',
-    Password: '',
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+    image: '',
   });
+
   const [clearInputs, SetClearInputs] = useState(false);
 
   const handleSignInPress = () => navigation.navigate('Sign In');
 
   const handlePress = () => {
     if (
-      newUser.Name.length > 2 &&
-      newUser.Email.length > 4 &&
-      newUser.Phone.length > 4 &&
-      newUser.Password.length > 4
+      newUser.name.length > 2 &&
+      newUser.email.length > 4 &&
+      newUser.phone.length > 4 &&
+      newUser.password.length > 4 &&
+      newUser.image.length > 4
     ) {
       appCtx.dispatch({ type: 'NEW_ACCOUNT', payload: newUser });
 
       SetClearInputs(true);
 
       setNewUser({
-        Name: '',
-        Email: '',
-        Phone: '',
-        Password: '',
+        name: '',
+        email: '',
+        phone: '',
+        password: '',
+        image: '',
       });
 
       navigation.navigate('Success');

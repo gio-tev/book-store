@@ -10,7 +10,7 @@ export default StyleSheet.create({
   signInUpContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '60%',
+    width: '55%',
     marginBottom: 10,
     // borderColor: 'red',
     // borderWidth: 1,

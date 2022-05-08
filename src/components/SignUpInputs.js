@@ -18,18 +18,16 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
   const [passwordInputActive, setPasswordInputActive] = useState(false);
   const [passwordInputIsValid, setPasswordInputIsValid] = useState(true);
 
+  const [imageValue, setImageValue] = useState('');
+  const [imageInputActive, setImageInputActive] = useState(false);
+  const [imageInputIsValid, setImageInputIsValid] = useState(true);
+
   useEffect(() => {
     if (clearInputs) {
-      console.log('Yes');
       setNameValue('');
       setEmailValue('');
       setPhoneValue('');
       setPasswordValue('');
-
-      setNameInputIsValid(true);
-      setEmailInputIsValid(true);
-      setPhoneInputIsValid(true);
-      setPasswordInputIsValid(true);
 
       SetClearInputs(false);
     }
@@ -42,7 +40,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
     if (name.length > 2) {
       setNameInputIsValid(true);
       setUser(prevState => {
-        return { ...prevState, Name: name };
+        return { ...prevState, name };
       });
     } else setNameInputIsValid(false);
   };
@@ -56,7 +54,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
       setEmailInputIsValid(true);
 
       setUser(prevState => {
-        return { ...prevState, Email: email };
+        return { ...prevState, email };
       });
     } else setEmailInputIsValid(false);
   };
@@ -70,7 +68,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
       setPhoneInputIsValid(true);
 
       setUser(prevState => {
-        return { ...prevState, Phone: phone };
+        return { ...prevState, phone };
       });
     } else setPhoneInputIsValid(false);
   };
@@ -84,9 +82,23 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
       setPasswordInputIsValid(true);
 
       setUser(prevState => {
-        return { ...prevState, Password: password };
+        return { ...prevState, password };
       });
     } else setPasswordInputIsValid(false);
+  };
+
+  const handleImageFocus = () => setImageInputActive(true);
+  const handleImageBlur = () => setImageInputActive(false);
+  const handleImageChange = image => {
+    setImageValue(image);
+
+    if (image.length > 4) {
+      setImageInputIsValid(true);
+
+      setUser(prevState => {
+        return { ...prevState, image };
+      });
+    } else setImageInputIsValid(false);
   };
 
   return (
@@ -137,6 +149,17 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
           Password must contain 5 or more letters.
         </Text>
       )}
+      <TextInput
+        onChangeText={handleImageChange}
+        onFocus={handleImageFocus}
+        onBlur={handleImageBlur}
+        style={[styles.inputs, imageInputActive ? styles.inputActive : '']}
+        placeholder="Image URL"
+        value={imageValue}
+      />
+      {!imageInputIsValid && (
+        <Text style={styles.error}>Image must contain valid URL.</Text>
+      )}
     </View>
   );
 };
@@ -156,7 +179,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.4,
   },
   error: {
-    color: 'red',
+    color: '#eb1e1e',
   },
 });
 

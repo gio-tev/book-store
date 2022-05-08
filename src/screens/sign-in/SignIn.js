@@ -1,16 +1,49 @@
-import React, { useState } from 'react';
-import { View, Text, Pressable, TextInput } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, Pressable } from 'react-native';
 import SignInStyles from './SignInStyles';
 import SignInInputs from '../../components/SignInInputs';
+import { AppContext } from '../../store/AppContext';
 
 const styles = SignInStyles;
 
 const SignIn = ({ navigation }) => {
+  const appCtx = useContext(AppContext);
+
+  const [signIn, setSignIn] = useState({
+    email: '',
+    password: '',
+  });
+  const [SignInError, setSignInError] = useState(false);
   const [continueForgotActive, setContinueForgotActive] = useState(1);
 
   const handleSignUpPress = () => navigation.navigate('Sign Up');
 
-  const handleContinuePress = () => setContinueForgotActive(1);
+  const handleContinuePress = () => {
+    setContinueForgotActive(1);
+
+    appCtx.state.accounts.map(account => {
+      if (
+        account.email === signIn.email &&
+        account.password === signIn.password
+      ) {
+        appCtx.dispatch({ type: 'LOGGED_USER', payload: account });
+
+        setSignInError(false);
+
+        navigation.navigate('DrawerNavigation');
+
+        setSignIn({
+          email: '',
+          password: '',
+        });
+        // console.log('Yes');
+      } else {
+        setSignInError(true);
+        // console.log('Noo');
+      }
+    });
+  };
+
   const handleForgotPress = () => setContinueForgotActive(2);
 
   return (
@@ -24,7 +57,11 @@ const SignIn = ({ navigation }) => {
         </Pressable>
       </View>
 
-      <SignInInputs />
+      <SignInInputs
+        setSignIn={setSignIn}
+        SignInError={SignInError}
+        signIn={signIn}
+      />
 
       <View style={styles.ContinueForgotContainer}>
         <Pressable onPress={handleContinuePress} style={styles.continueBtn}>

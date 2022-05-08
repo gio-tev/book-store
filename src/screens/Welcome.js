@@ -26,13 +26,14 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   img: {
-    height: '45%',
+    height: '40%',
     width: '100%',
     // resizeMode: 'contain',
+    // marginTop: -75,
   },
   text1Container: {
     // textAlign: 'center',
-    marginTop: '6%',
+    marginTop: '10%',
   },
   text1: {
     textAlign: 'center',
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#6200EE',
     marginTop: '8%',
+    fontSize: 17,
   },
 });
 
