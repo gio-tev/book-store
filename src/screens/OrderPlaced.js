@@ -57,13 +57,6 @@ const styles = StyleSheet.create({
     padding: 25,
     borderRadius: 100,
   },
-  //   tt: {
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //     borderColor: 'red',
-  //     borderWidth: 1,
-  //     backgroundColor: 'red',
-  //   },
   order: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 30,

@@ -28,17 +28,12 @@ function CustomDrawerContent(props) {
           <Text style={styles.btnTxt}>Edit Profile</Text>
         </Pressable>
       </View>
-      <DrawerContentScrollView
-        {...props}
-        // contentContainerStyle={{ backgroundColor: 'red' }}
-      >
+      <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
         <DrawerItem
           label="Log Out"
           labelStyle={{ marginLeft: -20 }}
-          icon={({ focused, color, size }) => (
-            <AntDesign name="logout" size={24} color="black" />
-          )}
+          icon={() => <AntDesign name="logout" size={24} color="black" />}
           onPress={() => {
             dispatch({ type: 'LOG_OUT' });
             props.navigation.navigate('Welcome');
@@ -53,11 +48,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileContainer: {
-    // height: '17%',
     marginTop: 20,
     marginLeft: 20,
     paddingBottom: 30,
-    // backgroundColor: '#6200EE',
     borderBottomColor: 'grey',
     borderBottomWidth: 1,
   },
@@ -79,8 +72,6 @@ const styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: '#6200EE',
-    // paddingHorizontal: 10,
-    // paddingVertical: 10,
     padding: 10,
     width: '50%',
     borderRadius: 100,

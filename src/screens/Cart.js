@@ -7,12 +7,10 @@ import {
   FlatList,
   Pressable,
 } from 'react-native';
-// import DATA from '../../api/book.json';
 import CartItem from '../components/CartItem';
 import { AppContext } from '../store/AppContext';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
 import ModalComp from '../components/Modal';
 
 const Cart = ({ navigation }) => {
@@ -22,7 +20,6 @@ const Cart = ({ navigation }) => {
 
   const handlePress = () => {
     setModalVisible(!modalVisible);
-    // Show modal and order placed component
   };
 
   return (
@@ -37,7 +34,6 @@ const Cart = ({ navigation }) => {
 
       <View style={styles.booksContainer}>
         <FlatList
-          // numColumns={1}
           data={DATA}
           renderItem={({ item }) => <CartItem item={item} />}
           keyExtractor={item => item.id}
@@ -49,8 +45,6 @@ const Cart = ({ navigation }) => {
             <Entypo name="price-ribbon" size={24} color="#6200EE" />
             <Text style={styles.promo}>Add Promo Code</Text>
           </View>
-          {/* <FontAwesome name="long-arrow-right" size={24} color="black" /> */}
-          {/* <FontAwesome5 name="arrow-right" size={20} color="#6200EE" /> */}
         </View>
 
         <View style={styles.priceBtnContainer}>
@@ -76,7 +70,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   booksContainer: {
-    // flex: 1,
     width: '95%',
     borderLeftColor: 'lightgrey',
     borderRightColor: 'lightgrey',
@@ -87,15 +80,12 @@ const styles = StyleSheet.create({
   promoTotalContainer: {
     position: 'absolute',
     bottom: 0,
-    // width: '95%',
     width: '95%',
   },
   promoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
     padding: 20,
-    // width: '80%',
     backgroundColor: '#D8D8D8',
   },
   promo: {
@@ -109,8 +99,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // alignItems: 'space-between',
-    // marginTop: 20,
     backgroundColor: '#D8D8D8',
     paddingHorizontal: 10,
     paddingVertical: 20,
@@ -126,16 +114,12 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   totalsContainer: {
-    // width: '60%',
     height: 65,
     justifyContent: 'space-between',
-    // borderColor: 'red',
-    // borderWidth: 1,
   },
   total: {
     fontFamily: 'Montserrat_500Medium',
     color: '#888888',
-    // letterSpacing: 0.01,
     fontSize: 13,
   },
   free: {
@@ -150,8 +134,6 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     fontFamily: 'Montserrat_700Bold',
-    // fontFamily: 'Montserrat_500Medium',
-    // fontSize: 15,
     color: 'white',
     marginRight: 5,
   },

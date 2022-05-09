@@ -16,10 +16,7 @@ const ModalComp = ({
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>
-            {/* Are you sure you want to add item in cart ? */}
-            {title}
-          </Text>
+          <Text style={styles.modalText}>{title}</Text>
           <View style={styles.modalBtnsContainer}>
             <Pressable
               style={[styles.button, styles.buttonClose]}
@@ -30,7 +27,6 @@ const ModalComp = ({
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
-                // dispatch({ type: 'ADD_TO_CART', payload: item });
                 dispatch({ type: `${TYPE}`, payload: item ? item : '' });
                 setModalVisible(!modalVisible);
                 if (TYPE === 'PLACE_ORDER') navigation.navigate('OrderPlaced');
@@ -50,7 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 22,
   },
   modalView: {
     margin: 20,

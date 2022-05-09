@@ -8,7 +8,6 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
   const handleEmailFocus = () => setEmailInputActive(true);
   const handleEmailBlur = () => setEmailInputActive(false);
   const handleEmailChange = email => {
-    // if (email.legth > 4)
     setSignIn(prevState => {
       return { ...prevState, email };
     });
@@ -17,7 +16,6 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
   const handlePasswordFocus = () => setPasswordInputActive(true);
   const handlePasswordBlur = () => setPasswordInputActive(false);
   const handlePasswordChange = password => {
-    // if (password.legth > 4)
     setSignIn(prevState => {
       return { ...prevState, password };
     });

@@ -77,11 +77,9 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     alignItems: 'center',
-    // marginLeft: 50,
   },
   titlesContainer: {
     flexDirection: 'row',
-    // marginLeft: 40,
   },
   titles: {
     fontFamily: 'Montserrat_700Bold',
@@ -96,8 +94,6 @@ const styles = StyleSheet.create({
     color: '#877be3',
     lineHeight: 25,
     marginLeft: 5,
-    // letterSpacing: 1,
-    // marginBottom: 30,
   },
   btn: {
     flexDirection: 'row',
@@ -112,7 +108,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Montserrat_700Bold',
     fontSize: 17,
-    // marginRight: 10,
   },
 });
 

@@ -33,14 +33,9 @@ const CartItem = ({ item }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 10,
     flexDirection: 'row',
-    // marginBottom: 5,
-    // borderColor: 'red',
-    // borderWidth: 1,
-    // justifyContent: 'space-evenly',
   },
   img: {
     width: '18%',

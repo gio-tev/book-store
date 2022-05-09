@@ -75,11 +75,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#E8E8E8',
     justifyContent: 'space-between',
-    // borderBottomColor: '#C8C8C8',
-    // borderBottomWidth: 1,
-
-    // borderTopColor: '#C8C8C8',
-    // borderTopWidth: 1,
   },
   descriptionTitleContainer: {
     marginTop: -30,

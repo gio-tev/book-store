@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 30,
@@ -12,8 +11,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     width: '55%',
     marginBottom: 10,
-    // borderColor: 'red',
-    // borderWidth: 1,
   },
   signInUpActive: {
     fontFamily: 'Montserrat_500Medium',
@@ -28,21 +25,7 @@ export default StyleSheet.create({
     color: 'grey',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    // borderRadius: 100,
   },
-  // inputContainer: {
-  //   width: '90%',
-  //   marginBottom: 40,
-  // },
-  // inputs: {
-  //   borderBottomColor: 'grey',
-  //   borderBottomWidth: 0.2,
-  //   height: 40,
-  // },
-  // inputActive: {
-  //   borderBottomColor: 'grey',
-  //   borderBottomWidth: 1.4,
-  // },
   ContinueForgotContainer: {
     textAlign: 'center',
     width: '92%',

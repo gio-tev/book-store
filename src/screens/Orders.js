@@ -1,12 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  View,
-  StyleSheet,
-  Pressable,
-  Text,
-  Modal,
-  FlatList,
-} from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import OrdersItem from '../components/OrdersItem';
 
@@ -37,10 +30,6 @@ const styles = StyleSheet.create({
   },
   ordersContainer: {
     width: '95%',
-    // borderLeftColor: 'lightgrey',
-    // borderRightColor: 'lightgrey',
-    // borderLeftWidth: 2,
-    // borderRightWidth: 2,
     alignSelf: 'center',
   },
   total: {

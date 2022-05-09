@@ -28,11 +28,8 @@ const styles = StyleSheet.create({
   img: {
     height: '40%',
     width: '100%',
-    // resizeMode: 'contain',
-    // marginTop: -75,
   },
   text1Container: {
-    // textAlign: 'center',
     marginTop: '10%',
   },
   text1: {
@@ -43,7 +40,6 @@ const styles = StyleSheet.create({
   },
   text2: {
     textAlign: 'center',
-    // flex: 1,
     fontFamily: 'Montserrat_500Medium',
     textAlign: 'center',
     color: '#6200EE',

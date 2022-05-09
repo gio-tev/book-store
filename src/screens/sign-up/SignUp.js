@@ -4,8 +4,6 @@ import SignUpStyles from './SignUpStyles';
 import SignUpInputs from '../../components/SignUpInputs';
 import { AppContext } from '../../store/AppContext';
 
-// import { useForm, Controller } from 'react-hook-form';
-
 const styles = SignUpStyles;
 
 const SignUp = ({ navigation }) => {

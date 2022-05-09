@@ -14,7 +14,6 @@ const HomeItem = ({ item, navigation }) => {
     <Pressable style={styles.container} onPress={handlePress}>
       <Image source={{ uri: item.cover }} style={styles.img} />
       <View style={styles.titlesContainer}>
-        {/* <Text style={styles.title}>{item.title}</Text> */}
         <Text style={styles.title}>By:</Text>
         <Text style={styles.author}>{item.author}</Text>
       </View>
@@ -25,15 +24,12 @@ const HomeItem = ({ item, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     width: '50%',
-    // height: 300,
     paddingVertical: 5,
-    // justifyContent: 'center',
   },
   titlesContainer: {
     borderBottomColor: '#C8C8C8',
     borderBottomWidth: 1,
     width: '80%',
-    // // height: 100,
     alignSelf: 'center',
     paddingVertical: 5,
     flexDirection: 'row',
@@ -42,7 +38,6 @@ const styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     height: 200,
-    // marginBottom: 5,
   },
   title: {
     fontFamily: 'Montserrat_500Medium',

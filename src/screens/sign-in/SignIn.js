@@ -36,10 +36,8 @@ const SignIn = ({ navigation }) => {
           email: '',
           password: '',
         });
-        // console.log('Yes');
       } else {
         setSignInError(true);
-        // console.log('Noo');
       }
     });
   };

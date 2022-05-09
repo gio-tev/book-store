@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    // flexDirection: 'row',
     marginBottom: 5,
   },
   img: {
@@ -58,11 +57,7 @@ const styles = StyleSheet.create({
   },
   descriptionBtnsContainer: {
     width: '65%',
-    // borderWidth: 1,
-    // borderColor: 'red',
-    // alignItems: 'center',
     justifyContent: 'space-between',
-    // padding: 10,
     paddingLeft: 20,
   },
   descriptionCostContainer: {
@@ -73,20 +68,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#877be3',
     marginBottom: 10,
-    // marginTop: 10,
   },
   descriptionContainer: {
     flexDirection: 'row',
   },
   description: {
     fontFamily: 'Montserrat_500Medium',
-    // fontSize: 15,
     color: 'grey',
     marginRight: 5,
   },
   author: {
     fontFamily: 'Montserrat_500Medium',
-    // fontSize: 15,
     color: '#303030',
   },
   cost: {
@@ -96,16 +88,12 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   btnsQuantityContainer: {
-    // marginTop: 25,
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
-    // paddingHorizontal: 50,
   },
   quantity: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 20,
-    // color: '#877be3',
     color: 'grey',
     paddingHorizontal: 10,
   },

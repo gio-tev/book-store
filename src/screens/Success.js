@@ -12,7 +12,6 @@ const Success = () => {
 const styles = StyleSheet.create({
   successContainer: {
     flex: 1,
-    // justifyContent: 'center',
     marginTop: '30%',
     alignItems: 'center',
   },
