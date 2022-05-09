@@ -102,30 +102,3 @@ const DrawerNavigation = () => {
 };
 
 export default DrawerNavigation;
-
-{
-  /* <DrawerItem
-              label="Help"
-              icon={({ focused, color, size }) => (
-                //   <Icon
-                //     color={color}
-                //     size={size}
-                //     name={focused ? 'heart' : 'heart-outline'}
-                //   />
-                <AntDesign name="caretright" size={24} color="black" />
-              )}
-              // onPress={() => Linking.openURL('https://mywebsite.com/help')}
-            />
-            <DrawerItem
-              label="Home"
-              icon={({ focused, color, size }) => (
-                //   <Icon
-                //     color={color}
-                //     size={size}
-                //     name={focused ? 'heart' : 'heart-outline'}
-                //   />
-                <AntDesign name="caretright" size={24} color="black" />
-              )}
-              onPress={() => props.navigation.navigate('Cart')}
-            /> */
-}

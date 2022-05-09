@@ -1,19 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import { MaterialIcons } from '@expo/vector-icons';
+import ModalComp from '../components/Modal';
 
 const Book = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state } = useContext(AppContext);
   const { selectedBook } = state;
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = () => {
-    dispatch({ type: 'ADD_TO_CART', payload: selectedBook });
+    setModalVisible(!modalVisible);
   };
 
   return (
     <View style={styles.container}>
-      {/* <View></View> */}
+      <ModalComp
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        item={selectedBook}
+        title={'Are you sure you want to add item in cart ?'}
+        TYPE={'ADD_TO_CART'}
+      />
+
       <Image style={styles.img} source={{ uri: selectedBook.cover }} />
 
       <View style={styles.descriptionContainer}>
@@ -34,7 +43,7 @@ const Book = () => {
         </View>
         <View style={styles.titlesContainer}>
           <Text style={styles.titles}>Price:</Text>
-          <Text style={styles.description}>{selectedBook.cost}</Text>
+          <Text style={styles.description}>${selectedBook.cost}</Text>
         </View>
       </View>
 

@@ -13,13 +13,12 @@ import Welcome from './src/screens/Welcome';
 import SignIn from './src/screens/sign-in/SignIn';
 import SignUp from './src/screens/sign-up/SignUp';
 import Success from './src/screens/Success';
-// import Home from './src/components/Home';
-// import Header from './src/components/Header';
 import Book from './src/screens/Book';
 import DrawerNavigation from './src/screens/DrawerNavigation';
+import OrderPlaced from './src/screens/OrderPlaced';
 
 const Stack = createStackNavigator();
-// const Drawer = createDrawerNavigator();
+
 export default function App() {
   let [fontsLoaded] = useFonts({
     Montserrat_700Bold,
@@ -33,7 +32,7 @@ export default function App() {
   return (
     <AppContextProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="DrawerNavigation">
+        <Stack.Navigator initialRouteName="Welcome">
           <Stack.Screen
             name="Welcome"
             component={Welcome}
@@ -65,6 +64,11 @@ export default function App() {
           <Stack.Screen
             name="Success"
             component={Success}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="OrderPlaced"
+            component={OrderPlaced}
             options={{ headerShown: false }}
           />
           <Stack.Screen

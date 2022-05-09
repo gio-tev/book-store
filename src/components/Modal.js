@@ -2,7 +2,14 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, Pressable, Text, Modal } from 'react-native';
 import { AppContext } from '../store/AppContext';
 
-const ModalComp = ({ setModalVisible, modalVisible, item }) => {
+const ModalComp = ({
+  setModalVisible,
+  modalVisible,
+  item,
+  title,
+  navigation,
+  TYPE,
+}) => {
   const { dispatch } = useContext(AppContext);
 
   return (
@@ -10,7 +17,8 @@ const ModalComp = ({ setModalVisible, modalVisible, item }) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>
-            Add you sure you want to add item in cart ?
+            {/* Are you sure you want to add item in cart ? */}
+            {title}
           </Text>
           <View style={styles.modalBtnsContainer}>
             <Pressable
@@ -22,8 +30,10 @@ const ModalComp = ({ setModalVisible, modalVisible, item }) => {
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
-                dispatch({ type: 'ADD_TO_CART', payload: item });
+                // dispatch({ type: 'ADD_TO_CART', payload: item });
+                dispatch({ type: `${TYPE}`, payload: item ? item : '' });
                 setModalVisible(!modalVisible);
+                if (TYPE === 'PLACE_ORDER') navigation.navigate('OrderPlaced');
               }}
             >
               <Text style={styles.textStyle}>Yes</Text>

@@ -18,6 +18,8 @@ const HomeItem = ({ item }) => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         item={item}
+        title={'Are you sure you want to add item in cart ?'}
+        TYPE={'ADD_TO_CART'}
       />
 
       <Image source={{ uri: item.cover }} style={styles.img} />
@@ -40,7 +42,7 @@ const HomeItem = ({ item }) => {
 
           <View style={styles.descriptionTitle}>
             <Text style={styles.description}>Price:</Text>
-            <Text style={styles.title}>{item.cost}</Text>
+            <Text style={styles.title}>${item.cost}</Text>
           </View>
         </View>
 
@@ -73,6 +75,11 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#E8E8E8',
     justifyContent: 'space-between',
+    // borderBottomColor: '#C8C8C8',
+    // borderBottomWidth: 1,
+
+    // borderTopColor: '#C8C8C8',
+    // borderTopWidth: 1,
   },
   descriptionTitleContainer: {
     marginTop: -30,
@@ -101,19 +108,20 @@ const styles = StyleSheet.create({
   },
   btnsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   btn: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#6200EE',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 1,
     borderRadius: 100,
   },
   btnTxt: {
     fontFamily: 'Montserrat_700Bold',
-    fontSize: 14,
+    fontFamily: 'Montserrat_500Medium',
+    fontSize: 13,
     color: '#fff',
   },
   icon: {
