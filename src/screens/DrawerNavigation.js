@@ -13,6 +13,7 @@ const Drawer = createDrawerNavigator();
 const DrawerNavigation = () => {
   return (
     <Drawer.Navigator
+      useLegacyImplementation
       initialRouteName="Home"
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{

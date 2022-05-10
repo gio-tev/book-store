@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
@@ -31,7 +31,7 @@ export default function App() {
   return (
     <AppContextProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome">
+        <Stack.Navigator initialRouteName="DrawerNavigation">
           <Stack.Screen
             name="Welcome"
             component={Welcome}
