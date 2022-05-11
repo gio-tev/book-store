@@ -16,6 +16,7 @@ const SignIn = ({ navigation }) => {
   });
   const [SignInError, setSignInError] = useState(false);
   const [continueForgotActive, setContinueForgotActive] = useState(1);
+  const [forgotBtnClicked, setForgotBtnClicked] = useState(false);
 
   const handleSignUpPress = () => navigation.navigate('Sign Up');
 
@@ -47,13 +48,22 @@ const SignIn = ({ navigation }) => {
           email: '',
           password: '',
         });
-      } else {
+      } else if (
+        (account.email !== signIn.email ||
+          account.password !== signIn.password) &&
+        !forgotBtnClicked
+      ) {
         setSignInError(true);
       }
     });
+
+    setForgotBtnClicked(false);
   };
 
-  const handleForgotPress = () => setContinueForgotActive(2);
+  const handleForgotPress = () => {
+    setContinueForgotActive(2);
+    setForgotBtnClicked(true);
+  };
 
   return (
     <View style={styles.container}>
