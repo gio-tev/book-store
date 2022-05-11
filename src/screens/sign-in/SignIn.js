@@ -3,6 +3,7 @@ import { View, Text, Pressable } from 'react-native';
 import SignInStyles from './SignInStyles';
 import SignInInputs from '../../components/SignInInputs';
 import { AppContext } from '../../store/AppContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const styles = SignInStyles;
 
@@ -26,6 +27,16 @@ const SignIn = ({ navigation }) => {
         account.email === signIn.email &&
         account.password === signIn.password
       ) {
+        const storeData = async value => {
+          try {
+            const jsonValue = JSON.stringify(value);
+            await AsyncStorage.setItem('Account', jsonValue);
+          } catch (e) {
+            console.log(e);
+          }
+        };
+        storeData(account);
+
         appCtx.dispatch({ type: 'LOGGED_USER', payload: account });
 
         setSignInError(false);

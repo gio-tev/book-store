@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet, Pressable, Text, Modal } from 'react-native';
 import { AppContext } from '../store/AppContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ModalComp = ({
   setModalVisible,
@@ -10,7 +11,60 @@ const ModalComp = ({
   navigation,
   TYPE,
 }) => {
-  const { dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
+
+  const handlePress = () => {
+    let newCartTotal;
+
+    if (item?.title) {
+      const sameItem = state.cart.find(product => product.id === item.id);
+
+      if (sameItem) {
+        newCartTotal = {
+          cart: state.cart.map(book =>
+            book.id === item.id
+              ? {
+                  ...book,
+                  quantity: +book.quantity + 1,
+                }
+              : book
+          ),
+          totalPrice: state.totalPrice + item.cost,
+        };
+      } else
+        newCartTotal = {
+          cart: [...state.cart, item],
+          totalPrice: state.totalPrice + item.cost,
+        };
+
+      const storeData = async value => {
+        try {
+          const jsonValue = JSON.stringify(value);
+          await AsyncStorage.setItem('CartTotal', jsonValue);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      storeData(newCartTotal);
+    }
+
+    setModalVisible(!modalVisible);
+
+    dispatch({ type: `${TYPE}`, payload: item ? item : '' });
+
+    if (TYPE === 'PLACE_ORDER') {
+      const removeCartTotal = async () => {
+        try {
+          await AsyncStorage.removeItem('CartTotal');
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      removeCartTotal();
+
+      navigation.navigate('OrderPlaced');
+    }
+  };
 
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
@@ -26,11 +80,7 @@ const ModalComp = ({
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => {
-                dispatch({ type: `${TYPE}`, payload: item ? item : '' });
-                setModalVisible(!modalVisible);
-                if (TYPE === 'PLACE_ORDER') navigation.navigate('OrderPlaced');
-              }}
+              onPress={handlePress}
             >
               <Text style={styles.textStyle}>Yes</Text>
             </Pressable>

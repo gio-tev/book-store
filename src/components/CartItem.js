@@ -2,14 +2,60 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, Pressable, Text, Image } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import { AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CartItem = ({ item }) => {
-  const { dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const handleDecrease = () => {
+    let newCartTotal = {
+      cart: state.cart.map(book =>
+        book.id === item.id && book.quantity > 1
+          ? {
+              ...book,
+              quantity: +book.quantity - 1,
+            }
+          : book
+      ),
+      totalPrice:
+        item.quantity > 1 ? state.totalPrice - item.cost : state.totalPrice,
+    };
+
+    const storeData = async value => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem('CartTotal', jsonValue);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    storeData(newCartTotal);
+
     dispatch({ type: 'DECREASE_QUANTITY', payload: item });
   };
   const handleIncrease = () => {
+    let newCartTotal = {
+      cart: state.cart.map(book =>
+        book.id === item.id
+          ? {
+              ...book,
+              quantity: +book.quantity + 1,
+            }
+          : book
+      ),
+      totalPrice: state.totalPrice + item.cost,
+    };
+
+    const storeData = async value => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem('CartTotal', jsonValue);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    storeData(newCartTotal);
+
     dispatch({ type: 'INCREASE_QUANTITY', payload: item });
   };
 

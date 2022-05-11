@@ -15,6 +15,7 @@ import Success from './src/screens/Success';
 import Book from './src/screens/Book';
 import DrawerNavigation from './src/screens/DrawerNavigation';
 import OrderPlaced from './src/screens/OrderPlaced';
+import AsyncStorageWelcome from './src/screens/AsyncStorageWelcome';
 
 const Stack = createStackNavigator();
 
@@ -31,7 +32,12 @@ export default function App() {
   return (
     <AppContextProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome">
+        <Stack.Navigator initialRouteName="AsyncStorageWelcome">
+          <Stack.Screen
+            name="AsyncStorageWelcome"
+            component={AsyncStorageWelcome}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Welcome"
             component={Welcome}

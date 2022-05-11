@@ -7,10 +7,26 @@ import {
 } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
 import { AppContext } from '../store/AppContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function CustomDrawerContent(props) {
   const { state, dispatch } = useContext(AppContext);
   const { currentLoggedUser } = state;
+
+  const handlePress = () => {
+    dispatch({ type: 'LOG_OUT' });
+
+    const removeValue = async () => {
+      try {
+        await AsyncStorage.removeItem('Account');
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    removeValue();
+
+    props.navigation.navigate('Welcome');
+  };
 
   return (
     <View style={styles.container}>
@@ -34,10 +50,7 @@ function CustomDrawerContent(props) {
           label="Log Out"
           labelStyle={{ marginLeft: -20 }}
           icon={() => <AntDesign name="logout" size={24} color="black" />}
-          onPress={() => {
-            dispatch({ type: 'LOG_OUT' });
-            props.navigation.navigate('Welcome');
-          }}
+          onPress={handlePress}
         />
       </DrawerContentScrollView>
     </View>

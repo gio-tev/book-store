@@ -33,10 +33,20 @@ const reducer = (state, action) => {
   if (action.type === 'LOG_OUT') {
     return { ...state, currentLoggedUser: {} };
   }
+  if (action.type === 'UPDATE_CART_AND_TOTAL') {
+    console.log(action.payload, 'update...........');
+    return {
+      ...state,
+      cart: [...action.payload.cart],
+      totalPrice: action.payload.totalPrice,
+    };
+  }
   if (action.type === 'ADD_TO_CART') {
-    const item = state.cart.find(product => product.id === action.payload.id);
+    const sameItem = state.cart.find(
+      product => product.id === action.payload.id
+    );
 
-    if (item) {
+    if (sameItem) {
       return {
         ...state,
         cart: state.cart.map(item =>
@@ -88,7 +98,7 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === 'PLACE_ORDER') {
-    return { ...state, orders: [...state.cart] };
+    return { ...state, orders: [...state.cart], cart: [] };
   }
 };
 
