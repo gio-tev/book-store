@@ -29,7 +29,7 @@ const HomeItem = ({ item }) => {
           <Text style={styles.name}>{item.title}</Text>
         </View>
 
-        <View style={styles.descriptionTitleContainer}>
+        <View>
           <View style={styles.descriptionTitle}>
             <Text style={styles.description}>Author:</Text>
             <Text style={styles.title}>{item.author}</Text>
@@ -66,19 +66,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 5,
   },
+
   img: {
     width: '35%',
-    height: 200,
+    height: 180,
+    borderRadius: 5,
+    marginRight: '2%',
   },
   titlesBtnsContainer: {
-    width: '65%',
-    padding: 10,
-    backgroundColor: '#E8E8E8',
     justifyContent: 'space-between',
+    width: '63%',
+    padding: 10,
+    backgroundColor: '#E0E0E0',
+    borderRadius: 5,
   },
-  descriptionTitleContainer: {
-    marginTop: -30,
-  },
+
   descriptionTitle: {
     flexDirection: 'row',
   },
@@ -86,7 +88,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_700Bold',
     fontSize: 18,
     color: '#877be3',
-    marginTop: 5,
   },
   title: {
     fontFamily: 'Montserrat_500Medium',
@@ -109,14 +110,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#6200EE',
-    paddingHorizontal: 8,
-    paddingVertical: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
     borderRadius: 100,
   },
   btnTxt: {
     fontFamily: 'Montserrat_700Bold',
-    fontFamily: 'Montserrat_500Medium',
-    fontSize: 13,
+    fontSize: 11,
     color: '#fff',
   },
   icon: {

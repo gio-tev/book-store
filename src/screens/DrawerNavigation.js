@@ -8,6 +8,7 @@ import CustomDrawerContent from '../components/CustomDrawerContent';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {

@@ -1,17 +1,11 @@
 import React, { useContext, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  FlatList,
-  Pressable,
-} from 'react-native';
+import { View, StyleSheet, Text, FlatList, Pressable } from 'react-native';
 import CartItem from '../components/CartItem';
 import { AppContext } from '../store/AppContext';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import ModalComp from '../components/Modal';
+import EmptyContent from '../components/EmptyContent';
 
 const Cart = ({ navigation }) => {
   const { state } = useContext(AppContext);
@@ -19,7 +13,7 @@ const Cart = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = () => {
-    setModalVisible(!modalVisible);
+    state.cart.length > 0 && setModalVisible(!modalVisible);
   };
 
   return (
@@ -33,11 +27,15 @@ const Cart = ({ navigation }) => {
       />
 
       <View style={styles.booksContainer}>
-        <FlatList
-          data={DATA}
-          renderItem={({ item }) => <CartItem item={item} />}
-          keyExtractor={item => item.id}
-        />
+        {DATA.length > 0 ? (
+          <FlatList
+            data={DATA}
+            renderItem={({ item }) => <CartItem item={item} />}
+            keyExtractor={item => item.id}
+          />
+        ) : (
+          <EmptyContent icon={'Cart'} title={'Your cart is empty'} />
+        )}
       </View>
       <View style={styles.promoTotalContainer}>
         <View style={styles.promoContainer}>
@@ -54,7 +52,13 @@ const Cart = ({ navigation }) => {
             <Text style={styles.free}>Free Domestic Shipping</Text>
           </View>
 
-          <Pressable style={styles.btnContainer} onPress={handlePress}>
+          <Pressable
+            style={[
+              styles.btnContainer,
+              state.cart.length == 0 ? styles.disableBtn : '',
+            ]}
+            onPress={handlePress}
+          >
             <Text style={styles.btnTxt}>PLACE ORDER</Text>
             <FontAwesome5 name="arrow-right" size={18} color="white" />
           </Pressable>
@@ -71,11 +75,6 @@ const styles = StyleSheet.create({
   },
   booksContainer: {
     width: '95%',
-    borderLeftColor: 'lightgrey',
-    borderRightColor: 'lightgrey',
-    borderLeftWidth: 2,
-    borderRightWidth: 2,
-    alignSelf: 'center',
   },
   promoTotalContainer: {
     position: 'absolute',
@@ -136,6 +135,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_700Bold',
     color: 'white',
     marginRight: 5,
+  },
+  disableBtn: {
+    backgroundColor: 'grey',
   },
 });
 

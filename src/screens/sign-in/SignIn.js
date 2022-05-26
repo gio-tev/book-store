@@ -42,7 +42,7 @@ const SignIn = ({ navigation }) => {
 
         setSignInError(false);
 
-        navigation.navigate('DrawerNavigation');
+        navigation.navigate('DrawerNavigation', { screen: 'Home' });
 
         setSignIn({
           email: '',

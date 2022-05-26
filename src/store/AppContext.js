@@ -31,10 +31,9 @@ const reducer = (state, action) => {
     return { ...state, currentLoggedUser: { ...action.payload } };
   }
   if (action.type === 'LOG_OUT') {
-    return { ...state, currentLoggedUser: {} };
+    return { ...state, currentLoggedUser: {}, orders: [] };
   }
   if (action.type === 'UPDATE_CART_AND_TOTAL') {
-    console.log(action.payload, 'update...........');
     return {
       ...state,
       cart: [...action.payload.cart],
@@ -53,7 +52,7 @@ const reducer = (state, action) => {
           item.id === action.payload.id
             ? {
                 ...item,
-                quantity: +item.quantity + 1,
+                quantity: item.quantity + 1,
               }
             : item
         ),
@@ -66,23 +65,54 @@ const reducer = (state, action) => {
       totalPrice: state.totalPrice + action.payload.cost,
     };
   }
+
   if (action.type === 'DECREASE_QUANTITY') {
-    return {
-      ...state,
-      cart: state.cart.map(item =>
-        item.id === action.payload.id && item.quantity > 1
-          ? {
-              ...item,
-              quantity: +item.quantity - 1,
-            }
-          : item
-      ),
-      totalPrice:
-        action.payload.quantity > 1
-          ? state.totalPrice - action.payload.cost
-          : state.totalPrice,
-    };
+    const sameItem = state.cart.find(
+      product => product.id === action.payload.id
+    );
+
+    if (sameItem && sameItem.quantity === 1) {
+      return {
+        ...state,
+        cart: state.cart.filter(item => item.id !== action.payload.id),
+        totalPrice: state.totalPrice - action.payload.cost,
+      };
+    } else {
+      return {
+        ...state,
+        cart: state.cart.map(item =>
+          item.id === action.payload.id && item.quantity > 1
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item
+        ),
+        totalPrice:
+          action.payload.quantity > 1
+            ? state.totalPrice - action.payload.cost
+            : state.totalPrice,
+      };
+    }
   }
+
+  // if (action.type === 'DECREASE_QUANTITY') {
+  //   return {
+  //     ...state,
+  //     cart: state.cart.map(item =>
+  //       item.id === action.payload.id && item.quantity > 1
+  //         ? {
+  //             ...item,
+  //             quantity: +item.quantity - 1,
+  //           }
+  //         : item
+  //     ),
+  //     totalPrice:
+  //       action.payload.quantity > 1
+  //         ? state.totalPrice - action.payload.cost
+  //         : state.totalPrice,
+  //   };
+  // }
   if (action.type === 'INCREASE_QUANTITY') {
     return {
       ...state,
@@ -90,7 +120,7 @@ const reducer = (state, action) => {
         item.id === action.payload.id
           ? {
               ...item,
-              quantity: +item.quantity + 1,
+              quantity: item.quantity + 1,
             }
           : item
       ),
@@ -98,7 +128,7 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === 'PLACE_ORDER') {
-    return { ...state, orders: [...state.cart], cart: [] };
+    return { ...state, orders: [...state.cart], cart: [], totalPrice: 0 };
   }
 };
 

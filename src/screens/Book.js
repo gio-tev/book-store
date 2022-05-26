@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { AppContext } from '../store/AppContext';
-import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import ModalComp from '../components/Modal';
 
 const Book = () => {
@@ -49,7 +49,7 @@ const Book = () => {
 
       <Pressable style={styles.btn} onPress={handlePress}>
         <Text style={styles.btnText}>Add To Cart</Text>
-        <MaterialIcons name="keyboard-arrow-right" size={34} color="white" />
+        <FontAwesome5 name="arrow-right" size={22} color="white" />
       </Pressable>
     </View>
   );
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Montserrat_700Bold',
     fontSize: 17,
+    marginRight: 10,
   },
 });
 

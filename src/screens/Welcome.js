@@ -5,10 +5,7 @@ import LoginNav from '../components/LoginNav';
 const Welcome = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.img}
-        source={require('../../assets/BookStore.jpg')}
-      />
+      <Image style={styles.img} source={require('../../assets/cover.jpg')} />
       <View style={styles.text1Container}>
         <Text style={styles.text1}>Welcome</Text>
         <Text style={styles.text1}>to Book Store</Text>

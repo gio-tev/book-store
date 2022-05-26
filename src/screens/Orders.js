@@ -2,23 +2,24 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import OrdersItem from '../components/OrdersItem';
+import EmptyContent from '../components/EmptyContent';
 
-const Orders = ({ navigation }) => {
+const Orders = () => {
   const { state } = useContext(AppContext);
   const DATA = state.orders;
-
-  const handlePress = () => {
-    navigation.navigate('DrawerNavigation');
-  };
 
   return (
     <View style={styles.container}>
       <View style={styles.ordersContainer}>
-        <FlatList
-          data={DATA}
-          renderItem={({ item }) => <OrdersItem item={item} />}
-          keyExtractor={item => item.id}
-        />
+        {DATA.length > 0 ? (
+          <FlatList
+            data={DATA}
+            renderItem={({ item }) => <OrdersItem item={item} />}
+            keyExtractor={item => item.id}
+          />
+        ) : (
+          <EmptyContent icon={'Orders'} title={'You do not have any orders'} />
+        )}
       </View>
     </View>
   );

@@ -6,14 +6,6 @@ const AsyncStorageWelcome = ({ navigation }) => {
   const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
-    //     const getCartData = async () => {
-    //       try {
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
-    // getCartData();
-
     const getData = async () => {
       try {
         const cartTotal = await AsyncStorage.getItem('CartTotal');

@@ -8,18 +8,41 @@ const CartItem = ({ item }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const handleDecrease = () => {
-    let newCartTotal = {
-      cart: state.cart.map(book =>
-        book.id === item.id && book.quantity > 1
-          ? {
-              ...book,
-              quantity: +book.quantity - 1,
-            }
-          : book
-      ),
-      totalPrice:
-        item.quantity > 1 ? state.totalPrice - item.cost : state.totalPrice,
-    };
+    const sameItem = state.cart.find(product => product.id === item.id);
+    let newCartTotal;
+
+    if (sameItem && sameItem.quantity === 1) {
+      newCartTotal = {
+        cart: state.cart.filter(book => book.id !== item.id),
+        totalPrice: state.totalPrice - item.cost,
+      };
+    } else {
+      newCartTotal = {
+        cart: state.cart.map(book =>
+          book.id === item.id && book.quantity > 1
+            ? {
+                ...book,
+                quantity: book.quantity - 1,
+              }
+            : book
+        ),
+        totalPrice:
+          item.quantity > 1 ? state.totalPrice - item.cost : state.totalPrice,
+      };
+    }
+
+    // let newCartTotal = {
+    //   cart: state.cart.map(book =>
+    //     book.id === item.id && book.quantity > 1
+    //       ? {
+    //           ...book,
+    //           quantity: book.quantity - 1,
+    //         }
+    //       : book
+    //   ),
+    //   totalPrice:
+    //     item.quantity > 1 ? state.totalPrice - item.cost : state.totalPrice,
+    // };
 
     const storeData = async value => {
       try {

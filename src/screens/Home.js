@@ -1,32 +1,36 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import DATA from '../../api/book.json';
 import HomeItem from '../components/HomeItem';
 
 const Home = ({ navigation }) => {
+  const homeRef = useRef();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () => {
+      homeRef.current.scrollToIndex({ animated: true, index: 0 });
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   return (
-    <View>
-      <View style={styles.booksontainer}>
-        <FlatList
-          numColumns={2}
-          data={DATA}
-          renderItem={({ item }) => (
-            <HomeItem item={item} navigation={navigation} />
-          )}
-          keyExtractor={item => item.id}
-        />
-      </View>
+    <View style={styles.booksContainer}>
+      <FlatList
+        ref={homeRef}
+        numColumns={2}
+        data={DATA}
+        renderItem={({ item }) => (
+          <HomeItem item={item} navigation={navigation} />
+        )}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  booksontainer: {
+  booksContainer: {
     width: '95%',
-    borderLeftColor: 'lightgrey',
-    borderRightColor: 'lightgrey',
-    borderLeftWidth: 2,
-    borderRightWidth: 2,
     alignSelf: 'center',
   },
 });

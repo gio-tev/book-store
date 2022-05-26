@@ -13,10 +13,6 @@ const HomeItem = ({ item, navigation }) => {
   return (
     <Pressable style={styles.container} onPress={handlePress}>
       <Image source={{ uri: item.cover }} style={styles.img} />
-      <View style={styles.titlesContainer}>
-        <Text style={styles.title}>By:</Text>
-        <Text style={styles.author}>{item.author}</Text>
-      </View>
     </Pressable>
   );
 };
@@ -26,29 +22,11 @@ const styles = StyleSheet.create({
     width: '50%',
     paddingVertical: 5,
   },
-  titlesContainer: {
-    borderBottomColor: '#C8C8C8',
-    borderBottomWidth: 1,
-    width: '80%',
-    alignSelf: 'center',
-    paddingVertical: 5,
-    flexDirection: 'row',
-  },
   img: {
     width: '80%',
     alignSelf: 'center',
     height: 200,
-  },
-  title: {
-    fontFamily: 'Montserrat_500Medium',
-    fontSize: 15,
-    color: 'grey',
-    marginRight: 5,
-  },
-  author: {
-    fontFamily: 'Montserrat_700Bold',
-    fontSize: 15,
-    color: '#877be3',
+    borderRadius: 5,
   },
 });
 
