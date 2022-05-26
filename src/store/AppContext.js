@@ -96,23 +96,6 @@ const reducer = (state, action) => {
     }
   }
 
-  // if (action.type === 'DECREASE_QUANTITY') {
-  //   return {
-  //     ...state,
-  //     cart: state.cart.map(item =>
-  //       item.id === action.payload.id && item.quantity > 1
-  //         ? {
-  //             ...item,
-  //             quantity: +item.quantity - 1,
-  //           }
-  //         : item
-  //     ),
-  //     totalPrice:
-  //       action.payload.quantity > 1
-  //         ? state.totalPrice - action.payload.cost
-  //         : state.totalPrice,
-  //   };
-  // }
   if (action.type === 'INCREASE_QUANTITY') {
     return {
       ...state,
