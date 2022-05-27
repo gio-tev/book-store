@@ -19,30 +19,16 @@ const CartItem = ({ item }) => {
     } else {
       newCartTotal = {
         cart: state.cart.map(book =>
-          book.id === item.id && book.quantity > 1
+          book.id === item.id
             ? {
                 ...book,
                 quantity: book.quantity - 1,
               }
             : book
         ),
-        totalPrice:
-          item.quantity > 1 ? state.totalPrice - item.cost : state.totalPrice,
+        totalPrice: state.totalPrice - item.cost,
       };
     }
-
-    // let newCartTotal = {
-    //   cart: state.cart.map(book =>
-    //     book.id === item.id && book.quantity > 1
-    //       ? {
-    //           ...book,
-    //           quantity: book.quantity - 1,
-    //         }
-    //       : book
-    //   ),
-    //   totalPrice:
-    //     item.quantity > 1 ? state.totalPrice - item.cost : state.totalPrice,
-    // };
 
     const storeData = async value => {
       try {
