@@ -49,7 +49,7 @@ function CustomDrawerContent(props) {
         <DrawerItem
           label="Log Out"
           labelStyle={{ marginLeft: -20 }}
-          icon={() => <AntDesign name="logout" size={24} color="black" />}
+          icon={() => <AntDesign name="logout" size={24} color="#1c1c1ead" />}
           onPress={handlePress}
         />
       </DrawerContentScrollView>
