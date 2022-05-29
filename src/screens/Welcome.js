@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#6200EE',
     marginTop: '8%',
-    fontSize: 17,
+    fontSize: 18,
   },
 });
 
