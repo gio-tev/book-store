@@ -1,5 +1,5 @@
-import React from 'react';
 import { View, Pressable, StyleSheet, Text } from 'react-native';
+import { colors } from '../utils/colors';
 
 const LoginNav = ({ navigation }) => {
   const handleSignInPress = () => {
@@ -34,14 +34,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '42%',
-    backgroundColor: '#9599B3',
+    borderTopLeftRadius: 3,
+    backgroundColor: colors.brown,
     paddingLeft: '25%',
   },
   signUpBtn: {
     justifyContent: 'center',
     width: '100%',
     height: '58%',
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.teal,
     paddingLeft: '25%',
   },
   btnTxt: {

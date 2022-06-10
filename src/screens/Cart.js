@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { View, StyleSheet, Text, FlatList, Pressable } from 'react-native';
 import CartItem from '../components/CartItem';
 import { AppContext } from '../store/AppContext';
@@ -6,6 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import ModalComp from '../components/Modal';
 import EmptyContent from '../components/EmptyContent';
+import { colors } from '../utils/colors';
 
 const Cart = ({ navigation }) => {
   const { state } = useContext(AppContext);
@@ -40,7 +41,7 @@ const Cart = ({ navigation }) => {
       <View style={styles.promoTotalContainer}>
         <View style={styles.promoContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Entypo name="price-ribbon" size={24} color="#6200EE" />
+            <Entypo name="price-ribbon" size={24} color={colors.teal} />
             <Text style={styles.promo}>Add Promo Code</Text>
           </View>
         </View>
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
   },
   booksContainer: {
     width: '95%',
+    height: '75%',
   },
   promoTotalContainer: {
     position: 'absolute',
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginLeft: 10,
     marginRight: 10,
-    color: '#6200EE',
+    color: colors.teal,
   },
   priceBtnContainer: {
     flexDirection: 'row',
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.salmon,
     height: 40,
     paddingHorizontal: 15,
     borderRadius: 100,
@@ -118,18 +120,18 @@ const styles = StyleSheet.create({
   },
   total: {
     fontFamily: 'Montserrat_500Medium',
-    color: '#888888',
+    color: 'grey',
     fontSize: 13,
   },
   free: {
     fontFamily: 'Montserrat_500Medium',
-    color: '#888888',
+    color: 'grey',
     fontSize: 13,
   },
   totalPrice: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 20,
-    color: '#505050',
+    color: colors.darkGrey,
   },
   btnTxt: {
     fontFamily: 'Montserrat_700Bold',

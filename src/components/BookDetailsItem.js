@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet, Pressable, Text, Image } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 import ModalComp from './Modal';
+import { colors } from '../utils/colors';
 
 const HomeItem = ({ item }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -87,18 +88,18 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 18,
-    color: '#877be3',
+    color: colors.darkGrey,
   },
   title: {
     fontFamily: 'Montserrat_500Medium',
-    color: 'grey',
+    color: colors.darkGrey,
     fontSize: 15,
     lineHeight: 22,
   },
   description: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 15,
-    color: '#51505c',
+    color: colors.darkGrey,
     lineHeight: 22,
     marginRight: 5,
   },
@@ -109,7 +110,8 @@ const styles = StyleSheet.create({
   btn: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.teal,
+    elevation: 5,
     paddingHorizontal: 10,
     paddingVertical: 3,
     borderRadius: 100,

@@ -1,5 +1,5 @@
-import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { colors } from '../utils/colors';
 
 const Success = () => {
   return (
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   success: {
     fontFamily: 'Montserrat_700Bold',
-    color: '#6200EE',
+    color: colors.teal,
     fontSize: 40,
   },
 });

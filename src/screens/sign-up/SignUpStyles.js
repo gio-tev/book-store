@@ -1,10 +1,16 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../utils/colors';
 
 export default StyleSheet.create({
   container: {
+    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 30,
+    width: '100%',
+  },
+  avoidingView: {
+    width: '100%',
   },
   signInUpContainer: {
     flexDirection: 'row',
@@ -14,7 +20,7 @@ export default StyleSheet.create({
   },
   signInUpActive: {
     fontFamily: 'Montserrat_500Medium',
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.brown,
     color: '#fff',
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -34,7 +40,7 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   continueForgotActive: {
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.teal,
     padding: 20,
     borderRadius: 100,
     fontFamily: 'Montserrat_500Medium',

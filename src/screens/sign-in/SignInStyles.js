@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../utils/colors';
 
 export default StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 30,
@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   signInUpActive: {
     fontFamily: 'Montserrat_500Medium',
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.brown,
     color: '#fff',
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -35,7 +35,7 @@ export default StyleSheet.create({
     marginBottom: 5,
   },
   continueForgotActive: {
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.teal,
     padding: 20,
     borderRadius: 100,
     fontFamily: 'Montserrat_500Medium',
@@ -45,7 +45,7 @@ export default StyleSheet.create({
   continueForgotInactive: {
     padding: 20,
     fontFamily: 'Montserrat_700Bold',
-    color: '#6200EE',
+    color: colors.teal,
     textAlign: 'center',
   },
 });

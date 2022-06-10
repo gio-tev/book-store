@@ -1,11 +1,5 @@
-// import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-  useFonts,
-  Montserrat_700Bold,
-  Montserrat_500Medium,
-} from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
 import AppContextProvider from './src/store/AppContext';
 import Welcome from './src/screens/Welcome';
@@ -16,6 +10,12 @@ import Book from './src/screens/Book';
 import DrawerNavigation from './src/screens/DrawerNavigation';
 import OrderPlaced from './src/screens/OrderPlaced';
 import AsyncStorageWelcome from './src/screens/AsyncStorageWelcome';
+import {
+  useFonts,
+  Montserrat_700Bold,
+  Montserrat_500Medium,
+} from '@expo-google-fonts/montserrat';
+import { colors } from './src/utils/colors';
 
 const Stack = createStackNavigator();
 
@@ -32,54 +32,30 @@ export default function App() {
   return (
     <AppContextProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="AsyncStorageWelcome">
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen
             name="AsyncStorageWelcome"
             component={AsyncStorageWelcome}
-            options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="Welcome"
-            component={Welcome}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Sign In"
-            component={SignIn}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Sign Up"
-            component={SignUp}
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Sign In" component={SignIn} />
+          <Stack.Screen name="Sign Up" component={SignUp} />
+          <Stack.Screen name="Success" component={Success} />
+          <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
+          <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
           <Stack.Screen
             name="Book"
             component={Book}
             options={{
               headerStyle: {
-                backgroundColor: '#6200EE',
+                backgroundColor: colors.teal,
               },
               headerTitleStyle: {
-                color: '#fff',
+                fontFamily: 'Montserrat_500Medium',
               },
               headerTintColor: '#fff',
+              headerShown: true,
             }}
-          />
-          <Stack.Screen
-            name="Success"
-            component={Success}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="OrderPlaced"
-            component={OrderPlaced}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="DrawerNavigation"
-            component={DrawerNavigation}
-            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -3,6 +3,7 @@ import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import { FontAwesome5 } from '@expo/vector-icons';
 import ModalComp from '../components/Modal';
+import { colors } from '../utils/colors';
 
 const Book = () => {
   const { state } = useContext(AppContext);
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
   titleYear: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 25,
-    color: '#877be3',
+    color: colors.darkGrey,
     textAlign: 'center',
     marginBottom: 15,
     paddingHorizontal: 5,
@@ -84,14 +85,14 @@ const styles = StyleSheet.create({
   titles: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 17,
-    color: '#51505c',
+    color: 'black',
     lineHeight: 25,
     marginRight: 5,
   },
   description: {
-    fontFamily: 'Montserrat_700Bold',
+    fontFamily: 'Montserrat_500Medium',
     fontSize: 17,
-    color: '#877be3',
+    color: 'black',
     lineHeight: 25,
     marginLeft: 5,
   },
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 35,
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.teal,
     paddingHorizontal: 35,
     paddingVertical: 13,
     borderRadius: 50,

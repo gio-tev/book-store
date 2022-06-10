@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../utils/colors';
 
 const EmptyContent = props => {
   const navigation = useNavigation();
@@ -18,8 +19,7 @@ const EmptyContent = props => {
           style={styles.icon}
           name="ios-cart-outline"
           size={35}
-          color="#6200EE"
-          // color="white"
+          color={colors.brown}
         />
       )}
       {props.icon === 'Orders' && (
@@ -27,7 +27,7 @@ const EmptyContent = props => {
           style={styles.icon}
           name="checkbox-marked-circle-outline"
           size={35}
-          color={'#6200EE'}
+          color={colors.brown}
         />
       )}
       <Text style={styles.cartTxt}>{props.title}</Text>
@@ -57,13 +57,13 @@ const styles = StyleSheet.create({
   cartTxt: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 25,
-    color: '#505050',
+    color: colors.darkGrey,
     marginBottom: 30,
     textAlign: 'center',
   },
   cartBtnContainer: {
     flexDirection: 'row',
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.brown,
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 50,

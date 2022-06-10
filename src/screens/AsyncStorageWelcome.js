@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { AppContext } from '../store/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

@@ -5,7 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Header = ({ headerTitle }) => {
-  const handlePress = () => {};
   return (
     <View style={styles.container}>
       <View style={styles.menuTitleContainer}>

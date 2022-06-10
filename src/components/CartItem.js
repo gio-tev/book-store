@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { View, StyleSheet, Pressable, Text, Image } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { colors } from '../utils/colors';
 
 const CartItem = ({ item }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -78,20 +79,22 @@ const CartItem = ({ item }) => {
 
           <View style={styles.descriptionCostContainer}>
             <View style={styles.descriptionContainer}>
-              <Text style={styles.description}>By:</Text>
+              <Text style={styles.description}>Author:</Text>
               <Text style={styles.author}>{item.author}</Text>
             </View>
-
-            <Text style={styles.cost}>${item.cost}</Text>
+            <View style={styles.descriptionContainer}>
+              <Text style={styles.description}>Price: </Text>
+              <Text style={styles.cost}>${item.cost}</Text>
+            </View>
           </View>
 
           <View style={styles.btnsQuantityContainer}>
             <Pressable onPress={handleDecrease}>
-              <AntDesign name="minuscircleo" size={24} color="#877be3" />
+              <AntDesign name="minuscircleo" size={24} color={colors.teal} />
             </Pressable>
             <Text style={styles.quantity}>{item.quantity}</Text>
             <Pressable onPress={handleIncrease}>
-              <AntDesign name="pluscircleo" size={24} color="#877be3" />
+              <AntDesign name="pluscircleo" size={24} color={colors.teal} />
             </Pressable>
           </View>
         </View>
@@ -121,25 +124,26 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 18,
-    color: '#877be3',
+    color: 'black',
     marginBottom: 10,
   },
   descriptionContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   description: {
     fontFamily: 'Montserrat_500Medium',
-    color: 'grey',
+    color: 'black',
     marginRight: 5,
   },
   author: {
     fontFamily: 'Montserrat_500Medium',
-    color: '#303030',
+    color: colors.darkGrey,
   },
   cost: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 15,
-    color: '#FF3131',
+    color: colors.redError,
     marginTop: 2,
   },
   btnsQuantityContainer: {
@@ -149,7 +153,7 @@ const styles = StyleSheet.create({
   quantity: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 20,
-    color: 'grey',
+    color: colors.darkGrey,
     paddingHorizontal: 10,
   },
 });

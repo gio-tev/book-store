@@ -1,14 +1,13 @@
-import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import LoginNav from '../components/LoginNav';
+import { colors } from '../utils/colors';
 
 const Welcome = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../../assets/cover.jpg')} />
       <View style={styles.text1Container}>
-        <Text style={styles.text1}>Welcome</Text>
-        <Text style={styles.text1}>to Book Store</Text>
+        <Text style={styles.text1}>Welcome {'\n'} to Book Store</Text>
       </View>
       <Text style={styles.text2}>Let's get started!</Text>
 
@@ -32,14 +31,14 @@ const styles = StyleSheet.create({
   text1: {
     textAlign: 'center',
     fontFamily: 'Montserrat_700Bold',
-    color: '#6200EE',
+    color: colors.brown,
     fontSize: 30,
   },
   text2: {
     textAlign: 'center',
     fontFamily: 'Montserrat_500Medium',
     textAlign: 'center',
-    color: '#6200EE',
+    color: colors.teal,
     marginTop: '8%',
     fontSize: 18,
   },

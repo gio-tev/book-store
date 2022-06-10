@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { colors } from '../utils/colors';
 
 const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
   const [emailInputActive, setEmailInputActive] = useState(false);
@@ -63,7 +64,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.4,
   },
   error: {
-    color: '#eb1e1e',
+    fontFamily: 'Montserrat_500Medium',
+    color: colors.redError,
+    marginTop: 15,
   },
 });
 

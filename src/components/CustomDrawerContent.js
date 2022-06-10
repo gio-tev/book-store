@@ -8,6 +8,7 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import { AppContext } from '../store/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { colors } from '../utils/colors';
 
 function CustomDrawerContent(props) {
   const { state, dispatch } = useContext(AppContext);
@@ -81,10 +82,10 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 15,
-    color: '#877be3',
+    color: colors.darkGrey,
   },
   btn: {
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.brown,
     padding: 10,
     width: '50%',
     borderRadius: 100,

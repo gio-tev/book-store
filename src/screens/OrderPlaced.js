@@ -1,7 +1,7 @@
-import React from 'react';
 import { View, StyleSheet, Pressable, Text } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
+import { colors } from '../utils/colors';
 
 const OrderPlaced = ({ navigation }) => {
   const handleClosePress = () => {
@@ -15,12 +15,12 @@ const OrderPlaced = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Pressable style={styles.close} onPress={handleClosePress}>
-        <Fontisto name="close-a" size={25} color="#6200EE" />
+        <Fontisto name="close-a" size={25} color={colors.brown} />
       </Pressable>
 
       <View style={styles.content}>
         <View style={styles.check}>
-          <FontAwesome5 name="check" size={40} color="#6200EE" />
+          <FontAwesome5 name="check" size={40} color={colors.teal} />
         </View>
 
         <Text style={styles.order}>Order Placed!</Text>
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F5F5F5',
   },
   close: {
     position: 'absolute',
@@ -60,18 +59,18 @@ const styles = StyleSheet.create({
   order: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 30,
-    color: '#707070',
+    color: colors.darkGrey,
   },
   placed: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 17,
-    color: '#707070',
+    color: 'grey',
     marginTop: -15,
   },
   btn: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.brown,
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 100,

@@ -1,5 +1,11 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { useState, useContext } from 'react';
+import {
+  View,
+  Text,
+  Pressable,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
 import SignUpStyles from './SignUpStyles';
 import SignUpInputs from '../../components/SignUpInputs';
 import { AppContext } from '../../store/AppContext';
@@ -50,7 +56,7 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.signInUpContainer}>
         <Pressable onPress={handleSignInPress}>
           <Text style={styles.signInUpInactive}>SIGN IN</Text>
@@ -61,18 +67,20 @@ const SignUp = ({ navigation }) => {
         </Pressable>
       </View>
 
-      <SignUpInputs
-        setUser={setNewUser}
-        clearInputs={clearInputs}
-        SetClearInputs={SetClearInputs}
-      />
+      <KeyboardAvoidingView style={styles.avoidingView} behavior="position">
+        <SignUpInputs
+          setUser={setNewUser}
+          clearInputs={clearInputs}
+          SetClearInputs={SetClearInputs}
+        />
+      </KeyboardAvoidingView>
 
       <View style={styles.ContinueForgotContainer}>
         <Pressable onPress={handlePress} style={styles.continueBtn}>
           <Text style={styles.continueForgotActive}>CONTINUE</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

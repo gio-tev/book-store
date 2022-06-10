@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import SignInStyles from './SignInStyles';
 import SignInInputs from '../../components/SignInInputs';

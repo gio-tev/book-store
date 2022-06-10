@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { View, StyleSheet, Pressable, Text, Modal } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { colors } from '../utils/colors';
 
 const ModalComp = ({
   setModalVisible,
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonClose: {
-    backgroundColor: '#6200EE',
+    backgroundColor: colors.salmon,
   },
   textStyle: {
     fontFamily: 'Montserrat_700Bold',

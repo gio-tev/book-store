@@ -8,6 +8,7 @@ import CustomDrawerContent from '../components/CustomDrawerContent';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../utils/colors';
 
 const Drawer = createDrawerNavigator();
 
@@ -18,13 +19,15 @@ const DrawerNavigation = () => {
       initialRouteName="Home"
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.teal,
+        },
+        headerTintColor: '#fff',
         drawerLabelStyle: {
           marginLeft: -20,
           fontFamily: 'Montserrat_500Medium',
         },
-        drawerActiveBackgroundColor: 'transparent',
-        color: '#6200EE',
-        drawerActiveTintColor: '#6200EE',
+        drawerActiveTintColor: colors.teal,
       }}
     >
       <Drawer.Screen
@@ -32,16 +35,9 @@ const DrawerNavigation = () => {
         component={Home}
         options={{
           headerTitle: () => <Header headerTitle={'Home'} />,
-          drawerIcon: ({ color }) => (
-            <AntDesign name="home" size={24} color={color} />
-          ),
-          headerStyle: {
-            backgroundColor: '#6200EE',
+          drawerIcon: ({ color }) => {
+            return <AntDesign name="home" size={24} color={color} />;
           },
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerTintColor: '#fff',
         }}
       />
       <Drawer.Screen
@@ -52,13 +48,6 @@ const DrawerNavigation = () => {
           drawerIcon: ({ color }) => (
             <Ionicons name="ios-book-outline" size={24} color={color} />
           ),
-          headerStyle: {
-            backgroundColor: '#6200EE',
-          },
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerTintColor: '#fff',
         }}
       />
       <Drawer.Screen
@@ -69,13 +58,6 @@ const DrawerNavigation = () => {
           drawerIcon: ({ color }) => (
             <Ionicons name="ios-cart-outline" size={24} color={color} />
           ),
-          headerStyle: {
-            backgroundColor: '#6200EE',
-          },
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerTintColor: '#fff',
         }}
       />
       <Drawer.Screen
@@ -90,13 +72,6 @@ const DrawerNavigation = () => {
               color={color}
             />
           ),
-          headerStyle: {
-            backgroundColor: '#6200EE',
-          },
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerTintColor: '#fff',
         }}
       />
     </Drawer.Navigator>

@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { useState, useEffect } from 'react';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
 
 const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
   const [nameValue, setNameValue] = useState('');
@@ -168,6 +174,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: '90%',
     marginBottom: 40,
+    alignSelf: 'center',
   },
   inputs: {
     borderBottomColor: 'grey',

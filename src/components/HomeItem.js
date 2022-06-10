@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { View, StyleSheet, Pressable, Text, Image } from 'react-native';
 import { AppContext } from '../store/AppContext';
 
