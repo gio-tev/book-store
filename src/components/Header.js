@@ -1,5 +1,4 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Platform } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -21,10 +20,9 @@ const Header = ({ headerTitle }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: Platform.OS === 'ios' ? '130%' : '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   menuTitleContainer: {
     flexDirection: 'row',
@@ -34,7 +32,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
     fontSize: 19,
     color: 'white',
-    marginLeft: -15,
   },
   rightIcons: {
     flexDirection: 'row',

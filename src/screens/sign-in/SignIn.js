@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { View, Text, Pressable } from 'react-native';
+import CustomStatusbar from '../../components/CustomStatusBar';
 import SignInStyles from './SignInStyles';
 import SignInInputs from '../../components/SignInInputs';
 import { AppContext } from '../../store/AppContext';
@@ -66,47 +67,65 @@ const SignIn = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.signInUpContainer}>
-        <Pressable>
-          <Text style={styles.signInUpActive}>SIGN IN</Text>
-        </Pressable>
-        <Pressable onPress={handleSignUpPress}>
-          <Text style={styles.signInUpInactive}>SIGN UP</Text>
-        </Pressable>
-      </View>
+    <>
+      <CustomStatusbar />
 
-      <SignInInputs
-        setSignIn={setSignIn}
-        SignInError={SignInError}
-        signIn={signIn}
-      />
+      <View style={styles.container}>
+        <View style={styles.signInUpContainer}>
+          <Pressable style={styles.signInUpActiveBtn}>
+            <Text style={styles.signInUpActiveTxt}>SIGN IN</Text>
+          </Pressable>
+          <Pressable onPress={handleSignUpPress}>
+            <Text style={styles.signInUpInactive}>SIGN UP</Text>
+          </Pressable>
+        </View>
 
-      <View style={styles.ContinueForgotContainer}>
-        <Pressable onPress={handleContinuePress} style={styles.continueBtn}>
-          <Text
+        <SignInInputs
+          setSignIn={setSignIn}
+          SignInError={SignInError}
+          signIn={signIn}
+        />
+
+        <View style={styles.ContinueForgotContainer}>
+          <Pressable
+            onPress={handleContinuePress}
             style={
               continueForgotActive === 1
-                ? styles.continueForgotActive
-                : styles.continueForgotInactive
+                ? styles.continueBtnActive
+                : styles.continueBtnInactive
             }
           >
-            CONTINUE
-          </Text>
-        </Pressable>
-        <Pressable onPress={handleForgotPress}>
-          <Text
+            <Text
+              style={
+                continueForgotActive === 1
+                  ? styles.continueForgotActive
+                  : styles.continueForgotInactive
+              }
+            >
+              CONTINUE
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={handleForgotPress}
             style={
               continueForgotActive === 2
-                ? styles.continueForgotActive
-                : styles.continueForgotInactive
+                ? styles.continueBtnActive
+                : styles.continueBtnInactive
             }
           >
-            FORGOT PASSWORD
-          </Text>
-        </Pressable>
+            <Text
+              style={
+                continueForgotActive === 2
+                  ? styles.continueForgotActive
+                  : styles.continueForgotInactive
+              }
+            >
+              FORGOT PASSWORD
+            </Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 

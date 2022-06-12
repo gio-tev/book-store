@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginBottom: 5,
+    marginBottom: 15,
   },
   img: {
     width: '35%',

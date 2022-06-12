@@ -6,10 +6,10 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
+import CustomStatusbar from '../../components/CustomStatusBar';
 import SignUpStyles from './SignUpStyles';
 import SignUpInputs from '../../components/SignUpInputs';
 import { AppContext } from '../../store/AppContext';
-
 const styles = SignUpStyles;
 
 const SignUp = ({ navigation }) => {
@@ -56,31 +56,35 @@ const SignUp = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.signInUpContainer}>
-        <Pressable onPress={handleSignInPress}>
-          <Text style={styles.signInUpInactive}>SIGN IN</Text>
-        </Pressable>
+    <>
+      <CustomStatusbar />
 
-        <Pressable>
-          <Text style={styles.signInUpActive}>SIGN UP</Text>
-        </Pressable>
-      </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.signInUpContainer}>
+          <Pressable onPress={handleSignInPress}>
+            <Text style={styles.signInUpInactive}>SIGN IN</Text>
+          </Pressable>
 
-      <KeyboardAvoidingView style={styles.avoidingView} behavior="position">
-        <SignUpInputs
-          setUser={setNewUser}
-          clearInputs={clearInputs}
-          SetClearInputs={SetClearInputs}
-        />
-      </KeyboardAvoidingView>
+          <Pressable style={styles.signInUpActiveBtn}>
+            <Text style={styles.signInUpActiveTxt}>SIGN UP</Text>
+          </Pressable>
+        </View>
 
-      <View style={styles.ContinueForgotContainer}>
-        <Pressable onPress={handlePress} style={styles.continueBtn}>
-          <Text style={styles.continueForgotActive}>CONTINUE</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
+        <KeyboardAvoidingView style={styles.avoidingView} behavior="position">
+          <SignUpInputs
+            setUser={setNewUser}
+            clearInputs={clearInputs}
+            SetClearInputs={SetClearInputs}
+          />
+        </KeyboardAvoidingView>
+
+        <View style={styles.ContinueForgotContainer}>
+          <Pressable onPress={handlePress} style={styles.continueBtn}>
+            <Text style={styles.continueForgotActive}>CONTINUE</Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </>
   );
 };
 

@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   titles: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 17,
-    color: 'black',
+    color: colors.darkGrey,
     lineHeight: 25,
     marginRight: 5,
   },

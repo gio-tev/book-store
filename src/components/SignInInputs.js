@@ -23,7 +23,7 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
   };
 
   return (
-    <View style={styles.inputContainer}>
+    <View style={styles.inputsContainer}>
       <TextInput
         onChangeText={handleEmailChange}
         onFocus={handleEmailFocus}
@@ -32,6 +32,7 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
         placeholder="Email"
         value={signIn.email}
       />
+
       <TextInput
         onChangeText={handlePasswordChange}
         onFocus={handlePasswordFocus}
@@ -50,18 +51,19 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
 };
 
 const styles = StyleSheet.create({
-  inputContainer: {
+  inputsContainer: {
     width: '90%',
     marginBottom: 40,
   },
+
   inputs: {
     borderBottomColor: 'grey',
-    borderBottomWidth: 0.2,
+    borderBottomWidth: 0.4,
     height: 50,
   },
   inputActive: {
     borderBottomColor: 'grey',
-    borderBottomWidth: 1.4,
+    borderBottomWidth: 1,
   },
   error: {
     fontFamily: 'Montserrat_500Medium',

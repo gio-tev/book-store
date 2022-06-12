@@ -1,3 +1,5 @@
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
@@ -30,35 +32,41 @@ export default function App() {
   }
 
   return (
-    <AppContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen
-            name="AsyncStorageWelcome"
-            component={AsyncStorageWelcome}
-          />
-          <Stack.Screen name="Welcome" component={Welcome} />
-          <Stack.Screen name="Sign In" component={SignIn} />
-          <Stack.Screen name="Sign Up" component={SignUp} />
-          <Stack.Screen name="Success" component={Success} />
-          <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
-          <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
-          <Stack.Screen
-            name="Book"
-            component={Book}
-            options={{
-              headerStyle: {
-                backgroundColor: colors.teal,
-              },
-              headerTitleStyle: {
-                fontFamily: 'Montserrat_500Medium',
-              },
-              headerTintColor: '#fff',
-              headerShown: true,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AppContextProvider>
+    <SafeAreaProvider>
+      <StatusBar style="light" />
+      <AppContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+              name="AsyncStorageWelcome"
+              component={AsyncStorageWelcome}
+            />
+            <Stack.Screen name="Welcome" component={Welcome} />
+            <Stack.Screen name="Sign In" component={SignIn} />
+            <Stack.Screen name="Sign Up" component={SignUp} />
+            <Stack.Screen name="Success" component={Success} />
+            <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
+            <Stack.Screen
+              name="DrawerNavigation"
+              component={DrawerNavigation}
+            />
+            <Stack.Screen
+              name="Book"
+              component={Book}
+              options={{
+                headerStyle: {
+                  backgroundColor: colors.teal,
+                },
+                headerTitleStyle: {
+                  fontFamily: 'Montserrat_500Medium',
+                },
+                headerTintColor: '#fff',
+                headerShown: true,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AppContextProvider>
+    </SafeAreaProvider>
   );
 }

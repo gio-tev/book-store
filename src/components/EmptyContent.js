@@ -14,22 +14,24 @@ const EmptyContent = props => {
 
   return (
     <View style={styles.emptyCartContainer}>
-      {props.icon === 'Cart' && (
-        <Ionicons
-          style={styles.icon}
-          name="ios-cart-outline"
-          size={35}
-          color={colors.brown}
-        />
-      )}
-      {props.icon === 'Orders' && (
-        <MaterialCommunityIcons
-          style={styles.icon}
-          name="checkbox-marked-circle-outline"
-          size={35}
-          color={colors.brown}
-        />
-      )}
+      <View style={styles.iconContainer}>
+        {props.icon === 'Cart' && (
+          <Ionicons
+            style={styles.icon}
+            name="ios-cart-outline"
+            size={35}
+            color={colors.brown}
+          />
+        )}
+        {props.icon === 'Orders' && (
+          <MaterialCommunityIcons
+            style={styles.icon}
+            name="checkbox-marked-circle-outline"
+            size={35}
+            color={colors.brown}
+          />
+        )}
+      </View>
       <Text style={styles.cartTxt}>{props.title}</Text>
       <Pressable style={styles.cartBtnContainer} onPress={handleEmptyCart}>
         <Text style={styles.emptyCartBtn}>SHOP NOW</Text>
@@ -46,13 +48,17 @@ const styles = StyleSheet.create({
     marginTop: '20%',
     alignItems: 'center',
   },
+  iconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#D8D8D8',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
   icon: {
     fontFamily: 'Montserrat_700Bold',
-    backgroundColor: '#D8D8D8',
-    borderRadius: 200,
-    paddingHorizontal: 30,
-    paddingVertical: 28,
-    marginBottom: 10,
   },
   cartTxt: {
     fontFamily: 'Montserrat_700Bold',

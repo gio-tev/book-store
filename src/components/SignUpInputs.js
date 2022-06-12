@@ -178,12 +178,12 @@ const styles = StyleSheet.create({
   },
   inputs: {
     borderBottomColor: 'grey',
-    borderBottomWidth: 0.2,
+    borderBottomWidth: 0.4,
     height: 50,
   },
   inputActive: {
     borderBottomColor: 'grey',
-    borderBottomWidth: 1.4,
+    borderBottomWidth: 1,
   },
   error: {
     color: '#eb1e1e',

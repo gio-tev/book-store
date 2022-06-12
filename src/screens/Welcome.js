@@ -1,10 +1,13 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
+// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LoginNav from '../components/LoginNav';
 import { colors } from '../utils/colors';
+import CustomStatusbar from '../components/CustomStatusBar';
 
 const Welcome = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <CustomStatusbar />
       <Image style={styles.img} source={require('../../assets/cover.jpg')} />
       <View style={styles.text1Container}>
         <Text style={styles.text1}>Welcome {'\n'} to Book Store</Text>
@@ -24,6 +27,7 @@ const styles = StyleSheet.create({
   img: {
     height: '40%',
     width: '100%',
+    // transform: [{ translateY: 5 }],
   },
   text1Container: {
     marginTop: '10%',

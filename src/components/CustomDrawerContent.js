@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileContainer: {
-    marginTop: 20,
+    marginTop: 50,
     marginLeft: 20,
     paddingBottom: 30,
-    borderBottomColor: 'grey',
+    borderBottomColor: colors.teal,
     borderBottomWidth: 1,
   },
   imageNameContainer: {
