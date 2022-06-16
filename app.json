@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "book-store",
+    "name": "Book Store",
     "slug": "book-store",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,15 +13,21 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "buildNumber": "1.0.0",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.giotev.bookstore"
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.giotev.bookstore"
     },
     "web": {
       "favicon": "./assets/favicon.png"

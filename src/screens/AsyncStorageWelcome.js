@@ -18,9 +18,9 @@ const AsyncStorageWelcome = ({ navigation }) => {
         const account = await AsyncStorage.getItem('Account');
         if (account !== null) {
           dispatch({ type: 'LOGGED_USER', payload: JSON.parse(account) });
-          navigation.navigate('DrawerNavigation', { screen: 'Home' });
+          navigation.replace('DrawerNavigation', { screen: 'Home' });
         } else {
-          navigation.navigate('Welcome');
+          navigation.replace('Welcome');
         }
       } catch (e) {
         console.log(e);
