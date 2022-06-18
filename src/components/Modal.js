@@ -74,13 +74,19 @@ const ModalComp = ({
           <Text style={styles.modalText}>{title}</Text>
           <View style={styles.modalBtnsContainer}>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={({ pressed }) => [
+                styles.button,
+                pressed && styles.pressed,
+              ]}
               onPress={() => setModalVisible(!modalVisible)}
             >
               <Text style={styles.textStyle}>Cancel</Text>
             </Pressable>
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={({ pressed }) => [
+                styles.button,
+                pressed && styles.pressed,
+              ]}
               onPress={handlePress}
             >
               <Text style={styles.textStyle}>Yes</Text>
@@ -123,10 +129,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 8,
     elevation: 2,
+    backgroundColor: colors.teal,
   },
-  buttonClose: {
-    backgroundColor: colors.salmon,
-  },
+
   textStyle: {
     fontFamily: 'Montserrat_700Bold',
     color: 'white',
@@ -138,6 +143,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
     color: '#585858',
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });
 export default ModalComp;

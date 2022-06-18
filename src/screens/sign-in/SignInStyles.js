@@ -56,4 +56,7 @@ export default StyleSheet.create({
     color: colors.teal,
     textAlign: 'center',
   },
+  pressed: {
+    opacity: 0.75,
+  },
 });

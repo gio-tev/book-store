@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   img: {
-    width: '80%',
+    width: '85%',
     alignSelf: 'center',
     height: 200,
     borderRadius: 5,

@@ -89,9 +89,9 @@ const SignIn = ({ navigation }) => {
         <View style={styles.ContinueForgotContainer}>
           <Pressable
             onPress={handleContinuePress}
-            style={
+            style={({ pressed }) =>
               continueForgotActive === 1
-                ? styles.continueBtnActive
+                ? [styles.continueBtnActive, pressed && styles.pressed]
                 : styles.continueBtnInactive
             }
           >
@@ -107,9 +107,9 @@ const SignIn = ({ navigation }) => {
           </Pressable>
           <Pressable
             onPress={handleForgotPress}
-            style={
+            style={({ pressed }) =>
               continueForgotActive === 2
-                ? styles.continueBtnActive
+                ? [styles.continueBtnActive, pressed && styles.pressed]
                 : styles.continueBtnInactive
             }
           >

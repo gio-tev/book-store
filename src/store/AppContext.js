@@ -7,10 +7,10 @@ const initialState = {
     {
       name: 'Giorgi Tevdorashvili',
       email: 'test@gmail.com',
-      phone: '123456',
-      password: '654321',
+      password: '111111',
+      phone: '222222',
       image:
-        'https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',
+        'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
     },
   ],
   currentLoggedUser: {},
@@ -109,6 +109,20 @@ const reducer = (state, action) => {
   }
   if (action.type === 'PLACE_ORDER') {
     return { ...state, orders: [...state.cart], cart: [], totalPrice: 0 };
+  }
+  if (action.type === 'EDIT_PROFILE') {
+    const accountToUpdateIndex = state.accounts.findIndex(account => {
+      return account.email === action.payload.email;
+    });
+    const copyOfAccounts = [...state.accounts];
+    copyOfAccounts[accountToUpdateIndex] = action.payload;
+    const updatedAccounts = [...copyOfAccounts];
+
+    return {
+      ...state,
+      accounts: updatedAccounts,
+      currentLoggedUser: action.payload,
+    };
   }
 };
 

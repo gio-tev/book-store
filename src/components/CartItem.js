@@ -80,7 +80,11 @@ const CartItem = ({ item }) => {
           <View style={styles.descriptionCostContainer}>
             <View style={styles.descriptionContainer}>
               <Text style={styles.description}>Author:</Text>
-              <Text style={styles.author}>{item.author}</Text>
+              <Text style={styles.authorPublisher}>{item.author}</Text>
+            </View>
+            <View style={styles.descriptionContainer}>
+              <Text style={styles.description}>Publisher: </Text>
+              <Text style={styles.authorPublisher}>{item.publisher}</Text>
             </View>
             <View style={styles.descriptionContainer}>
               <Text style={styles.description}>Price: </Text>
@@ -89,11 +93,17 @@ const CartItem = ({ item }) => {
           </View>
 
           <View style={styles.btnsQuantityContainer}>
-            <Pressable onPress={handleDecrease}>
+            <Pressable
+              onPress={handleDecrease}
+              style={({ pressed }) => pressed && styles.pressed}
+            >
               <AntDesign name="minuscircleo" size={24} color={colors.teal} />
             </Pressable>
             <Text style={styles.quantity}>{item.quantity}</Text>
-            <Pressable onPress={handleIncrease}>
+            <Pressable
+              onPress={handleIncrease}
+              style={({ pressed }) => pressed && styles.pressed}
+            >
               <AntDesign name="pluscircleo" size={24} color={colors.teal} />
             </Pressable>
           </View>
@@ -119,7 +129,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   descriptionCostContainer: {
-    marginTop: -40,
+    marginTop: -10,
   },
   title: {
     fontFamily: 'Montserrat_500Medium',
@@ -136,7 +146,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginRight: 5,
   },
-  author: {
+  authorPublisher: {
     fontFamily: 'Montserrat_500Medium',
     color: colors.darkGrey,
   },
@@ -147,14 +157,19 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   btnsQuantityContainer: {
+    width: 90,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   quantity: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 20,
     color: colors.darkGrey,
     paddingHorizontal: 10,
+  },
+  pressed: {
+    transform: [{ scale: 1.2 }],
   },
 });
 

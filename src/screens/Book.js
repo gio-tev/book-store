@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -27,12 +27,14 @@ const Book = () => {
       <Image style={styles.img} source={{ uri: selectedBook.cover }} />
 
       <View style={styles.descriptionContainer}>
-        <Text style={styles.titleYear}>
-          {selectedBook.title} ({selectedBook.year})
-        </Text>
+        <Text style={styles.title}>{selectedBook.title}</Text>
         <View style={styles.titlesContainer}>
           <Text style={styles.titles}>Author:</Text>
           <Text style={styles.description}>{selectedBook.author}</Text>
+        </View>
+        <View style={styles.titlesContainer}>
+          <Text style={styles.titles}>Year:</Text>
+          <Text style={styles.description}>{selectedBook.year}</Text>
         </View>
         <View style={styles.titlesContainer}>
           <Text style={styles.titles}>Publisher:</Text>
@@ -48,7 +50,10 @@ const Book = () => {
         </View>
       </View>
 
-      <Pressable style={styles.btn} onPress={handlePress}>
+      <Pressable
+        style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+        onPress={handlePress}
+      >
         <Text style={styles.btnText}>Add To Cart</Text>
         <FontAwesome5 name="arrow-right" size={22} color="white" />
       </Pressable>
@@ -68,7 +73,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 10,
   },
-  titleYear: {
+  title: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 25,
     color: colors.darkGrey,
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 35,
-    backgroundColor: colors.teal,
+    backgroundColor: colors.brown,
     paddingHorizontal: 35,
     paddingVertical: 13,
     borderRadius: 50,
@@ -110,6 +115,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_700Bold',
     fontSize: 17,
     marginRight: 10,
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });
 

@@ -26,7 +26,10 @@ const OrderPlaced = ({ navigation }) => {
         <Text style={styles.order}>Order Placed!</Text>
         <Text style={styles.placed}>Your order was placed successfully</Text>
 
-        <Pressable style={styles.btn} onPress={handleOrdersPress}>
+        <Pressable
+          style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+          onPress={handleOrdersPress}
+        >
           <Text style={styles.btnTxt}>MY ORDERS</Text>
           <FontAwesome5 name="arrow-right" size={20} color="white" />
         </Pressable>
@@ -81,6 +84,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#fff',
     marginRight: 5,
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });
 

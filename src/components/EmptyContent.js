@@ -33,7 +33,13 @@ const EmptyContent = props => {
         )}
       </View>
       <Text style={styles.cartTxt}>{props.title}</Text>
-      <Pressable style={styles.cartBtnContainer} onPress={handleEmptyCart}>
+      <Pressable
+        style={({ pressed }) => [
+          styles.cartBtnContainer,
+          pressed && styles.pressed,
+        ]}
+        onPress={handleEmptyCart}
+      >
         <Text style={styles.emptyCartBtn}>SHOP NOW</Text>
         <FontAwesome5 name="arrow-right" size={18} color="white" />
       </Pressable>
@@ -78,5 +84,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_700Bold',
     color: 'white',
     marginRight: 5,
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });

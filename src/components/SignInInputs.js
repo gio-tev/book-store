@@ -40,6 +40,7 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
         style={[styles.inputs, passwordInputActive ? styles.inputActive : '']}
         placeholder="Password"
         value={signIn.password}
+        secureTextEntry={true}
       />
       {SignInError && (
         <Text style={styles.error}>

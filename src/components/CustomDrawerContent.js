@@ -14,7 +14,7 @@ function CustomDrawerContent(props) {
   const { state, dispatch } = useContext(AppContext);
   const { currentLoggedUser } = state;
 
-  const handlePress = () => {
+  const handleLogoutPress = () => {
     dispatch({ type: 'LOG_OUT' });
 
     const removeValue = async () => {
@@ -29,6 +29,10 @@ function CustomDrawerContent(props) {
     props.navigation.navigate('Welcome');
   };
 
+  const handleEditPress = () => {
+    props.navigation.navigate('EditProfile', { user: currentLoggedUser });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -41,19 +45,24 @@ function CustomDrawerContent(props) {
           />
           <Text style={styles.name}>{currentLoggedUser.name}</Text>
         </View>
-        <Pressable style={styles.btn}>
+        <Pressable
+          style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+          onPress={handleEditPress}
+        >
           <Text style={styles.btnTxt}>Edit Profile</Text>
         </Pressable>
       </View>
-      <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
-        <DrawerItem
-          label="Log Out"
-          labelStyle={{ marginLeft: -20 }}
-          icon={() => <AntDesign name="logout" size={24} color="#1c1c1ead" />}
-          onPress={handlePress}
-        />
-      </DrawerContentScrollView>
+      <View style={styles.drawerContentContainer}>
+        <DrawerContentScrollView {...props}>
+          <DrawerItemList {...props} />
+          <DrawerItem
+            label="Log Out"
+            labelStyle={{ marginLeft: -20 }}
+            icon={() => <AntDesign name="logout" size={24} color="#1c1c1ead" />}
+            onPress={handleLogoutPress}
+          />
+        </DrawerContentScrollView>
+      </View>
     </View>
   );
 }
@@ -62,16 +71,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileContainer: {
-    marginTop: 50,
-    marginLeft: 20,
-    paddingBottom: 30,
-    borderBottomColor: colors.teal,
+    justifyContent: 'space-between',
+    padding: 30,
+    paddingTop: 50,
+    borderBottomColor: '#DCDCDC',
     borderBottomWidth: 1,
+  },
+  drawerContentContainer: {
+    flex: 4.5,
   },
   imageNameContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
   },
   img: {
     width: 60,
@@ -87,13 +99,16 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: colors.brown,
     padding: 10,
-    width: '50%',
     borderRadius: 100,
+    elevation: 5,
   },
   btnTxt: {
     fontFamily: 'Montserrat_500Medium',
     textAlign: 'center',
     color: 'white',
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });
 export default CustomDrawerContent;

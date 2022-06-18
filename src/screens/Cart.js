@@ -54,9 +54,10 @@ const Cart = ({ navigation }) => {
           </View>
 
           <Pressable
-            style={[
+            style={({ pressed }) => [
               styles.btnContainer,
-              state.cart.length == 0 ? styles.disableBtn : '',
+              pressed && styles.pressed,
+              state.cart.length == 0 && [styles.disableBtn],
             ]}
             onPress={handlePress}
           >
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.salmon,
+    backgroundColor: colors.brown,
     height: 40,
     paddingHorizontal: 15,
     borderRadius: 100,
@@ -140,6 +141,9 @@ const styles = StyleSheet.create({
   },
   disableBtn: {
     backgroundColor: 'grey',
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });
 

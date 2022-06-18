@@ -42,11 +42,14 @@ export default StyleSheet.create({
     backgroundColor: colors.teal,
     padding: 20,
     borderRadius: 100,
-    marginBottom: 5,
+    marginBottom: 50,
   },
   continueForgotActive: {
     fontFamily: 'Montserrat_500Medium',
     color: '#fff',
     textAlign: 'center',
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });

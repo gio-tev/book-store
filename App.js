@@ -3,6 +3,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
+import {
+  useFonts,
+  Montserrat_700Bold,
+  Montserrat_500Medium,
+} from '@expo-google-fonts/montserrat';
+
+import AsyncStorageWelcome from './src/screens/AsyncStorageWelcome';
+import { colors } from './src/utils/colors';
 import AppContextProvider from './src/store/AppContext';
 import Welcome from './src/screens/Welcome';
 import SignIn from './src/screens/sign-in/SignIn';
@@ -11,13 +19,7 @@ import Success from './src/screens/Success';
 import Book from './src/screens/Book';
 import DrawerNavigation from './src/screens/DrawerNavigation';
 import OrderPlaced from './src/screens/OrderPlaced';
-import AsyncStorageWelcome from './src/screens/AsyncStorageWelcome';
-import {
-  useFonts,
-  Montserrat_700Bold,
-  Montserrat_500Medium,
-} from '@expo-google-fonts/montserrat';
-import { colors } from './src/utils/colors';
+import EditProfile from './src/screens/EditProfile';
 
 const Stack = createStackNavigator();
 
@@ -51,9 +53,10 @@ export default function App() {
               component={DrawerNavigation}
             />
             <Stack.Screen
-              name="Book"
-              component={Book}
+              name="EditProfile"
+              component={EditProfile}
               options={{
+                headerShown: true,
                 headerStyle: {
                   backgroundColor: colors.teal,
                 },
@@ -61,7 +64,21 @@ export default function App() {
                   fontFamily: 'Montserrat_500Medium',
                 },
                 headerTintColor: '#fff',
+                title: 'Edit Profile',
+              }}
+            />
+            <Stack.Screen
+              name="Book"
+              component={Book}
+              options={{
                 headerShown: true,
+                headerStyle: {
+                  backgroundColor: colors.teal,
+                },
+                headerTitleStyle: {
+                  fontFamily: 'Montserrat_500Medium',
+                },
+                headerTintColor: '#fff',
               }}
             />
           </Stack.Navigator>

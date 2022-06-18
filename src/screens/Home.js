@@ -19,7 +19,7 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   booksContainer: {
-    width: '95%',
+    width: '90%',
     alignSelf: 'center',
   },
 });

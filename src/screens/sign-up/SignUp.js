@@ -10,6 +10,7 @@ import CustomStatusbar from '../../components/CustomStatusBar';
 import SignUpStyles from './SignUpStyles';
 import SignUpInputs from '../../components/SignUpInputs';
 import { AppContext } from '../../store/AppContext';
+
 const styles = SignUpStyles;
 
 const SignUp = ({ navigation }) => {
@@ -20,7 +21,7 @@ const SignUp = ({ navigation }) => {
     email: '',
     phone: '',
     password: '',
-    image: '',
+    // image: '',
   });
 
   const [clearInputs, SetClearInputs] = useState(false);
@@ -32,10 +33,16 @@ const SignUp = ({ navigation }) => {
       newUser.name.length > 2 &&
       newUser.email.length > 4 &&
       newUser.phone.length > 4 &&
-      newUser.password.length > 4 &&
-      newUser.image.length > 4
+      newUser.password.length > 4
     ) {
-      appCtx.dispatch({ type: 'NEW_ACCOUNT', payload: newUser });
+      appCtx.dispatch({
+        type: 'NEW_ACCOUNT',
+        payload: {
+          ...newUser,
+          image:
+            'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
+        },
+      });
 
       SetClearInputs(true);
 
@@ -44,7 +51,6 @@ const SignUp = ({ navigation }) => {
         email: '',
         phone: '',
         password: '',
-        image: '',
       });
 
       navigation.navigate('Success');
@@ -77,9 +83,14 @@ const SignUp = ({ navigation }) => {
             SetClearInputs={SetClearInputs}
           />
         </KeyboardAvoidingView>
-
         <View style={styles.ContinueForgotContainer}>
-          <Pressable onPress={handlePress} style={styles.continueBtn}>
+          <Pressable
+            onPress={handlePress}
+            style={({ pressed }) => [
+              styles.continueBtn,
+              pressed && styles.pressed,
+            ]}
+          >
             <Text style={styles.continueForgotActive}>CONTINUE</Text>
           </Pressable>
         </View>

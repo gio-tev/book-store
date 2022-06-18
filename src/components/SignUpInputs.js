@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Text,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { View, TextInput, StyleSheet, Text } from 'react-native';
 
 const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
   const [nameValue, setNameValue] = useState('');
@@ -23,10 +17,6 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordInputActive, setPasswordInputActive] = useState(false);
   const [passwordInputIsValid, setPasswordInputIsValid] = useState(true);
-
-  const [imageValue, setImageValue] = useState('');
-  const [imageInputActive, setImageInputActive] = useState(false);
-  const [imageInputIsValid, setImageInputIsValid] = useState(true);
 
   useEffect(() => {
     if (clearInputs) {
@@ -93,20 +83,6 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
     } else setPasswordInputIsValid(false);
   };
 
-  const handleImageFocus = () => setImageInputActive(true);
-  const handleImageBlur = () => setImageInputActive(false);
-  const handleImageChange = image => {
-    setImageValue(image);
-
-    if (image.length > 4) {
-      setImageInputIsValid(true);
-
-      setUser(prevState => {
-        return { ...prevState, image };
-      });
-    } else setImageInputIsValid(false);
-  };
-
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -149,22 +125,12 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
         style={[styles.inputs, passwordInputActive ? styles.inputActive : '']}
         placeholder="Password"
         value={passwordValue}
+        secureTextEntry={true}
       />
       {!passwordInputIsValid && (
         <Text style={styles.error}>
           Password must contain 5 or more letters.
         </Text>
-      )}
-      <TextInput
-        onChangeText={handleImageChange}
-        onFocus={handleImageFocus}
-        onBlur={handleImageBlur}
-        style={[styles.inputs, imageInputActive ? styles.inputActive : '']}
-        placeholder="Image URL"
-        value={imageValue}
-      />
-      {!imageInputIsValid && (
-        <Text style={styles.error}>Image must contain valid URL.</Text>
       )}
     </View>
   );
@@ -177,9 +143,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   inputs: {
+    height: 50,
     borderBottomColor: 'grey',
     borderBottomWidth: 0.4,
-    height: 50,
   },
   inputActive: {
     borderBottomColor: 'grey',
