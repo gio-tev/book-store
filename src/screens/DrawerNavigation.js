@@ -21,7 +21,9 @@ const DrawerNavigation = () => {
           backgroundColor: colors.teal,
         },
         headerTintColor: '#fff',
-        headerTitleStyle: { fontFamily: 'Montserrat_500Medium' },
+        headerTitleStyle: {
+          fontFamily: 'Montserrat_500Medium',
+        },
         drawerLabelStyle: {
           marginLeft: -20,
           fontFamily: 'Montserrat_500Medium',

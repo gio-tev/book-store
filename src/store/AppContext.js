@@ -4,14 +4,14 @@ export const AppContext = createContext();
 
 const initialState = {
   accounts: [
-    {
-      name: 'Giorgi Tevdorashvili',
-      email: 'test@gmail.com',
-      password: '111111',
-      phone: '222222',
-      image:
-        'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
-    },
+    // {
+    //   name: 'Giorgi Tevdorashvili',
+    //   email: 'test@gmail.com',
+    //   password: '111111',
+    //   phone: '222222',
+    //   image:
+    //     'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
+    // },
   ],
   currentLoggedUser: {},
   selectedBook: {},
@@ -21,6 +21,9 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
+  if (action.type === 'LOAD_ACCOUNTS') {
+    return { ...state, accounts: [...action.payload] };
+  }
   if (action.type === 'NEW_ACCOUNT') {
     return { ...state, accounts: [...state.accounts, action.payload] };
   }

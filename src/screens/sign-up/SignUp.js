@@ -21,20 +21,34 @@ const SignUp = ({ navigation }) => {
     email: '',
     phone: '',
     password: '',
-    // image: '',
   });
 
   const [clearInputs, SetClearInputs] = useState(false);
 
   const handleSignInPress = () => navigation.navigate('Sign In');
 
-  const handlePress = () => {
+  const handlePress = async () => {
     if (
       newUser.name.length > 2 &&
       newUser.email.length > 4 &&
       newUser.phone.length > 4 &&
       newUser.password.length > 4
     ) {
+      await fetch(
+        'https://book-store-ac9bf-default-rtdb.firebaseio.com/accounts.json',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...newUser,
+            image:
+              'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
+          }),
+        }
+      );
+
       appCtx.dispatch({
         type: 'NEW_ACCOUNT',
         payload: {

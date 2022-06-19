@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const styles = SignInStyles;
 
 const SignIn = ({ navigation }) => {
-  const appCtx = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const [signIn, setSignIn] = useState({
     email: '',
@@ -24,11 +24,17 @@ const SignIn = ({ navigation }) => {
   const handleContinuePress = () => {
     setContinueForgotActive(1);
 
-    appCtx.state.accounts.map(account => {
+    setForgotBtnClicked(false);
+
+    let accountMatched = false;
+
+    state.accounts.forEach(account => {
       if (
         account.email === signIn.email &&
         account.password === signIn.password
       ) {
+        setSignInError(false);
+        accountMatched = true;
         const storeData = async value => {
           try {
             const jsonValue = JSON.stringify(value);
@@ -39,9 +45,7 @@ const SignIn = ({ navigation }) => {
         };
         storeData(account);
 
-        appCtx.dispatch({ type: 'LOGGED_USER', payload: account });
-
-        setSignInError(false);
+        dispatch({ type: 'LOGGED_USER', payload: account });
 
         navigation.navigate('DrawerNavigation', { screen: 'Home' });
 
@@ -49,7 +53,13 @@ const SignIn = ({ navigation }) => {
           email: '',
           password: '',
         });
-      } else if (
+      }
+    });
+
+    if (accountMatched) return;
+
+    state.accounts.forEach(account => {
+      if (
         (account.email !== signIn.email ||
           account.password !== signIn.password) &&
         !forgotBtnClicked
@@ -57,13 +67,12 @@ const SignIn = ({ navigation }) => {
         setSignInError(true);
       }
     });
-
-    setForgotBtnClicked(false);
   };
 
   const handleForgotPress = () => {
     setContinueForgotActive(2);
     setForgotBtnClicked(true);
+    setSignInError(false);
   };
 
   return (

@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import HomeItem from '../components/HomeItem';
+import { colors } from '../utils/colors';
 
 const Home = ({ navigation }) => {
   const [booksData, setBooksData] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -23,12 +26,20 @@ const Home = ({ navigation }) => {
       }
 
       setBooksData(transformedBooks);
+      setIsLoading(false);
     };
     fetchBooks();
   }, []);
 
   return (
     <View style={styles.booksContainer}>
+      {isLoading && (
+        <ActivityIndicator
+          size="large"
+          color={colors.teal}
+          style={styles.loading}
+        />
+      )}
       <FlatList
         numColumns={2}
         data={booksData}
@@ -45,6 +56,9 @@ const styles = StyleSheet.create({
   booksContainer: {
     width: '90%',
     alignSelf: 'center',
+  },
+  loading: {
+    marginTop: 100,
   },
 });
 

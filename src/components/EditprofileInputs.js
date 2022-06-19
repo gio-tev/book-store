@@ -48,6 +48,28 @@ const EditprofileInputs = ({ picture }) => {
       image: picture ? picture : route.params.user.image,
     };
 
+    const updateProfile = async () => {
+      const modifiedProfile = {
+        name: userInputs.name,
+        email: userInputs.email,
+        password: userInputs.password,
+        image: picture ? picture : route.params.user.image,
+        phone: userInputs.phone,
+      };
+
+      await fetch(
+        `https://book-store-ac9bf-default-rtdb.firebaseio.com/accounts/${userInputs.id}.json`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(modifiedProfile),
+        }
+      );
+    };
+    updateProfile();
+
     const storeData = async value => {
       try {
         const jsonValue = JSON.stringify(value);
