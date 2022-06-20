@@ -1,17 +1,12 @@
 import { useContext } from 'react';
-import { View, StyleSheet, Pressable, Text, Modal } from 'react-native';
-import { AppContext } from '../store/AppContext';
+import { View, StyleSheet, Text, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { colors } from '../utils/colors';
 
-const ModalComp = ({
-  setModalVisible,
-  modalVisible,
-  item,
-  title,
-  navigation,
-  TYPE,
-}) => {
+import { AppContext } from '../../store/AppContext';
+import { colors } from '../../utils/colors';
+import Button from './Button';
+
+const ModalComp = ({ setModalVisible, modalVisible, item, title, navigation, TYPE }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const handlePress = () => {
@@ -73,24 +68,21 @@ const ModalComp = ({
         <View style={styles.modalView}>
           <Text style={styles.modalText}>{title}</Text>
           <View style={styles.modalBtnsContainer}>
-            <Pressable
-              style={({ pressed }) => [
-                styles.button,
-                pressed && styles.pressed,
-              ]}
+            <Button
+              pressable={({ pressed }) => [styles.button, pressed && styles.pressed]}
+              text={styles.textStyle}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Cancel</Text>
-            </Pressable>
-            <Pressable
-              style={({ pressed }) => [
-                styles.button,
-                pressed && styles.pressed,
-              ]}
+              Cancel
+            </Button>
+
+            <Button
+              pressable={({ pressed }) => [styles.button, pressed && styles.pressed]}
+              text={styles.textStyle}
               onPress={handlePress}
             >
-              <Text style={styles.textStyle}>Yes</Text>
-            </Pressable>
+              Yes
+            </Button>
           </View>
         </View>
       </View>

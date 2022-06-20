@@ -1,9 +1,11 @@
-import { StyleSheet, View, Text, Pressable } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { colors } from '../utils/colors';
+import Button from './UI/Button';
 
 const EmptyContent = props => {
   const navigation = useNavigation();
@@ -12,16 +14,12 @@ const EmptyContent = props => {
     navigation.navigate('DrawerNavigation', { screen: 'Home' });
   };
 
+  const icon = <FontAwesome5 name="arrow-right" size={18} color="white" />;
   return (
     <View style={styles.emptyCartContainer}>
       <View style={styles.iconContainer}>
         {props.icon === 'Cart' && (
-          <Ionicons
-            style={styles.icon}
-            name="ios-cart-outline"
-            size={35}
-            color={colors.brown}
-          />
+          <Ionicons style={styles.icon} name="ios-cart-outline" size={35} color={colors.brown} />
         )}
         {props.icon === 'Orders' && (
           <MaterialCommunityIcons
@@ -33,16 +31,15 @@ const EmptyContent = props => {
         )}
       </View>
       <Text style={styles.cartTxt}>{props.title}</Text>
-      <Pressable
-        style={({ pressed }) => [
-          styles.cartBtnContainer,
-          pressed && styles.pressed,
-        ]}
+
+      <Button
+        pressable={({ pressed }) => [styles.cartBtnContainer, pressed && styles.pressed]}
+        text={styles.emptyCartBtn}
         onPress={handleEmptyCart}
+        icon={icon}
       >
-        <Text style={styles.emptyCartBtn}>SHOP NOW</Text>
-        <FontAwesome5 name="arrow-right" size={18} color="white" />
-      </Pressable>
+        SHOP NOW
+      </Button>
     </View>
   );
 };
@@ -70,14 +67,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_700Bold',
     fontSize: 25,
     color: colors.darkGrey,
-    marginBottom: 30,
+    marginBottom: 40,
     textAlign: 'center',
   },
   cartBtnContainer: {
     flexDirection: 'row',
     backgroundColor: colors.brown,
-    paddingHorizontal: 30,
-    paddingVertical: 15,
+    paddingHorizontal: 40,
+    paddingVertical: 12,
     borderRadius: 50,
   },
   emptyCartBtn: {

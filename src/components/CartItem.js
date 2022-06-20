@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { View, StyleSheet, Pressable, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '../utils/colors';
+import Button from './UI/Button';
 
 const CartItem = ({ item }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -69,6 +70,9 @@ const CartItem = ({ item }) => {
     dispatch({ type: 'INCREASE_QUANTITY', payload: item });
   };
 
+  const iconMinus = <AntDesign name="minuscircleo" size={24} color={colors.teal} />;
+  const iconPlus = <AntDesign name="pluscircleo" size={24} color={colors.teal} />;
+
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row' }}>
@@ -93,19 +97,19 @@ const CartItem = ({ item }) => {
           </View>
 
           <View style={styles.btnsQuantityContainer}>
-            <Pressable
+            <Button
+              pressable={({ pressed }) => pressed && styles.pressed}
               onPress={handleDecrease}
-              style={({ pressed }) => pressed && styles.pressed}
-            >
-              <AntDesign name="minuscircleo" size={24} color={colors.teal} />
-            </Pressable>
+              icon={iconMinus}
+            />
+
             <Text style={styles.quantity}>{item.quantity}</Text>
-            <Pressable
+
+            <Button
+              pressable={({ pressed }) => pressed && styles.pressed}
               onPress={handleIncrease}
-              style={({ pressed }) => pressed && styles.pressed}
-            >
-              <AntDesign name="pluscircleo" size={24} color={colors.teal} />
-            </Pressable>
+              icon={iconPlus}
+            />
           </View>
         </View>
       </View>

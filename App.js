@@ -3,11 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
-import {
-  useFonts,
-  Montserrat_700Bold,
-  Montserrat_500Medium,
-} from '@expo-google-fonts/montserrat';
+import { useFonts, Montserrat_700Bold, Montserrat_500Medium } from '@expo-google-fonts/montserrat';
 
 import AsyncStorageWelcome from './src/screens/AsyncStorageWelcome';
 import { colors } from './src/utils/colors';
@@ -39,19 +35,13 @@ export default function App() {
       <AppContextProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen
-              name="AsyncStorageWelcome"
-              component={AsyncStorageWelcome}
-            />
+            <Stack.Screen name="AsyncStorageWelcome" component={AsyncStorageWelcome} />
             <Stack.Screen name="Welcome" component={Welcome} />
             <Stack.Screen name="Sign In" component={SignIn} />
             <Stack.Screen name="Sign Up" component={SignUp} />
             <Stack.Screen name="Success" component={Success} />
             <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
-            <Stack.Screen
-              name="DrawerNavigation"
-              component={DrawerNavigation}
-            />
+            <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
             <Stack.Screen
               name="EditProfile"
               component={EditProfile}

@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import CustomStatusbar from '../../components/CustomStatusBar';
 import SignInStyles from './SignInStyles';
 import SignInInputs from '../../components/SignInInputs';
 import { AppContext } from '../../store/AppContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Button from '../../components/UI/Button';
 
 const styles = SignInStyles;
 
@@ -29,10 +31,7 @@ const SignIn = ({ navigation }) => {
     let accountMatched = false;
 
     state.accounts.forEach(account => {
-      if (
-        account.email === signIn.email &&
-        account.password === signIn.password
-      ) {
+      if (account.email === signIn.email && account.password === signIn.password) {
         setSignInError(false);
         accountMatched = true;
         const storeData = async value => {
@@ -60,8 +59,7 @@ const SignIn = ({ navigation }) => {
 
     state.accounts.forEach(account => {
       if (
-        (account.email !== signIn.email ||
-          account.password !== signIn.password) &&
+        (account.email !== signIn.email || account.password !== signIn.password) &&
         !forgotBtnClicked
       ) {
         setSignInError(true);
@@ -81,57 +79,49 @@ const SignIn = ({ navigation }) => {
 
       <View style={styles.container}>
         <View style={styles.signInUpContainer}>
-          <Pressable style={styles.signInUpActiveBtn}>
-            <Text style={styles.signInUpActiveTxt}>SIGN IN</Text>
-          </Pressable>
-          <Pressable onPress={handleSignUpPress}>
-            <Text style={styles.signInUpInactive}>SIGN UP</Text>
-          </Pressable>
+          <Button pressable={styles.signInUpActiveBtn} text={styles.signInUpActiveTxt}>
+            SIGN IN
+          </Button>
+
+          <Button text={styles.signInUpInactive} onPress={handleSignUpPress}>
+            SIGN UP
+          </Button>
         </View>
 
-        <SignInInputs
-          setSignIn={setSignIn}
-          SignInError={SignInError}
-          signIn={signIn}
-        />
+        <SignInInputs setSignIn={setSignIn} SignInError={SignInError} signIn={signIn} />
 
         <View style={styles.ContinueForgotContainer}>
-          <Pressable
-            onPress={handleContinuePress}
-            style={({ pressed }) =>
+          <Button
+            pressable={({ pressed }) =>
               continueForgotActive === 1
                 ? [styles.continueBtnActive, pressed && styles.pressed]
                 : styles.continueBtnInactive
             }
+            text={
+              continueForgotActive === 1
+                ? styles.continueForgotActive
+                : styles.continueForgotInactive
+            }
+            onPress={handleContinuePress}
           >
-            <Text
-              style={
-                continueForgotActive === 1
-                  ? styles.continueForgotActive
-                  : styles.continueForgotInactive
-              }
-            >
-              CONTINUE
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={handleForgotPress}
-            style={({ pressed }) =>
+            CONTINUE
+          </Button>
+
+          <Button
+            pressable={({ pressed }) =>
               continueForgotActive === 2
                 ? [styles.continueBtnActive, pressed && styles.pressed]
                 : styles.continueBtnInactive
             }
+            text={
+              continueForgotActive === 2
+                ? styles.continueForgotActive
+                : styles.continueForgotInactive
+            }
+            onPress={handleForgotPress}
           >
-            <Text
-              style={
-                continueForgotActive === 2
-                  ? styles.continueForgotActive
-                  : styles.continueForgotInactive
-              }
-            >
-              FORGOT PASSWORD
-            </Text>
-          </Pressable>
+            FORGOT PASSWORD
+          </Button>
         </View>
       </View>
     </>

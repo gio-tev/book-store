@@ -1,7 +1,9 @@
 import { View, StyleSheet, Pressable, Text } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
+
 import { colors } from '../utils/colors';
+import Button from '../components/UI/Button';
 
 const OrderPlaced = ({ navigation }) => {
   const handleClosePress = () => {
@@ -12,11 +14,15 @@ const OrderPlaced = ({ navigation }) => {
     navigation.navigate('DrawerNavigation', { screen: 'Orders' });
   };
 
+  const iconOrders = <FontAwesome5 name="arrow-right" size={20} color="white" />;
+  const iconClose = <Fontisto name="close-a" size={25} color={colors.brown} />;
   return (
     <View style={styles.container}>
-      <Pressable style={styles.close} onPress={handleClosePress}>
-        <Fontisto name="close-a" size={25} color={colors.brown} />
-      </Pressable>
+      <Button
+        pressable={({ pressed }) => [styles.close, pressed && styles.pressed]}
+        onPress={handleClosePress}
+        icon={iconClose}
+      />
 
       <View style={styles.content}>
         <View style={styles.check}>
@@ -26,13 +32,14 @@ const OrderPlaced = ({ navigation }) => {
         <Text style={styles.order}>Order Placed!</Text>
         <Text style={styles.placed}>Your order was placed successfully</Text>
 
-        <Pressable
-          style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+        <Button
+          pressable={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+          text={styles.btnTxt}
           onPress={handleOrdersPress}
+          icon={iconOrders}
         >
-          <Text style={styles.btnTxt}>MY ORDERS</Text>
-          <FontAwesome5 name="arrow-right" size={20} color="white" />
-        </Pressable>
+          MY ORDERS
+        </Button>
       </View>
     </View>
   );

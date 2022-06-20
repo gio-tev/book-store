@@ -1,14 +1,12 @@
 import { useContext } from 'react';
-import { View, Text, Pressable, Image, StyleSheet } from 'react-native';
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
-import { AppContext } from '../store/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
+import Button from './UI/Button';
 
 function CustomDrawerContent(props) {
   const { state, dispatch } = useContext(AppContext);
@@ -45,12 +43,14 @@ function CustomDrawerContent(props) {
           />
           <Text style={styles.name}>{currentLoggedUser.name}</Text>
         </View>
-        <Pressable
-          style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+
+        <Button
+          pressable={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+          text={styles.btnTxt}
           onPress={handleEditPress}
         >
-          <Text style={styles.btnTxt}>Edit Profile</Text>
-        </Pressable>
+          Edit Profile
+        </Button>
       </View>
       <View style={styles.drawerContentContainer}>
         <DrawerContentScrollView {...props}>

@@ -3,16 +3,7 @@ import { createContext, useReducer } from 'react';
 export const AppContext = createContext();
 
 const initialState = {
-  accounts: [
-    // {
-    //   name: 'Giorgi Tevdorashvili',
-    //   email: 'test@gmail.com',
-    //   password: '111111',
-    //   phone: '222222',
-    //   image:
-    //     'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
-    // },
-  ],
+  accounts: [],
   currentLoggedUser: {},
   selectedBook: {},
   cart: [],
@@ -44,9 +35,7 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === 'ADD_TO_CART') {
-    const sameItem = state.cart.find(
-      product => product.id === action.payload.id
-    );
+    const sameItem = state.cart.find(product => product.id === action.payload.id);
 
     if (sameItem) {
       return {
@@ -70,9 +59,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'DECREASE_QUANTITY') {
-    const sameItem = state.cart.find(
-      product => product.id === action.payload.id
-    );
+    const sameItem = state.cart.find(product => product.id === action.payload.id);
 
     if (sameItem && sameItem.quantity === 1) {
       return {
@@ -132,11 +119,7 @@ const reducer = (state, action) => {
 const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return (
-    <AppContext.Provider value={{ state, dispatch }}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
 };
 
 export default AppContextProvider;

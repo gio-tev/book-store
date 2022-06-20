@@ -1,9 +1,11 @@
 import { useContext, useState } from 'react';
-import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
-import { AppContext } from '../store/AppContext';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import ModalComp from '../components/Modal';
+
+import { AppContext } from '../store/AppContext';
+import ModalComp from '../components/UI/Modal';
 import { colors } from '../utils/colors';
+import Button from '../components/UI/Button';
 
 const Book = () => {
   const { state } = useContext(AppContext);
@@ -13,6 +15,8 @@ const Book = () => {
   const handlePress = () => {
     setModalVisible(!modalVisible);
   };
+
+  const icon = <FontAwesome5 name="arrow-right" size={22} color="white" />;
 
   return (
     <View style={styles.container}>
@@ -50,13 +54,14 @@ const Book = () => {
         </View>
       </View>
 
-      <Pressable
-        style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+      <Button
+        pressable={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+        text={styles.btnText}
         onPress={handlePress}
+        icon={icon}
       >
-        <Text style={styles.btnText}>Add To Cart</Text>
-        <FontAwesome5 name="arrow-right" size={22} color="white" />
-      </Pressable>
+        Add To Cart
+      </Button>
     </View>
   );
 };

@@ -1,15 +1,11 @@
 import { useState, useContext } from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
+import { View, KeyboardAvoidingView, ScrollView } from 'react-native';
+
+import { AppContext } from '../../store/AppContext';
 import CustomStatusbar from '../../components/CustomStatusBar';
 import SignUpStyles from './SignUpStyles';
 import SignUpInputs from '../../components/SignUpInputs';
-import { AppContext } from '../../store/AppContext';
+import Button from '../../components/UI/Button';
 
 const styles = SignUpStyles;
 
@@ -34,20 +30,17 @@ const SignUp = ({ navigation }) => {
       newUser.phone.length > 4 &&
       newUser.password.length > 4
     ) {
-      await fetch(
-        'https://book-store-ac9bf-default-rtdb.firebaseio.com/accounts.json',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...newUser,
-            image:
-              'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
-          }),
-        }
-      );
+      await fetch('https://book-store-ac9bf-default-rtdb.firebaseio.com/accounts.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...newUser,
+          image:
+            'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
+        }),
+      });
 
       appCtx.dispatch({
         type: 'NEW_ACCOUNT',
@@ -81,13 +74,13 @@ const SignUp = ({ navigation }) => {
 
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.signInUpContainer}>
-          <Pressable onPress={handleSignInPress}>
-            <Text style={styles.signInUpInactive}>SIGN IN</Text>
-          </Pressable>
+          <Button text={styles.signInUpInactive} onPress={handleSignInPress}>
+            SIGN IN
+          </Button>
 
-          <Pressable style={styles.signInUpActiveBtn}>
-            <Text style={styles.signInUpActiveTxt}>SIGN UP</Text>
-          </Pressable>
+          <Button pressable={styles.signInUpActiveBtn} text={styles.signInUpActiveTxt}>
+            SIGN UP
+          </Button>
         </View>
 
         <KeyboardAvoidingView style={styles.avoidingView} behavior="position">
@@ -98,15 +91,13 @@ const SignUp = ({ navigation }) => {
           />
         </KeyboardAvoidingView>
         <View style={styles.ContinueForgotContainer}>
-          <Pressable
+          <Button
+            pressable={({ pressed }) => [styles.continueBtn, pressed && styles.pressed]}
+            text={styles.continueForgotActive}
             onPress={handlePress}
-            style={({ pressed }) => [
-              styles.continueBtn,
-              pressed && styles.pressed,
-            ]}
           >
-            <Text style={styles.continueForgotActive}>CONTINUE</Text>
-          </Pressable>
+            CONTINUE
+          </Button>
         </View>
       </ScrollView>
     </>

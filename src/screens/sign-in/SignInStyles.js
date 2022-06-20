@@ -5,7 +5,7 @@ export default StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 30,
+    marginTop: 80,
   },
   signInUpContainer: {
     flexDirection: 'row',

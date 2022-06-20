@@ -1,12 +1,14 @@
 import { useContext, useState } from 'react';
-import { View, StyleSheet, Text, FlatList, Pressable } from 'react-native';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
+
 import CartItem from '../components/CartItem';
 import { AppContext } from '../store/AppContext';
-import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import ModalComp from '../components/Modal';
+import ModalComp from '../components/UI/Modal';
 import EmptyContent from '../components/EmptyContent';
 import { colors } from '../utils/colors';
+import Button from '../components/UI/Button';
 
 const Cart = ({ navigation }) => {
   const { state } = useContext(AppContext);
@@ -17,6 +19,7 @@ const Cart = ({ navigation }) => {
     state.cart.length > 0 && setModalVisible(!modalVisible);
   };
 
+  const icon = <FontAwesome5 name="arrow-right" size={18} color="white" />;
   return (
     <View style={styles.container}>
       <ModalComp
@@ -53,17 +56,18 @@ const Cart = ({ navigation }) => {
             <Text style={styles.free}>Free Domestic Shipping</Text>
           </View>
 
-          <Pressable
-            style={({ pressed }) => [
+          <Button
+            pressable={({ pressed }) => [
               styles.btnContainer,
-              pressed && styles.pressed,
-              state.cart.length == 0 && [styles.disableBtn],
+              state.cart.length !== 0 && pressed && [styles.btnContainer, styles.pressed],
+              state.cart.length === 0 && styles.disableBtn,
             ]}
+            text={styles.btnTxt}
             onPress={handlePress}
+            icon={icon}
           >
-            <Text style={styles.btnTxt}>PLACE ORDER</Text>
-            <FontAwesome5 name="arrow-right" size={18} color="white" />
-          </Pressable>
+            PLACE ORDER
+          </Button>
         </View>
       </View>
     </View>

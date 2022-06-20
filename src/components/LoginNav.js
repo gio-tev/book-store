@@ -1,5 +1,6 @@
-import { View, Pressable, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { colors } from '../utils/colors';
+import Button from './UI/Button';
 
 const LoginNav = ({ navigation }) => {
   const handleSignInPress = () => {
@@ -11,19 +12,33 @@ const LoginNav = ({ navigation }) => {
 
   return (
     <View style={styles.loginNaveContainer}>
-      <Pressable
+      {/* <Pressable
         onPress={handleSignInPress}
         style={({ pressed }) => [styles.signInBtn, pressed && styles.pressed]}
       >
         <Text style={styles.btnTxt}>SIGN IN</Text>
-      </Pressable>
+      </Pressable> */}
 
-      <Pressable
+      {/* <Pressable
         onPress={handleSignUpPress}
         style={({ pressed }) => [styles.signUpBtn, pressed && styles.pressed]}
       >
         <Text style={styles.btnTxt}>SIGN UP</Text>
-      </Pressable>
+      </Pressable> */}
+      <Button
+        pressable={({ pressed }) => [styles.signInBtn, pressed && styles.pressed]}
+        text={styles.btnTxt}
+        onPress={handleSignInPress}
+      >
+        SIGN IN
+      </Button>
+      <Button
+        pressable={({ pressed }) => [styles.signUpBtn, pressed && styles.pressed]}
+        text={styles.btnTxt}
+        onPress={handleSignUpPress}
+      >
+        SIGN IN
+      </Button>
     </View>
   );
 };

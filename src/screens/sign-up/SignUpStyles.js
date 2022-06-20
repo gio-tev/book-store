@@ -6,7 +6,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 30,
+    marginTop: 80,
     width: '100%',
   },
   avoidingView: {
