@@ -12,19 +12,6 @@ const LoginNav = ({ navigation }) => {
 
   return (
     <View style={styles.loginNaveContainer}>
-      {/* <Pressable
-        onPress={handleSignInPress}
-        style={({ pressed }) => [styles.signInBtn, pressed && styles.pressed]}
-      >
-        <Text style={styles.btnTxt}>SIGN IN</Text>
-      </Pressable> */}
-
-      {/* <Pressable
-        onPress={handleSignUpPress}
-        style={({ pressed }) => [styles.signUpBtn, pressed && styles.pressed]}
-      >
-        <Text style={styles.btnTxt}>SIGN UP</Text>
-      </Pressable> */}
       <Button
         pressable={({ pressed }) => [styles.signInBtn, pressed && styles.pressed]}
         text={styles.btnTxt}
@@ -37,7 +24,7 @@ const LoginNav = ({ navigation }) => {
         text={styles.btnTxt}
         onPress={handleSignUpPress}
       >
-        SIGN IN
+        SIGN UP
       </Button>
     </View>
   );

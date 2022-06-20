@@ -42,11 +42,7 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
         value={signIn.password}
         secureTextEntry={true}
       />
-      {SignInError && (
-        <Text style={styles.error}>
-          Incorrect email address and/or password.
-        </Text>
-      )}
+      {SignInError && <Text style={styles.error}>Incorrect email address and/or password.</Text>}
     </View>
   );
 };
@@ -70,6 +66,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
     color: colors.redError,
     marginTop: 15,
+    fontSize: 13,
   },
 });
 

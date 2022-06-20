@@ -10,7 +10,7 @@ import Button from '../../components/UI/Button';
 const styles = SignUpStyles;
 
 const SignUp = ({ navigation }) => {
-  const appCtx = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const [newUser, setNewUser] = useState({
     name: '',
@@ -19,11 +19,23 @@ const SignUp = ({ navigation }) => {
     password: '',
   });
 
+  const [emailExists, setEmailExists] = useState(false);
+
   const [clearInputs, SetClearInputs] = useState(false);
 
   const handleSignInPress = () => navigation.navigate('Sign In');
 
   const handlePress = async () => {
+    let sameEmail = false;
+    state.accounts.forEach(account => {
+      if (account.email === newUser.email) {
+        setEmailExists(true);
+        sameEmail = true;
+      }
+    });
+
+    if (sameEmail) return;
+
     if (
       newUser.name.length > 2 &&
       newUser.email.length > 4 &&
@@ -42,7 +54,7 @@ const SignUp = ({ navigation }) => {
         }),
       });
 
-      appCtx.dispatch({
+      dispatch({
         type: 'NEW_ACCOUNT',
         payload: {
           ...newUser,
@@ -88,6 +100,8 @@ const SignUp = ({ navigation }) => {
             setUser={setNewUser}
             clearInputs={clearInputs}
             SetClearInputs={SetClearInputs}
+            emailExists={emailExists}
+            setEmailExists={setEmailExists}
           />
         </KeyboardAvoidingView>
         <View style={styles.ContinueForgotContainer}>

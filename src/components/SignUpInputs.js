@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { colors } from '../utils/colors';
 
-const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
+const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEmailExists }) => {
   const [nameValue, setNameValue] = useState('');
   const [nameInputActive, setNameInputActive] = useState(false);
   const [nameInputIsValid, setNameInputIsValid] = useState(true);
@@ -44,6 +45,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
   const handleEmailFocus = () => setEmailInputActive(true);
   const handleEmailBlur = () => setEmailInputActive(false);
   const handleEmailChange = email => {
+    setEmailExists(false);
     setEmailValue(email);
 
     if (email.length > 4) {
@@ -93,9 +95,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
         placeholder="Name"
         value={nameValue}
       />
-      {!nameInputIsValid && (
-        <Text style={styles.error}>Name must contain 3 or more letters.</Text>
-      )}
+      {!nameInputIsValid && <Text style={styles.error}>Name must contain 3 or more letters.</Text>}
       <TextInput
         onChangeText={handleEmailChange}
         onFocus={handleEmailFocus}
@@ -128,10 +128,10 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs }) => {
         secureTextEntry={true}
       />
       {!passwordInputIsValid && (
-        <Text style={styles.error}>
-          Password must contain 5 or more letters.
-        </Text>
+        <Text style={styles.error}>Password must contain 5 or more letters.</Text>
       )}
+
+      {emailExists && <Text style={styles.error}>Email already exists.</Text>}
     </View>
   );
 };
@@ -152,7 +152,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   error: {
-    color: '#eb1e1e',
+    fontFamily: 'Montserrat_500Medium',
+    color: colors.redError,
+    marginTop: 5,
+    fontSize: 13,
   },
 });
 

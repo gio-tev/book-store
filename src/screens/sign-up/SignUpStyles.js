@@ -42,7 +42,7 @@ export default StyleSheet.create({
     backgroundColor: colors.teal,
     padding: 20,
     borderRadius: 100,
-    marginBottom: 50,
+    marginBottom: 100,
   },
   continueForgotActive: {
     fontFamily: 'Montserrat_500Medium',

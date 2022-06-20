@@ -22,7 +22,6 @@ export default StyleSheet.create({
 
   signInUpActiveTxt: {
     fontFamily: 'Montserrat_500Medium',
-
     color: '#fff',
   },
   signInUpInactive: {
