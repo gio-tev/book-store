@@ -47,6 +47,8 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
   );
 };
 
+export default SignInInputs;
+
 const styles = StyleSheet.create({
   inputsContainer: {
     width: '90%',
@@ -66,8 +68,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
     color: colors.redError,
     marginTop: 15,
-    fontSize: 13,
+    fontSize: 12,
   },
 });
-
-export default SignInInputs;

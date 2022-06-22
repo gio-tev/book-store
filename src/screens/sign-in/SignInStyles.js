@@ -19,7 +19,6 @@ export default StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 100,
   },
-
   signInUpActiveTxt: {
     fontFamily: 'Montserrat_500Medium',
     color: '#fff',
@@ -34,23 +33,23 @@ export default StyleSheet.create({
     textAlign: 'center',
     width: '92%',
   },
-  continueBtnActive: {
+  continueBtn: {
     backgroundColor: colors.teal,
     marginBottom: 5,
-    padding: 20,
+    padding: 15,
     borderRadius: 100,
   },
-  continueBtnInactive: {
-    padding: 20,
-    marginBottom: 5,
-    borderRadius: 100,
-  },
-  continueForgotActive: {
+  continueTxt: {
     fontFamily: 'Montserrat_500Medium',
     color: '#fff',
     textAlign: 'center',
   },
-  continueForgotInactive: {
+  forgotBtn: {
+    padding: 20,
+    marginBottom: 5,
+    borderRadius: 100,
+  },
+  forgotTxt: {
     fontFamily: 'Montserrat_700Bold',
     color: colors.teal,
     textAlign: 'center',

@@ -1,31 +1,17 @@
 import { useEffect, useContext } from 'react';
 import { AppContext } from '../store/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fetchAccounts } from '../utils/https';
 
 const AsyncStorageWelcome = ({ navigation }) => {
   const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
-    const fetchAccounts = async () => {
-      const response = await fetch(
-        'https://book-store-ac9bf-default-rtdb.firebaseio.com/accounts.json'
-      );
-
-      const data = await response.json();
-
-      const transformedAccounts = [];
-
-      for (const [key, value] of Object.entries(data)) {
-        const transforemdAccount = {
-          ...value,
-          id: key,
-        };
-        transformedAccounts.push(transforemdAccount);
-      }
-
-      dispatch({ type: 'LOAD_ACCOUNTS', payload: transformedAccounts });
+    const loadAccounts = async () => {
+      const accounts = await fetchAccounts();
+      dispatch({ type: 'LOAD_ACCOUNTS', payload: accounts });
     };
-    fetchAccounts();
+    loadAccounts();
   }, []);
 
   useEffect(() => {

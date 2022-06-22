@@ -4,10 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Montserrat_700Bold, Montserrat_500Medium } from '@expo-google-fonts/montserrat';
+import { Ionicons } from '@expo/vector-icons';
 
+import AppContextProvider from './src/store/AppContext';
 import AsyncStorageWelcome from './src/screens/AsyncStorageWelcome';
 import { colors } from './src/utils/colors';
-import AppContextProvider from './src/store/AppContext';
 import Welcome from './src/screens/Welcome';
 import SignIn from './src/screens/sign-in/SignIn';
 import SignUp from './src/screens/sign-up/SignUp';
@@ -16,6 +17,8 @@ import Book from './src/screens/Book';
 import DrawerNavigation from './src/screens/DrawerNavigation';
 import OrderPlaced from './src/screens/OrderPlaced';
 import EditProfile from './src/screens/EditProfile';
+import ForgotPassword from './src/screens/ForgotPassword';
+import Button from './src/components/UI/Button';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +32,8 @@ export default function App() {
     return <AppLoading />;
   }
 
+  const iconCart = <Ionicons name="ios-cart-outline" size={30} color={'white'} />;
+
   return (
     <SafeAreaProvider>
       <StatusBar style="light" />
@@ -37,6 +42,7 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="AsyncStorageWelcome" component={AsyncStorageWelcome} />
             <Stack.Screen name="Welcome" component={Welcome} />
+            <Stack.Screen name="Forgot Password" component={ForgotPassword} />
             <Stack.Screen name="Sign In" component={SignIn} />
             <Stack.Screen name="Sign Up" component={SignUp} />
             <Stack.Screen name="Success" component={Success} />
@@ -60,15 +66,27 @@ export default function App() {
             <Stack.Screen
               name="Book"
               component={Book}
-              options={{
-                headerShown: true,
-                headerStyle: {
-                  backgroundColor: colors.teal,
-                },
-                headerTitleStyle: {
-                  fontFamily: 'Montserrat_500Medium',
-                },
-                headerTintColor: '#fff',
+              options={({ navigation }) => {
+                return {
+                  headerShown: true,
+                  headerStyle: {
+                    backgroundColor: colors.teal,
+                  },
+                  headerTitleStyle: {
+                    fontFamily: 'Montserrat_500Medium',
+                  },
+                  headerTintColor: '#fff',
+                  headerRight: () => (
+                    <Button
+                      pressable={({ pressed }) => [
+                        { marginRight: 25 },
+                        pressed && { transform: [{ scale: 1.1 }] },
+                      ]}
+                      onPress={() => navigation.navigate('Cart')}
+                      icon={iconCart}
+                    />
+                  ),
+                };
               }}
             />
           </Stack.Navigator>

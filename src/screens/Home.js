@@ -1,51 +1,30 @@
 import { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+
 import HomeItem from '../components/HomeItem';
 import { colors } from '../utils/colors';
+import { fetchBooks } from '../utils/https';
 
 const Home = ({ navigation }) => {
   const [booksData, setBooksData] = useState(null);
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      const response = await fetch(
-        'https://book-store-ac9bf-default-rtdb.firebaseio.com/books.json'
-      );
-
-      const data = await response.json();
-
-      const transformedBooks = [];
-      for (const [key, value] of Object.entries(data)) {
-        const transforemdBook = {
-          ...value,
-          id: key,
-        };
-        transformedBooks.push(transforemdBook);
-      }
-
-      setBooksData(transformedBooks);
+    const loadBooks = async () => {
+      const books = await fetchBooks();
+      setBooksData(books);
       setIsLoading(false);
     };
-    fetchBooks();
+    loadBooks();
   }, []);
 
   return (
     <View style={styles.booksContainer}>
-      {isLoading && (
-        <ActivityIndicator
-          size="large"
-          color={colors.teal}
-          style={styles.loading}
-        />
-      )}
+      {isLoading && <ActivityIndicator size="large" color={colors.teal} style={styles.loading} />}
       <FlatList
         numColumns={2}
         data={booksData}
-        renderItem={({ item }) => (
-          <HomeItem item={item} navigation={navigation} />
-        )}
+        renderItem={({ item }) => <HomeItem item={item} navigation={navigation} />}
         keyExtractor={item => item.id}
       />
     </View>

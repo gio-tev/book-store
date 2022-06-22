@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../utils/colors';
 
-const Success = () => {
+const Success = ({ route }) => {
+  const { text } = route.params;
   return (
     <View style={styles.successContainer}>
-      <Text style={styles.success}>Success!</Text>
+      <Text style={styles.success}>{text}</Text>
     </View>
   );
 };
@@ -12,13 +13,15 @@ const Success = () => {
 const styles = StyleSheet.create({
   successContainer: {
     flex: 1,
-    marginTop: '30%',
+    marginTop: '50%', // ???????????????????????????????????????????????????????????????????
     alignItems: 'center',
   },
   success: {
+    width: '80%',
     fontFamily: 'Montserrat_700Bold',
     color: colors.teal,
-    fontSize: 40,
+    fontSize: 30,
+    textAlign: 'center',
   },
 });
 

@@ -6,6 +6,7 @@ import CustomStatusbar from '../../components/CustomStatusBar';
 import SignUpStyles from './SignUpStyles';
 import SignUpInputs from '../../components/SignUpInputs';
 import Button from '../../components/UI/Button';
+import { saveUser, signupUser } from '../../utils/https';
 
 const styles = SignUpStyles;
 
@@ -25,39 +26,38 @@ const SignUp = ({ navigation }) => {
 
   const handleSignInPress = () => navigation.navigate('Sign In');
 
-  const handlePress = async () => {
-    let sameEmail = false;
-    state.accounts.forEach(account => {
-      if (account.email === newUser.email) {
-        setEmailExists(true);
-        sameEmail = true;
-      }
+  const handleRegisterPress = async () => {
+    const sameUser = state.accounts.find(account => {
+      return account.email === newUser.email;
     });
 
-    if (sameEmail) return;
+    if (sameUser) {
+      setEmailExists(true);
+      return;
+    }
 
     if (
-      newUser.name.length > 2 &&
-      newUser.email.length > 4 &&
-      newUser.phone.length > 4 &&
-      newUser.password.length > 4
+      newUser.name.length > 5 &&
+      newUser.email.includes('@') &&
+      newUser.email.length > 5 &&
+      newUser.phone.length > 5 &&
+      newUser.password.length > 5
     ) {
-      await fetch('https://book-store-ac9bf-default-rtdb.firebaseio.com/accounts.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...newUser,
-          image:
-            'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
-        }),
-      });
+      await signupUser(newUser.email, newUser.password);
+
+      const userWithoutPassword = {
+        name: newUser.name,
+        email: newUser.email,
+        phone: newUser.phone,
+      };
+
+      const res = await saveUser(userWithoutPassword);
 
       dispatch({
         type: 'NEW_ACCOUNT',
         payload: {
-          ...newUser,
+          ...userWithoutPassword,
+          id: res.name,
           image:
             'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
         },
@@ -72,10 +72,10 @@ const SignUp = ({ navigation }) => {
         password: '',
       });
 
-      navigation.navigate('Success');
+      navigation.navigate('Success', { text: 'Success!' });
 
       setTimeout(() => {
-        navigation.navigate('Sign In');
+        navigation.replace('Sign In');
       }, 2000);
     }
   };
@@ -108,7 +108,7 @@ const SignUp = ({ navigation }) => {
           <Button
             pressable={({ pressed }) => [styles.continueBtn, pressed && styles.pressed]}
             text={styles.continueForgotActive}
-            onPress={handlePress}
+            onPress={handleRegisterPress}
           >
             CONTINUE
           </Button>

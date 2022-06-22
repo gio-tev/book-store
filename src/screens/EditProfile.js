@@ -12,6 +12,7 @@ import { colors } from '../utils/colors';
 import EditprofileInputs from '../components/EditprofileInputs';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import Button from '../components/UI/Button';
 
 const EditProfile = ({ route }) => {
   const [image, setImage] = useState(null);
@@ -25,7 +26,6 @@ const EditProfile = ({ route }) => {
         quality: 1,
       });
 
-      console.log(result);
       if (!result.cancelled) {
         setImage(result.uri);
       }
@@ -34,31 +34,23 @@ const EditProfile = ({ route }) => {
     }
   };
 
+  const icon = <Ionicons name="ios-cloud-upload-outline" size={22} color="white" />;
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <KeyboardAvoidingView
-        style={styles.keyboardAvoidingView}
-        behavior="position"
-      >
+      <KeyboardAvoidingView style={styles.keyboardAvoidingView} behavior="position">
         <View style={styles.pictureNameContainer}>
-          <Image
-            source={{ uri: image ? image : route.params.user.image }}
-            style={styles.img}
-          />
+          <Image source={{ uri: image ? image : route.params.user.image }} style={styles.img} />
           <View style={styles.titleIconContainer}>
             <Text style={styles.name}>{route.params.user.name}</Text>
-            <Pressable
-              style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
-              onPress={pickImage}
-            >
-              <Text style={styles.btnTxt}>Upload Image</Text>
 
-              <Ionicons
-                name="ios-cloud-upload-outline"
-                size={24}
-                color="white"
-              />
-            </Pressable>
+            <Button
+              pressable={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+              text={styles.btnTxt}
+              onPress={pickImage}
+              icon={icon}
+            >
+              Upload Image
+            </Button>
           </View>
         </View>
 
@@ -95,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.brown,
     paddingHorizontal: 20,
-    paddingVertical: 5,
+    paddingVertical: 7,
     borderRadius: 100,
   },
   btnTxt: {

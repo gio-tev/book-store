@@ -34,7 +34,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
   const handleNameBlur = () => setNameInputActive(false);
   const handleNameChange = name => {
     setNameValue(name);
-    if (name.length > 2) {
+    if (name.length > 5) {
       setNameInputIsValid(true);
       setUser(prevState => {
         return { ...prevState, name };
@@ -48,7 +48,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
     setEmailExists(false);
     setEmailValue(email);
 
-    if (email.length > 4) {
+    if (email.length > 5 && email.includes('@')) {
       setEmailInputIsValid(true);
 
       setUser(prevState => {
@@ -62,7 +62,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
   const handlePhoneChange = phone => {
     setPhoneValue(phone);
 
-    if (phone.length > 4) {
+    if (phone.length > 5) {
       setPhoneInputIsValid(true);
 
       setUser(prevState => {
@@ -76,7 +76,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
   const handlePasswordChange = password => {
     setPasswordValue(password);
 
-    if (password.length > 4) {
+    if (password.length > 5) {
       setPasswordInputIsValid(true);
 
       setUser(prevState => {
@@ -95,7 +95,9 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
         placeholder="Name"
         value={nameValue}
       />
-      {!nameInputIsValid && <Text style={styles.error}>Name must contain 3 or more letters.</Text>}
+      {!nameInputIsValid && (
+        <Text style={styles.error}>Name must have more than 5 charachters.</Text>
+      )}
       <TextInput
         onChangeText={handleEmailChange}
         onFocus={handleEmailFocus}
@@ -105,7 +107,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
         value={emailValue}
       />
       {!emailInputIsValid && (
-        <Text style={styles.error}>Email must contain 5 or more letters.</Text>
+        <Text style={styles.error}>Email must have '@' and more than 5 charachters</Text>
       )}
       <TextInput
         onChangeText={handlePhoneChange}
@@ -116,7 +118,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
         value={phoneValue}
       />
       {!phoneInputIsValid && (
-        <Text style={styles.error}>Phone must contain 5 or more letters.</Text>
+        <Text style={styles.error}>Phone must have more than 5 charachters.</Text>
       )}
       <TextInput
         onChangeText={handlePasswordChange}
@@ -128,7 +130,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
         secureTextEntry={true}
       />
       {!passwordInputIsValid && (
-        <Text style={styles.error}>Password must contain 5 or more letters.</Text>
+        <Text style={styles.error}>Password must have more than 5 charachters.</Text>
       )}
 
       {emailExists && <Text style={styles.error}>Email already exists.</Text>}
@@ -155,7 +157,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat_500Medium',
     color: colors.redError,
     marginTop: 5,
-    fontSize: 13,
+    fontSize: 12,
   },
 });
 

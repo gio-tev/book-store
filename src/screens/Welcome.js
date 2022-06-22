@@ -1,23 +1,20 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
-// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LoginNav from '../components/LoginNav';
 import { colors } from '../utils/colors';
 import CustomStatusbar from '../components/CustomStatusBar';
 
-const Welcome = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <CustomStatusbar />
-      <Image style={styles.img} source={require('../../assets/cover.jpg')} />
-      <View style={styles.text1Container}>
-        <Text style={styles.text1}>Welcome {'\n'} to Book Store</Text>
-      </View>
-      <Text style={styles.text2}>Let's get started!</Text>
-
-      <LoginNav navigation={navigation} />
+const Welcome = ({ navigation }) => (
+  <View style={styles.container}>
+    <CustomStatusbar />
+    <Image style={styles.img} source={require('../../assets/cover.jpg')} />
+    <View style={styles.text1Container}>
+      <Text style={styles.text1}>Welcome {'\n'} to Book Store</Text>
     </View>
-  );
-};
+    <Text style={styles.text2}>Let's get started!</Text>
+
+    <LoginNav navigation={navigation} />
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {

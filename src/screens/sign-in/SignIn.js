@@ -7,6 +7,7 @@ import SignInStyles from './SignInStyles';
 import SignInInputs from '../../components/SignInInputs';
 import { AppContext } from '../../store/AppContext';
 import Button from '../../components/UI/Button';
+import { authenticateUser } from '../../utils/https';
 
 const styles = SignInStyles;
 
@@ -17,60 +18,50 @@ const SignIn = ({ navigation }) => {
     email: '',
     password: '',
   });
+
   const [SignInError, setSignInError] = useState(false);
-  const [continueForgotActive, setContinueForgotActive] = useState(1);
-  const [forgotBtnClicked, setForgotBtnClicked] = useState(false);
 
   const handleSignUpPress = () => navigation.navigate('Sign Up');
 
-  const handleContinuePress = () => {
-    setContinueForgotActive(1);
+  const handleContinuePress = async () => {
+    const auth = await authenticateUser(signIn.email, signIn.password);
 
-    setForgotBtnClicked(false);
+    if (auth.registered) {
+      setSignInError(false);
 
-    let accountMatched = false;
+      const loggedAccount = state.accounts.find(account => account.email === auth.email);
 
-    state.accounts.forEach(account => {
-      if (account.email === signIn.email && account.password === signIn.password) {
-        setSignInError(false);
-        accountMatched = true;
-        const storeData = async value => {
-          try {
-            const jsonValue = JSON.stringify(value);
-            await AsyncStorage.setItem('Account', jsonValue);
-          } catch (e) {
-            console.log(e);
-          }
-        };
-        storeData(account);
+      const storeData = async value => {
+        try {
+          const jsonValue = JSON.stringify(value);
+          await AsyncStorage.setItem('Account', jsonValue);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      storeData(loggedAccount);
 
-        dispatch({ type: 'LOGGED_USER', payload: account });
+      dispatch({ type: 'LOGGED_USER', payload: loggedAccount });
 
-        navigation.navigate('DrawerNavigation', { screen: 'Home' });
+      navigation.navigate('DrawerNavigation', { screen: 'Home' });
 
-        setSignIn({
-          email: '',
-          password: '',
-        });
-      }
-    });
-
-    if (accountMatched) return;
-
-    state.accounts.forEach(account => {
-      if (
-        (account.email !== signIn.email || account.password !== signIn.password) &&
-        !forgotBtnClicked
-      ) {
-        setSignInError(true);
-      }
-    });
+      setSignIn({
+        email: '',
+        password: '',
+      });
+      return;
+    } else {
+      setSignInError(true);
+    }
   };
 
   const handleForgotPress = () => {
-    setContinueForgotActive(2);
-    setForgotBtnClicked(true);
+    setSignIn({
+      email: '',
+      password: '',
+    });
     setSignInError(false);
+    navigation.navigate('Forgot Password');
   };
 
   return (
@@ -92,34 +83,14 @@ const SignIn = ({ navigation }) => {
 
         <View style={styles.ContinueForgotContainer}>
           <Button
-            pressable={({ pressed }) =>
-              continueForgotActive === 1
-                ? [styles.continueBtnActive, pressed && styles.pressed]
-                : styles.continueBtnInactive
-            }
-            text={
-              continueForgotActive === 1
-                ? styles.continueForgotActive
-                : styles.continueForgotInactive
-            }
+            pressable={({ pressed }) => [styles.continueBtn, pressed && styles.pressed]}
+            text={styles.continueTxt}
             onPress={handleContinuePress}
           >
             CONTINUE
           </Button>
 
-          <Button
-            pressable={({ pressed }) =>
-              continueForgotActive === 2
-                ? [styles.continueBtnActive, pressed && styles.pressed]
-                : styles.continueBtnInactive
-            }
-            text={
-              continueForgotActive === 2
-                ? styles.continueForgotActive
-                : styles.continueForgotInactive
-            }
-            onPress={handleForgotPress}
-          >
+          <Button pressable={styles.forgotBtn} text={styles.forgotTxt} onPress={handleForgotPress}>
             FORGOT PASSWORD
           </Button>
         </View>

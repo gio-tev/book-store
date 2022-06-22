@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { colors } from '../utils/colors';
 import { AppContext } from '../store/AppContext';
+import { colors } from '../utils/colors';
+import Button from './UI/Button';
 
 const EditprofileInputs = ({ picture }) => {
   const { dispatch } = useContext(AppContext);
@@ -18,7 +19,7 @@ const EditprofileInputs = ({ picture }) => {
 
   const [focusedInput, setFocusedInput] = useState({
     email: false,
-    password: false,
+    // password: false,
     phone: false,
   });
 
@@ -52,7 +53,7 @@ const EditprofileInputs = ({ picture }) => {
       const modifiedProfile = {
         name: userInputs.name,
         email: userInputs.email,
-        password: userInputs.password,
+        // password: userInputs.password,
         image: picture ? picture : route.params.user.image,
         phone: userInputs.phone,
       };
@@ -82,7 +83,7 @@ const EditprofileInputs = ({ picture }) => {
 
     dispatch({ type: 'EDIT_PROFILE', payload: updatedUser });
 
-    navigation.replace('Success');
+    navigation.navigate('Success', { text: 'Your profile has been updated!' });
 
     setTimeout(() => {
       navigation.replace('DrawerNavigation', { screen: 'Home' });
@@ -91,12 +92,7 @@ const EditprofileInputs = ({ picture }) => {
 
   return (
     <View style={styles.inputsContainer}>
-      <View
-        style={[
-          styles.inputContainer,
-          focusedInput.email && styles.inputContainerActive,
-        ]}
-      >
+      <View style={[styles.inputContainer, focusedInput.email && styles.inputContainerActive]}>
         <Text style={styles.label}>Email:</Text>
         <TextInput
           style={styles.input}
@@ -106,13 +102,8 @@ const EditprofileInputs = ({ picture }) => {
           value={userInputs.email}
         />
       </View>
-
-      <View
-        style={[
-          styles.inputContainer,
-          focusedInput.password && styles.inputContainerActive,
-        ]}
-      >
+      {/* 
+      <View style={[styles.inputContainer, focusedInput.password && styles.inputContainerActive]}>
         <Text style={styles.label}>Password:</Text>
         <TextInput
           style={styles.input}
@@ -122,14 +113,9 @@ const EditprofileInputs = ({ picture }) => {
           value={userInputs.password}
           secureTextEntry={true}
         />
-      </View>
+      </View> */}
 
-      <View
-        style={[
-          styles.inputContainer,
-          focusedInput.phone && styles.inputContainerActive,
-        ]}
-      >
+      <View style={[styles.inputContainer, focusedInput.phone && styles.inputContainerActive]}>
         <Text style={styles.label}>Phone:</Text>
         <TextInput
           style={styles.input}
@@ -139,13 +125,13 @@ const EditprofileInputs = ({ picture }) => {
           value={userInputs.phone}
         />
       </View>
-
-      <Pressable
-        style={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+      <Button
+        pressable={({ pressed }) => [styles.btn, pressed && styles.pressed]}
+        text={styles.btnTxt}
         onPress={handleEditPress}
       >
-        <Text style={styles.btnTxt}>Save Changes</Text>
-      </Pressable>
+        Save Changes
+      </Button>
     </View>
   );
 };
@@ -183,11 +169,11 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   btn: {
+    width: '90%',
+    marginTop: '5%',
     backgroundColor: colors.teal,
-    paddingHorizontal: '20%',
     paddingVertical: 15,
     borderRadius: 100,
-    marginTop: '5%',
   },
   btnTxt: {
     fontFamily: 'Montserrat_500Medium',
