@@ -7,6 +7,7 @@ import { colors } from '../utils/colors';
 import CustomStatusbar from '../components/CustomStatusBar';
 import Button from '../components/UI/Button';
 import { resetPassword } from '../utils/https';
+import { API_KEY } from '@env';
 
 const ForgotPassword = ({ navigation }) => {
   const { state } = useContext(AppContext);
@@ -27,7 +28,7 @@ const ForgotPassword = ({ navigation }) => {
 
     if (!emailFound) setEmailError(true);
 
-    const res = await resetPassword(emailInput);
+    const res = await resetPassword(emailInput, API_KEY);
 
     if (res.email)
       navigation.replace('Success', { text: 'Please check you Email to reset password!' });

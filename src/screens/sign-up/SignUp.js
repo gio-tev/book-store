@@ -7,6 +7,7 @@ import SignUpStyles from './SignUpStyles';
 import SignUpInputs from '../../components/SignUpInputs';
 import Button from '../../components/UI/Button';
 import { saveUser, signupUser } from '../../utils/https';
+import { API_KEY } from '@env';
 
 const styles = SignUpStyles;
 
@@ -43,7 +44,7 @@ const SignUp = ({ navigation }) => {
       newUser.phone.length > 5 &&
       newUser.password.length > 5
     ) {
-      await signupUser(newUser.email, newUser.password);
+      await signupUser(newUser.email, newUser.password, API_KEY);
 
       const userWithoutPassword = {
         name: newUser.name,

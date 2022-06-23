@@ -8,6 +8,7 @@ import SignInInputs from '../../components/SignInInputs';
 import { AppContext } from '../../store/AppContext';
 import Button from '../../components/UI/Button';
 import { authenticateUser } from '../../utils/https';
+import { API_KEY } from '@env';
 
 const styles = SignInStyles;
 
@@ -24,8 +25,8 @@ const SignIn = ({ navigation }) => {
   const handleSignUpPress = () => navigation.navigate('Sign Up');
 
   const handleContinuePress = async () => {
-    const auth = await authenticateUser(signIn.email, signIn.password);
-
+    const auth = await authenticateUser(signIn.email, signIn.password, API_KEY);
+    console.log(auth, 'authhh');
     if (auth.registered) {
       setSignInError(false);
 
