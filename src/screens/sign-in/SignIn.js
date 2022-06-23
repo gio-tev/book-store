@@ -22,7 +22,13 @@ const SignIn = ({ navigation }) => {
 
   const [SignInError, setSignInError] = useState(false);
 
-  const handleSignUpPress = () => navigation.navigate('Sign Up');
+  const handleSignUpPress = () => {
+    setSignIn({
+      email: '',
+      password: '',
+    });
+    navigation.navigate('Sign Up');
+  };
 
   const handleContinuePress = async () => {
     const auth = await authenticateUser(signIn.email, signIn.password, API_KEY);
@@ -91,7 +97,11 @@ const SignIn = ({ navigation }) => {
             CONTINUE
           </Button>
 
-          <Button pressable={styles.forgotBtn} text={styles.forgotTxt} onPress={handleForgotPress}>
+          <Button
+            pressable={styles.forgotBtn}
+            text={styles.forgotTxt}
+            onPress={handleForgotPress}
+          >
             FORGOT PASSWORD
           </Button>
         </View>
