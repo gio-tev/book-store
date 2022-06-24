@@ -9,9 +9,13 @@ const initialState = {
   cart: [],
   totalPrice: 0,
   orders: [],
+  networkAvailable: false,
 };
 
 const reducer = (state, action) => {
+  if (action.type === 'NETWORK_INFO') {
+    return { ...state, networkAvailable: action.payload };
+  }
   if (action.type === 'LOAD_ACCOUNTS') {
     return { ...state, accounts: [...action.payload] };
   }
@@ -119,7 +123,9 @@ const reducer = (state, action) => {
 const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>
+  );
 };
 
 export default AppContextProvider;

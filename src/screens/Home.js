@@ -5,10 +5,7 @@ import HomeItem from '../components/HomeItem';
 import { colors } from '../utils/colors';
 import { fetchBooks } from '../utils/https';
 
-// import 'dotenv/config'
 const Home = ({ navigation }) => {
-  // console.log(process.env.API_KEY, 'keyyy......');
-
   const [booksData, setBooksData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,7 +20,9 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.booksContainer}>
-      {isLoading && <ActivityIndicator size="large" color={colors.teal} style={styles.loading} />}
+      {isLoading && (
+        <ActivityIndicator size="large" color={colors.teal} style={styles.loading} />
+      )}
       <FlatList
         numColumns={2}
         data={booksData}

@@ -20,17 +20,32 @@ const SignUp = ({ navigation }) => {
     phone: '',
     password: '',
   });
-
   const [emailExists, setEmailExists] = useState(false);
-
   const [clearInputs, SetClearInputs] = useState(false);
+  const [emptyInputs, setEmptyInputs] = useState(false);
 
-  const handleSignInPress = () => navigation.navigate('Sign In');
+  const handleSignInPress = () => {
+    SetClearInputs(true);
+    navigation.navigate('Sign In');
+  };
 
   const handleRegisterPress = async () => {
     const sameUser = state.accounts.find(account => {
       return account.email === newUser.email;
     });
+
+    if (!state.networkAvailable) {
+      return;
+    }
+
+    if (
+      newUser.name.length === 0 ||
+      newUser.email.length === 0 ||
+      newUser.phone.length === 0 ||
+      newUser.password.length === 0
+    ) {
+      setEmptyInputs(true);
+    }
 
     if (sameUser) {
       setEmailExists(true);
@@ -103,6 +118,8 @@ const SignUp = ({ navigation }) => {
             SetClearInputs={SetClearInputs}
             emailExists={emailExists}
             setEmailExists={setEmailExists}
+            emptyInputs={emptyInputs}
+            setEmptyInputs={setEmptyInputs}
           />
         </KeyboardAvoidingView>
         <View style={styles.ContinueForgotContainer}>

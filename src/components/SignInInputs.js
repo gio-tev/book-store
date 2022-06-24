@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+
+import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
 
 const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
+  const { state } = useContext(AppContext);
+
   const [emailInputActive, setEmailInputActive] = useState(false);
   const [passwordInputActive, setPasswordInputActive] = useState(false);
 
@@ -42,7 +46,12 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
         value={signIn.password}
         secureTextEntry={true}
       />
-      {SignInError && <Text style={styles.error}>Incorrect email address and/or password.</Text>}
+      {SignInError && (
+        <Text style={styles.error}>Incorrect email address and/or password.</Text>
+      )}
+      {!state.networkAvailable && (
+        <Text style={styles.error}>No internet connection, try again later.</Text>
+      )}
     </View>
   );
 };

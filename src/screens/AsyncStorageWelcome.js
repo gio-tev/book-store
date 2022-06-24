@@ -1,10 +1,12 @@
 import { useEffect, useContext } from 'react';
+import NetInfo from '@react-native-community/netinfo';
+
 import { AppContext } from '../store/AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchAccounts } from '../utils/https';
 
 const AsyncStorageWelcome = ({ navigation }) => {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, state } = useContext(AppContext);
 
   useEffect(() => {
     const loadAccounts = async () => {
@@ -37,6 +39,16 @@ const AsyncStorageWelcome = ({ navigation }) => {
       // await AsyncStorage.clear();
     };
     getData();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      dispatch({ type: 'NETWORK_INFO', payload: state.isConnected });
+    });
+
+    // return () => {
+    //   unsubscribe();
+    // };
   }, []);
 
   return <></>;

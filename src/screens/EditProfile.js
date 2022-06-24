@@ -5,13 +5,13 @@ import {
   Image,
   StyleSheet,
   KeyboardAvoidingView,
-  Pressable,
   ScrollView,
 } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from '@expo/vector-icons';
+
 import { colors } from '../utils/colors';
 import EditprofileInputs from '../components/EditprofileInputs';
-import { Ionicons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
 import Button from '../components/UI/Button';
 
 const EditProfile = ({ route }) => {
@@ -39,7 +39,10 @@ const EditProfile = ({ route }) => {
     <ScrollView contentContainerStyle={styles.container}>
       <KeyboardAvoidingView style={styles.keyboardAvoidingView} behavior="position">
         <View style={styles.pictureNameContainer}>
-          <Image source={{ uri: image ? image : route.params.user.image }} style={styles.img} />
+          <Image
+            source={{ uri: image ? image : route.params.user.image }}
+            style={styles.img}
+          />
           <View style={styles.titleIconContainer}>
             <Text style={styles.name}>{route.params.user.name}</Text>
 
@@ -95,7 +98,6 @@ const styles = StyleSheet.create({
     color: 'white',
     marginRight: 5,
   },
-
   name: {
     fontFamily: 'Montserrat_500Medium',
     fontSize: 20,

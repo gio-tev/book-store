@@ -1,8 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { View, TextInput, StyleSheet, Text } from 'react-native';
+
+import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
 
-const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEmailExists }) => {
+const SignUpInputs = ({
+  setUser,
+  clearInputs,
+  SetClearInputs,
+  emailExists,
+  setEmailExists,
+  emptyInputs,
+  setEmptyInputs,
+}) => {
+  const { state } = useContext(AppContext);
+
   const [nameValue, setNameValue] = useState('');
   const [nameInputActive, setNameInputActive] = useState(false);
   const [nameInputIsValid, setNameInputIsValid] = useState(true);
@@ -33,7 +45,9 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
   const handleNameFocus = () => setNameInputActive(true);
   const handleNameBlur = () => setNameInputActive(false);
   const handleNameChange = name => {
+    setEmptyInputs(false);
     setNameValue(name);
+
     if (name.length > 5) {
       setNameInputIsValid(true);
       setUser(prevState => {
@@ -45,6 +59,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
   const handleEmailFocus = () => setEmailInputActive(true);
   const handleEmailBlur = () => setEmailInputActive(false);
   const handleEmailChange = email => {
+    setEmptyInputs(false);
     setEmailExists(false);
     setEmailValue(email);
 
@@ -60,6 +75,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
   const handlePhoneFocus = () => setPhoneInputActive(true);
   const handlePhoneBlur = () => setPhoneInputActive(false);
   const handlePhoneChange = phone => {
+    setEmptyInputs(false);
     setPhoneValue(phone);
 
     if (phone.length > 5) {
@@ -74,6 +90,7 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
   const handlePasswordFocus = () => setPasswordInputActive(true);
   const handlePasswordBlur = () => setPasswordInputActive(false);
   const handlePasswordChange = password => {
+    setEmptyInputs(false);
     setPasswordValue(password);
 
     if (password.length > 5) {
@@ -134,6 +151,12 @@ const SignUpInputs = ({ setUser, clearInputs, SetClearInputs, emailExists, setEm
       )}
 
       {emailExists && <Text style={styles.error}>Email already exists.</Text>}
+
+      {emptyInputs && <Text style={styles.error}>Please fill out all the inputs.</Text>}
+
+      {!state.networkAvailable && (
+        <Text style={styles.error}>No internet connection, try again later.</Text>
+      )}
     </View>
   );
 };
@@ -156,7 +179,7 @@ const styles = StyleSheet.create({
   error: {
     fontFamily: 'Montserrat_500Medium',
     color: colors.redError,
-    marginTop: 5,
+    marginTop: 15,
     fontSize: 12,
   },
 });

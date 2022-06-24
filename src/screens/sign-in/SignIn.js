@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_KEY } from '@env';
 
 import CustomStatusbar from '../../components/CustomStatusBar';
 import SignInStyles from './SignInStyles';
@@ -8,21 +9,19 @@ import SignInInputs from '../../components/SignInInputs';
 import { AppContext } from '../../store/AppContext';
 import Button from '../../components/UI/Button';
 import { authenticateUser } from '../../utils/https';
-import { API_KEY } from '@env';
 
 const styles = SignInStyles;
 
 const SignIn = ({ navigation }) => {
   const { state, dispatch } = useContext(AppContext);
-
   const [signIn, setSignIn] = useState({
     email: '',
     password: '',
   });
-
   const [SignInError, setSignInError] = useState(false);
 
   const handleSignUpPress = () => {
+    setSignInError(false);
     setSignIn({
       email: '',
       password: '',
@@ -33,7 +32,10 @@ const SignIn = ({ navigation }) => {
   const handleContinuePress = async () => {
     const auth = await authenticateUser(signIn.email, signIn.password, API_KEY);
     console.log(auth, 'authhh');
-    if (auth.registered) {
+
+    if (!state.networkAvailable) {
+      return;
+    } else if (auth.registered) {
       setSignInError(false);
 
       const loggedAccount = state.accounts.find(account => account.email === auth.email);

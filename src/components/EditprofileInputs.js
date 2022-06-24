@@ -8,7 +8,7 @@ import { colors } from '../utils/colors';
 import Button from './UI/Button';
 
 const EditprofileInputs = ({ picture }) => {
-  const { dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const route = useRoute();
   const navigation = useNavigation();
@@ -19,7 +19,6 @@ const EditprofileInputs = ({ picture }) => {
 
   const [focusedInput, setFocusedInput] = useState({
     email: false,
-    // password: false,
     phone: false,
   });
 
@@ -44,6 +43,10 @@ const EditprofileInputs = ({ picture }) => {
   };
 
   const handleEditPress = () => {
+    if (!state.networkAvailable) {
+      return;
+    }
+
     const updatedUser = {
       ...userInputs,
       image: picture ? picture : route.params.user.image,
@@ -53,7 +56,6 @@ const EditprofileInputs = ({ picture }) => {
       const modifiedProfile = {
         name: userInputs.name,
         email: userInputs.email,
-        // password: userInputs.password,
         image: picture ? picture : route.params.user.image,
         phone: userInputs.phone,
       };
@@ -87,12 +89,14 @@ const EditprofileInputs = ({ picture }) => {
 
     setTimeout(() => {
       navigation.replace('DrawerNavigation', { screen: 'Home' });
-    }, 1000);
+    }, 2000);
   };
 
   return (
     <View style={styles.inputsContainer}>
-      <View style={[styles.inputContainer, focusedInput.email && styles.inputContainerActive]}>
+      <View
+        style={[styles.inputContainer, focusedInput.email && styles.inputContainerActive]}
+      >
         <Text style={styles.label}>Email:</Text>
         <TextInput
           style={styles.input}
@@ -102,20 +106,10 @@ const EditprofileInputs = ({ picture }) => {
           value={userInputs.email}
         />
       </View>
-      {/* 
-      <View style={[styles.inputContainer, focusedInput.password && styles.inputContainerActive]}>
-        <Text style={styles.label}>Password:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={handleInputs.bind(this, 'password')}
-          onFocus={handleFocus.bind(this, 'password')}
-          onBlur={handleBlur.bind(this, 'password')}
-          value={userInputs.password}
-          secureTextEntry={true}
-        />
-      </View> */}
 
-      <View style={[styles.inputContainer, focusedInput.phone && styles.inputContainerActive]}>
+      <View
+        style={[styles.inputContainer, focusedInput.phone && styles.inputContainerActive]}
+      >
         <Text style={styles.label}>Phone:</Text>
         <TextInput
           style={styles.input}
@@ -125,6 +119,9 @@ const EditprofileInputs = ({ picture }) => {
           value={userInputs.phone}
         />
       </View>
+      {!state.networkAvailable && (
+        <Text style={styles.error}>No internet connection, try again later.</Text>
+      )}
       <Button
         pressable={({ pressed }) => [styles.btn, pressed && styles.pressed]}
         text={styles.btnTxt}
@@ -183,5 +180,10 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.75,
+  },
+  error: {
+    fontFamily: 'Montserrat_500Medium',
+    color: colors.redError,
+    fontSize: 12,
   },
 });
