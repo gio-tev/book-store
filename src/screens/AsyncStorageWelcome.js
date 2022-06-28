@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchAccounts } from '../utils/https';
 
 const AsyncStorageWelcome = ({ navigation }) => {
-  const { dispatch, state } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
     const loadAccounts = async () => {
@@ -46,9 +46,9 @@ const AsyncStorageWelcome = ({ navigation }) => {
       dispatch({ type: 'NETWORK_INFO', payload: state.isConnected });
     });
 
-    // return () => {
-    //   unsubscribe();
-    // };
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return <></>;

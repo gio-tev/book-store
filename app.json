@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#10A078"
+      "backgroundColor": "#4BA5A3"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -34,7 +34,7 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
+          "cameraPermission": "The app needs accesses to your camera to take photos."
         }
       ]
     ]

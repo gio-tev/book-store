@@ -10,6 +10,8 @@ const initialState = {
   totalPrice: 0,
   orders: [],
   networkAvailable: false,
+  promoCode: '',
+  discountApplied: false,
 };
 
 const reducer = (state, action) => {
@@ -116,6 +118,26 @@ const reducer = (state, action) => {
       ...state,
       accounts: updatedAccounts,
       currentLoggedUser: action.payload,
+    };
+  }
+  if (action.type === 'PROMO_CODE') {
+    return {
+      ...state,
+      promoCode: action.payload,
+    };
+  }
+  if (action.type === 'UPDATE_TOTAL') {
+    return {
+      ...state,
+      totalPrice: action.payload,
+      discountApplied: true,
+    };
+  }
+  if (action.type === 'RESET_DISCOUNT_APPLIED') {
+    return {
+      ...state,
+      promoCode: '',
+      discountApplied: false,
     };
   }
 };

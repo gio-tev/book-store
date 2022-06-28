@@ -1,10 +1,9 @@
 import { useContext, useState } from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { View, StyleSheet, Text, FlatList, Alert } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import CartItem from '../components/CartItem';
 import { AppContext } from '../store/AppContext';
-import { FontAwesome5 } from '@expo/vector-icons';
 import ModalComp from '../components/UI/Modal';
 import EmptyContent from '../components/EmptyContent';
 import { colors } from '../utils/colors';
@@ -12,11 +11,38 @@ import Button from '../components/UI/Button';
 
 const Cart = ({ navigation }) => {
   const { state } = useContext(AppContext);
+
   const DATA = state.cart;
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = () => {
     state.cart.length > 0 && setModalVisible(!modalVisible);
+  };
+
+  const handleGetDiscount = () => {
+    if (state.promoCode) {
+      Alert.alert(
+        '',
+        'You already generated the promo code, please apply it to your orders.',
+        [{ text: 'OK' }]
+      );
+      return;
+    }
+    if (state.totalPrice === 0) {
+      Alert.alert('', 'You do not have any items in the cart.', [{ text: 'OK' }]);
+      return;
+    }
+    navigation.navigate('GetPromoCode');
+  };
+  const handleAddDiscount = () => {
+    if (!state.promoCode) {
+      Alert.alert('', 'You do not have any code yet, please get it first.', [
+        { text: 'OK' },
+      ]);
+      return;
+    }
+    navigation.navigate('AddPromoCode');
   };
 
   const icon = <FontAwesome5 name="arrow-right" size={18} color="white" />;
@@ -43,10 +69,28 @@ const Cart = ({ navigation }) => {
       </View>
       <View style={styles.promoTotalContainer}>
         <View style={styles.promoContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Entypo name="price-ribbon" size={24} color={colors.teal} />
-            <Text style={styles.promo}>Add Promo Code</Text>
-          </View>
+          <Button
+            pressable={({ pressed }) => [
+              styles.titleIconContainer,
+              pressed && styles.pressed,
+            ]}
+            text={styles.promo}
+            onPress={handleGetDiscount}
+          >
+            Get Promo Code
+          </Button>
+
+          <Button
+            pressable={({ pressed }) => [
+              styles.titleIconContainer,
+              styles.titleIconContainerAdd,
+              pressed && styles.pressed,
+            ]}
+            text={styles.promo}
+            onPress={handleAddDiscount}
+          >
+            Add Promo Code
+          </Button>
         </View>
 
         <View style={styles.priceBtnContainer}>
@@ -91,16 +135,35 @@ const styles = StyleSheet.create({
   promoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    // padding: 20,
     backgroundColor: '#D8D8D8',
+    // borderColor: 'red',
+    // borderWidth: 1,
+  },
+  titleIconContainer: {
+    paddingVertical: 20,
+    // borderColor: 'red',
+    // borderWidth: 1,
+    width: '50%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // height: '100%',
+    // marginHorizontal: 5,
+  },
+  titleIconContainerAdd: {
+    borderLeftColor: 'white',
+    borderLeftWidth: 0.5,
   },
   promo: {
     fontFamily: 'Montserrat_700Bold',
-    fontSize: 17,
-    marginLeft: 10,
-    marginRight: 10,
+    fontSize: 13,
+    // marginLeft: 10,
+    // marginRight: 10,
     color: colors.teal,
+    height: '100%',
   },
+
   priceBtnContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -148,6 +211,7 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.75,
+    backgroundColor: colors.salmon,
   },
 });
 

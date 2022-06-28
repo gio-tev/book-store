@@ -3,7 +3,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
-import { useFonts, Montserrat_700Bold, Montserrat_500Medium } from '@expo-google-fonts/montserrat';
+import {
+  useFonts,
+  Montserrat_700Bold,
+  Montserrat_500Medium,
+} from '@expo-google-fonts/montserrat';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppContextProvider from './src/store/AppContext';
@@ -19,6 +23,8 @@ import OrderPlaced from './src/screens/OrderPlaced';
 import EditProfile from './src/screens/EditProfile';
 import ForgotPassword from './src/screens/ForgotPassword';
 import Button from './src/components/UI/Button';
+import GetPromoCode from './src/screens/GetPromoCode';
+import AddPromoCode from './src/screens/AddPromoCode';
 
 const Stack = createStackNavigator();
 
@@ -45,9 +51,39 @@ export default function App() {
             <Stack.Screen name="Forgot Password" component={ForgotPassword} />
             <Stack.Screen name="Sign In" component={SignIn} />
             <Stack.Screen name="Sign Up" component={SignUp} />
+            <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
             <Stack.Screen name="Success" component={Success} />
             <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
-            <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
+            <Stack.Screen
+              name="GetPromoCode"
+              component={GetPromoCode}
+              options={{
+                headerShown: true,
+                headerStyle: {
+                  backgroundColor: colors.teal,
+                },
+                headerTitleStyle: {
+                  fontFamily: 'Montserrat_500Medium',
+                },
+                headerTintColor: '#fff',
+                title: 'Get Code',
+              }}
+            />
+            <Stack.Screen
+              name="AddPromoCode"
+              component={AddPromoCode}
+              options={{
+                headerShown: true,
+                headerStyle: {
+                  backgroundColor: colors.teal,
+                },
+                headerTitleStyle: {
+                  fontFamily: 'Montserrat_500Medium',
+                },
+                headerTintColor: '#fff',
+                title: 'Add Code',
+              }}
+            />
             <Stack.Screen
               name="EditProfile"
               component={EditProfile}
@@ -76,6 +112,7 @@ export default function App() {
                     fontFamily: 'Montserrat_500Medium',
                   },
                   headerTintColor: '#fff',
+                  title: '',
                   headerRight: () => (
                     <Button
                       pressable={({ pressed }) => [

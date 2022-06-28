@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_KEY } from '@env';
 
@@ -30,12 +30,12 @@ const SignIn = ({ navigation }) => {
   };
 
   const handleContinuePress = async () => {
-    const auth = await authenticateUser(signIn.email, signIn.password, API_KEY);
-    console.log(auth, 'authhh');
-
     if (!state.networkAvailable) {
       return;
-    } else if (auth.registered) {
+    }
+    const auth = await authenticateUser(signIn.email, signIn.password, API_KEY);
+
+    if (auth.registered) {
       setSignInError(false);
 
       const loggedAccount = state.accounts.find(account => account.email === auth.email);
@@ -58,6 +58,7 @@ const SignIn = ({ navigation }) => {
         email: '',
         password: '',
       });
+
       return;
     } else {
       setSignInError(true);
@@ -76,7 +77,6 @@ const SignIn = ({ navigation }) => {
   return (
     <>
       <CustomStatusbar />
-
       <View style={styles.container}>
         <View style={styles.signInUpContainer}>
           <Button pressable={styles.signInUpActiveBtn} text={styles.signInUpActiveTxt}>

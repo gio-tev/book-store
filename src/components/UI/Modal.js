@@ -58,6 +58,8 @@ const ModalComp = ({ setModalVisible, modalVisible, item, title, navigation, TYP
       };
       removeCartTotal();
 
+      dispatch({ type: 'RESET_DISCOUNT_APPLIED' });
+
       navigation.navigate('OrderPlaced');
     }
   };

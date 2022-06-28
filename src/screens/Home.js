@@ -19,17 +19,20 @@ const Home = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.booksContainer}>
-      {isLoading && (
+    <>
+      {isLoading ? (
         <ActivityIndicator size="large" color={colors.teal} style={styles.loading} />
+      ) : (
+        <View style={styles.booksContainer}>
+          <FlatList
+            numColumns={2}
+            data={booksData}
+            renderItem={({ item }) => <HomeItem item={item} navigation={navigation} />}
+            keyExtractor={item => item.id}
+          />
+        </View>
       )}
-      <FlatList
-        numColumns={2}
-        data={booksData}
-        renderItem={({ item }) => <HomeItem item={item} navigation={navigation} />}
-        keyExtractor={item => item.id}
-      />
-    </View>
+    </>
   );
 };
 
