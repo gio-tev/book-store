@@ -65,13 +65,43 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'DECREASE_QUANTITY') {
+    let reducedPriceWithDiscount;
+    let reducedTotalPrice;
+
+    if (state.discountApplied) {
+      reducedTotalPrice = state.cart
+        .map(book => book.cost * book.quantity)
+        .reduce((prev, cur) => prev + cur);
+
+      reducedPriceWithDiscount =
+        reducedTotalPrice -
+        action.payload.cost -
+        (reducedTotalPrice - action.payload.cost) * 0.2;
+    }
+
     const sameItem = state.cart.find(product => product.id === action.payload.id);
 
+    if (sameItem && sameItem.quantity === 1 && state.cart.length === 1) {
+      return {
+        ...state,
+        cart: [],
+        totalPrice: 0,
+        promoCode: '',
+        discountApplied: false,
+      };
+    }
     if (sameItem && sameItem.quantity === 1) {
       return {
         ...state,
         cart: state.cart.filter(item => item.id !== action.payload.id),
-        totalPrice: state.totalPrice - action.payload.cost,
+        totalPrice:
+          state.discountApplied && state.totalPrice < action.payload.cost
+            ? 0
+            : state.discountApplied && state.totalPrice > action.payload.cost
+            ? reducedPriceWithDiscount
+            : !state.discountApplied && state.totalPrice < action.payload.cost
+            ? 0
+            : state.totalPrice - action.payload.cost,
       };
     } else {
       return {
@@ -84,12 +114,28 @@ const reducer = (state, action) => {
               }
             : item
         ),
-        totalPrice: state.totalPrice - action.payload.cost,
+        totalPrice: state.discountApplied
+          ? reducedPriceWithDiscount
+          : state.totalPrice - action.payload.cost,
       };
     }
   }
 
   if (action.type === 'INCREASE_QUANTITY') {
+    let increasedPriceWithDiscount;
+    let reducedTotalPrice;
+
+    if (state.discountApplied) {
+      reducedTotalPrice = state.cart
+        .map(book => book.cost * book.quantity)
+        .reduce((prev, cur) => prev + cur);
+
+      increasedPriceWithDiscount =
+        reducedTotalPrice +
+        action.payload.cost -
+        (reducedTotalPrice + action.payload.cost) * 0.2;
+    }
+
     return {
       ...state,
       cart: state.cart.map(item =>
@@ -100,7 +146,9 @@ const reducer = (state, action) => {
             }
           : item
       ),
-      totalPrice: state.totalPrice + action.payload.cost,
+      totalPrice: state.discountApplied
+        ? increasedPriceWithDiscount
+        : state.totalPrice + action.payload.cost,
     };
   }
   if (action.type === 'PLACE_ORDER') {

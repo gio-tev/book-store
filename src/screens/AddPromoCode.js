@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -27,10 +26,10 @@ const AddPromoCode = () => {
     }
     if (state.promoCode === promoCode && !state.discountApplied) {
       const discountedTotalPrice = state.totalPrice - state.totalPrice * 0.2;
-      const saved = state.totalPrice * 0.2;
+      const saved = (state.totalPrice * 0.2).toFixed(1);
 
-      setSaved(saved.toFixed(2));
-      dispatch({ type: 'UPDATE_TOTAL', payload: discountedTotalPrice.toFixed(2) });
+      setSaved(saved);
+      dispatch({ type: 'UPDATE_TOTAL', payload: discountedTotalPrice });
 
       const newCartTotal = {
         cart: [...state.cart],
@@ -75,7 +74,7 @@ const AddPromoCode = () => {
       <View style={styles.pricesContainer}>
         <View style={styles.priceContainer}>
           <Text style={styles.titles}>Total Price:</Text>
-          <Text style={styles.total}>${state.totalPrice}</Text>
+          <Text style={styles.total}>${state.totalPrice.toFixed(1)}</Text>
         </View>
         <View style={styles.priceContainer}>
           <Text style={styles.titles}>You Saved:</Text>
@@ -91,9 +90,6 @@ export default AddPromoCode;
 const styles = StyleSheet.create({
   container: {
     marginTop: 60,
-    // backgroundColor: 'grey',
-    // flex: 1,
-    // width: '100%',
     alignItems: 'center',
   },
   mainTitle: {
@@ -101,7 +97,6 @@ const styles = StyleSheet.create({
     color: colors.darkGrey,
     fontSize: 20,
     textAlign: 'center',
-    // paddingHorizontal: 20,
     marginBottom: 30,
   },
   promoContainer: {
@@ -161,12 +156,9 @@ const styles = StyleSheet.create({
   },
   total: {
     fontSize: 15,
-    // color: 'grey',
-    // marginLeft: 5,
   },
   saved: {
     fontSize: 15,
     color: colors.redError,
-    // marginLeft: 5,
   },
 });

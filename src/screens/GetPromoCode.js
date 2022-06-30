@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   View,
   Text,

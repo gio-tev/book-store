@@ -10,13 +10,42 @@ const CartItem = ({ item }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const handleDecrease = () => {
+    let reducedPriceWithDiscount;
+    let reducedTotalPrice;
+
+    if (state.discountApplied) {
+      reducedTotalPrice = state.cart
+        .map(book => book.cost * book.quantity)
+        .reduce((prev, cur) => prev + cur);
+
+      reducedPriceWithDiscount =
+        reducedTotalPrice - item.cost - (reducedTotalPrice - item.cost) * 0.2;
+    }
+
     const sameItem = state.cart.find(product => product.id === item.id);
+
     let newCartTotal;
 
+    if (sameItem && sameItem.quantity === 1 && state.cart.length === 1) {
+      newCartTotal = {
+        ...state,
+        cart: [],
+        totalPrice: 0,
+        promoCode: '',
+        discountApplied: false,
+      };
+    }
     if (sameItem && sameItem.quantity === 1) {
       newCartTotal = {
         cart: state.cart.filter(book => book.id !== item.id),
-        totalPrice: state.totalPrice - item.cost,
+        totalPrice:
+          state.discountApplied && state.totalPrice < item.cost
+            ? 0
+            : state.discountApplied && state.totalPrice > item.cost
+            ? reducedPriceWithDiscount
+            : !state.discountApplied && state.totalPrice < item.cost
+            ? 0
+            : state.totalPrice - item.cost,
       };
     } else {
       newCartTotal = {
@@ -28,7 +57,9 @@ const CartItem = ({ item }) => {
               }
             : book
         ),
-        totalPrice: state.totalPrice - item.cost,
+        totalPrice: state.discountApplied
+          ? reducedPriceWithDiscount
+          : state.totalPrice - item.cost,
       };
     }
 
@@ -40,11 +71,25 @@ const CartItem = ({ item }) => {
         console.log(e);
       }
     };
+
     storeData(newCartTotal);
 
     dispatch({ type: 'DECREASE_QUANTITY', payload: item });
   };
+
   const handleIncrease = () => {
+    let increasedPriceWithDiscount;
+    let reducedTotalPrice;
+
+    if (state.discountApplied) {
+      reducedTotalPrice = state.cart
+        .map(book => book.cost * book.quantity)
+        .reduce((prev, cur) => prev + cur);
+
+      increasedPriceWithDiscount =
+        reducedTotalPrice + item.cost - (reducedTotalPrice + item.cost) * 0.2;
+    }
+
     let newCartTotal = {
       cart: state.cart.map(book =>
         book.id === item.id
@@ -54,7 +99,9 @@ const CartItem = ({ item }) => {
             }
           : book
       ),
-      totalPrice: state.totalPrice + item.cost,
+      totalPrice: state.discountApplied
+        ? increasedPriceWithDiscount
+        : state.totalPrice + item.cost,
     };
 
     const storeData = async value => {

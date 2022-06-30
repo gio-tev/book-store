@@ -11,7 +11,7 @@ import Button from '../components/UI/Button';
 
 const Cart = ({ navigation }) => {
   const { state } = useContext(AppContext);
-
+  // console.log(state, 'll');
   const DATA = state.cart;
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,6 +35,7 @@ const Cart = ({ navigation }) => {
     }
     navigation.navigate('GetPromoCode');
   };
+
   const handleAddDiscount = () => {
     if (!state.promoCode) {
       Alert.alert('', 'You do not have any code yet, please get it first.', [
