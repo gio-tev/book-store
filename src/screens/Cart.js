@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
-import { View, StyleSheet, Text, FlatList, Alert } from 'react-native';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import Toast from 'react-native-root-toast';
 
 import CartItem from '../components/CartItem';
 import { AppContext } from '../store/AppContext';
@@ -11,42 +12,55 @@ import Button from '../components/UI/Button';
 
 const Cart = ({ navigation }) => {
   const { state } = useContext(AppContext);
-  // console.log(state, 'll');
-  const DATA = state.cart;
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [toastIsActive, setToastIsActive] = useState(false);
 
-  const handlePress = () => {
-    state.cart.length > 0 && setModalVisible(!modalVisible);
+  const DATA = state.cart;
+
+  const showToast = text => {
+    setToastIsActive(true);
+
+    Toast.show(text, {
+      position: -200,
+      duration: 2500,
+      hideOnPress: false,
+      backgroundColor: colors.teal,
+    });
+
+    setTimeout(() => {
+      setToastIsActive(false);
+    }, 2500);
   };
 
   const handleGetDiscount = () => {
-    if (state.promoCode) {
-      Alert.alert(
-        '',
-        'You already generated the promo code, please apply it to your orders.',
-        [{ text: 'OK' }]
+    if (state.promoCode && !toastIsActive) {
+      return showToast(
+        'You already generated the promo code, please apply it to your orders.'
       );
-      return;
     }
-    if (state.totalPrice === 0) {
-      Alert.alert('', 'You do not have any items in the cart.', [{ text: 'OK' }]);
-      return;
+
+    if (state.totalPrice === 0 && !toastIsActive) {
+      return showToast('You do not have any items in the cart.');
     }
-    navigation.navigate('GetPromoCode');
+
+    if (!toastIsActive) navigation.navigate('GetPromoCode');
   };
 
   const handleAddDiscount = () => {
-    if (!state.promoCode) {
-      Alert.alert('', 'You do not have any code yet, please get it first.', [
-        { text: 'OK' },
-      ]);
-      return;
+    if (!state.promoCode && !toastIsActive) {
+      return showToast('You do not have any code yet, please get it first.');
     }
-    navigation.navigate('AddPromoCode');
+
+    if (!toastIsActive) navigation.navigate('AddPromoCode');
+  };
+
+  const handlePlacePress = () => {
+    state.cart.length > 0 && setModalVisible(!modalVisible);
   };
 
   const icon = <FontAwesome5 name="arrow-right" size={18} color="white" />;
+
   return (
     <View style={styles.container}>
       <ModalComp
@@ -108,7 +122,7 @@ const Cart = ({ navigation }) => {
               state.cart.length === 0 && styles.disableBtn,
             ]}
             text={styles.btnTxt}
-            onPress={handlePress}
+            onPress={handlePlacePress}
             icon={icon}
           >
             PLACE ORDER

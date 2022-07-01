@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
@@ -9,6 +9,7 @@ import {
   Montserrat_500Medium,
 } from '@expo-google-fonts/montserrat';
 import { Ionicons } from '@expo/vector-icons';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 import AppContextProvider from './src/store/AppContext';
 import AsyncStorageWelcome from './src/screens/AsyncStorageWelcome';
@@ -41,7 +42,7 @@ export default function App() {
   const iconCart = <Ionicons name="ios-cart-outline" size={30} color={'white'} />;
 
   return (
-    <SafeAreaProvider>
+    <RootSiblingParent>
       <StatusBar style="light" />
       <AppContextProvider>
         <NavigationContainer>
@@ -129,6 +130,6 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </AppContextProvider>
-    </SafeAreaProvider>
+    </RootSiblingParent>
   );
 }
