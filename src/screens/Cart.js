@@ -150,21 +150,14 @@ const styles = StyleSheet.create({
   promoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // padding: 20,
     backgroundColor: '#D8D8D8',
-    // borderColor: 'red',
-    // borderWidth: 1,
   },
   titleIconContainer: {
     paddingVertical: 20,
-    // borderColor: 'red',
-    // borderWidth: 1,
     width: '50%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    // height: '100%',
-    // marginHorizontal: 5,
   },
   titleIconContainerAdd: {
     borderLeftColor: 'white',
@@ -173,8 +166,6 @@ const styles = StyleSheet.create({
   promo: {
     fontFamily: 'Montserrat_700Bold',
     fontSize: 13,
-    // marginLeft: 10,
-    // marginRight: 10,
     color: colors.teal,
     height: '100%',
   },

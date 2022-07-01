@@ -1,67 +1,19 @@
 import { useContext } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
-import { AppContext } from '../store/AppContext';
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { colors } from '../utils/colors';
+
+import { AppContext } from '../store/AppContext';
 import Button from './UI/Button';
+import { colors } from '../utils/colors';
+import decreaseQuantity from '../utils/decreaseQuantity';
+import increaseQuantity from '../utils/increaseQuantity';
 
 const CartItem = ({ item }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const handleDecrease = () => {
-    let reducedPriceWithDiscount;
-    let reducedTotalPrice;
-
-    if (state.discountApplied) {
-      reducedTotalPrice = state.cart
-        .map(book => book.cost * book.quantity)
-        .reduce((prev, cur) => prev + cur);
-
-      reducedPriceWithDiscount =
-        reducedTotalPrice - item.cost - (reducedTotalPrice - item.cost) * 0.2;
-    }
-
-    const sameItem = state.cart.find(product => product.id === item.id);
-
-    let newCartTotal;
-
-    if (sameItem && sameItem.quantity === 1 && state.cart.length === 1) {
-      newCartTotal = {
-        ...state,
-        cart: [],
-        totalPrice: 0,
-        promoCode: '',
-        discountApplied: false,
-      };
-    }
-    if (sameItem && sameItem.quantity === 1) {
-      newCartTotal = {
-        cart: state.cart.filter(book => book.id !== item.id),
-        totalPrice:
-          state.discountApplied && state.totalPrice < item.cost
-            ? 0
-            : state.discountApplied && state.totalPrice > item.cost
-            ? reducedPriceWithDiscount
-            : !state.discountApplied && state.totalPrice < item.cost
-            ? 0
-            : state.totalPrice - item.cost,
-      };
-    } else {
-      newCartTotal = {
-        cart: state.cart.map(book =>
-          book.id === item.id
-            ? {
-                ...book,
-                quantity: book.quantity - 1,
-              }
-            : book
-        ),
-        totalPrice: state.discountApplied
-          ? reducedPriceWithDiscount
-          : state.totalPrice - item.cost,
-      };
-    }
+    const newCartTotal = decreaseQuantity(state, item.cost, item.id);
 
     const storeData = async value => {
       try {
@@ -78,31 +30,7 @@ const CartItem = ({ item }) => {
   };
 
   const handleIncrease = () => {
-    let increasedPriceWithDiscount;
-    let reducedTotalPrice;
-
-    if (state.discountApplied) {
-      reducedTotalPrice = state.cart
-        .map(book => book.cost * book.quantity)
-        .reduce((prev, cur) => prev + cur);
-
-      increasedPriceWithDiscount =
-        reducedTotalPrice + item.cost - (reducedTotalPrice + item.cost) * 0.2;
-    }
-
-    let newCartTotal = {
-      cart: state.cart.map(book =>
-        book.id === item.id
-          ? {
-              ...book,
-              quantity: +book.quantity + 1,
-            }
-          : book
-      ),
-      totalPrice: state.discountApplied
-        ? increasedPriceWithDiscount
-        : state.totalPrice + item.cost,
-    };
+    const newCartTotal = increaseQuantity(state, item.cost, item.id);
 
     const storeData = async value => {
       try {

@@ -3,35 +3,18 @@ import { View, StyleSheet, Text, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppContext } from '../../store/AppContext';
-import { colors } from '../../utils/colors';
 import Button from './Button';
+import { colors } from '../../utils/colors';
+import addToCart from '../../utils/addToCart';
 
 const ModalComp = ({ setModalVisible, modalVisible, item, title, navigation, TYPE }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const handlePress = () => {
-    let newCartTotal;
+    // let newCartTotal;
 
     if (item?.title) {
-      const sameItem = state.cart.find(product => product.id === item.id);
-
-      if (sameItem) {
-        newCartTotal = {
-          cart: state.cart.map(book =>
-            book.id === item.id
-              ? {
-                  ...book,
-                  quantity: +book.quantity + 1,
-                }
-              : book
-          ),
-          totalPrice: state.totalPrice + item.cost,
-        };
-      } else
-        newCartTotal = {
-          cart: [...state.cart, item],
-          totalPrice: state.totalPrice + item.cost,
-        };
+      const newCartTotal = addToCart(state, item);
 
       const storeData = async value => {
         try {
