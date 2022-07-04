@@ -23,14 +23,14 @@ const Cart = ({ navigation }) => {
 
     Toast.show(text, {
       position: -200,
-      duration: 2500,
+      duration: 2000,
       hideOnPress: false,
       backgroundColor: colors.teal,
     });
 
     setTimeout(() => {
       setToastIsActive(false);
-    }, 2500);
+    }, 2000);
   };
 
   const handleGetDiscount = () => {

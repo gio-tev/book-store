@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-root-toast';
 
 import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
@@ -18,9 +19,20 @@ const EditprofileInputs = ({ picture }) => {
   });
 
   const [focusedInput, setFocusedInput] = useState({
-    email: false,
+    name: false,
     phone: false,
   });
+
+  const showToast = text => {
+    Toast.show(text, {
+      position: Toast.positions.CENTER,
+      position: 0,
+      duration: 2000,
+      hideOnPress: false,
+      backgroundColor: colors.brown,
+      opacity: 0.95,
+    });
+  };
 
   const handleInputs = (inputIdentifier, enteredValue) => {
     setUserInputs(prevState => {
@@ -78,7 +90,7 @@ const EditprofileInputs = ({ picture }) => {
 
     dispatch({ type: 'EDIT_PROFILE', payload: updatedUser });
 
-    navigation.navigate('Success', { text: 'Your profile has been updated!' });
+    showToast('Your profile has been updated!');
 
     setTimeout(() => {
       navigation.replace('DrawerNavigation', { screen: 'Home' });
@@ -88,15 +100,15 @@ const EditprofileInputs = ({ picture }) => {
   return (
     <View style={styles.inputsContainer}>
       <View
-        style={[styles.inputContainer, focusedInput.email && styles.inputContainerActive]}
+        style={[styles.inputContainer, focusedInput.name && styles.inputContainerActive]}
       >
-        <Text style={styles.label}>Email:</Text>
+        <Text style={styles.label}>Name:</Text>
         <TextInput
           style={styles.input}
-          onChangeText={handleInputs.bind(this, 'email')}
-          onFocus={handleFocus.bind(this, 'email')}
-          onBlur={handleBlur.bind(this, 'email')}
-          value={userInputs.email}
+          onChangeText={handleInputs.bind(this, 'name')}
+          onFocus={handleFocus.bind(this, 'name')}
+          onBlur={handleBlur.bind(this, 'name')}
+          value={userInputs.name}
         />
       </View>
 

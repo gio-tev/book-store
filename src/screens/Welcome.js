@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   img: {
     height: '40%',
     width: '100%',
-    // transform: [{ translateY: 5 }],
   },
   text1Container: {
     marginTop: '10%',

@@ -15,11 +15,17 @@ const EmptyContent = props => {
   };
 
   const icon = <FontAwesome5 name="arrow-right" size={18} color="white" />;
+
   return (
     <View style={styles.emptyCartContainer}>
       <View style={styles.iconContainer}>
         {props.icon === 'Cart' && (
-          <Ionicons style={styles.icon} name="ios-cart-outline" size={35} color={colors.brown} />
+          <Ionicons
+            style={styles.icon}
+            name="ios-cart-outline"
+            size={35}
+            color={colors.brown}
+          />
         )}
         {props.icon === 'Orders' && (
           <MaterialCommunityIcons
@@ -30,6 +36,7 @@ const EmptyContent = props => {
           />
         )}
       </View>
+
       <Text style={styles.cartTxt}>{props.title}</Text>
 
       <Button

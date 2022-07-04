@@ -16,7 +16,6 @@ import { colors } from './src/utils/colors';
 import Welcome from './src/screens/Welcome';
 import SignIn from './src/screens/sign-in/SignIn';
 import SignUp from './src/screens/sign-up/SignUp';
-import Success from './src/screens/Success';
 import Book from './src/screens/Book';
 import DrawerNavigation from './src/screens/DrawerNavigation';
 import OrderPlaced from './src/screens/OrderPlaced';
@@ -52,7 +51,6 @@ export default function App() {
             <Stack.Screen name="Sign In" component={SignIn} />
             <Stack.Screen name="Sign Up" component={SignUp} />
             <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
-            <Stack.Screen name="Success" component={Success} />
             <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
             <Stack.Screen
               name="GetPromoCode"

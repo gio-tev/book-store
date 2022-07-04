@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
 import { View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_KEY } from '@env';
 
 import CustomStatusbar from '../../components/CustomStatusBar';
@@ -9,6 +8,7 @@ import SignInInputs from '../../components/SignInInputs';
 import { AppContext } from '../../store/AppContext';
 import Button from '../../components/UI/Button';
 import { authenticateUser } from '../../utils/https';
+import asyncStorage from '../../utils/asyncStorage';
 
 const styles = SignInStyles;
 
@@ -22,10 +22,12 @@ const SignIn = ({ navigation }) => {
 
   const handleSignUpPress = () => {
     setSignInError(false);
+
     setSignIn({
       email: '',
       password: '',
     });
+
     navigation.navigate('Sign Up');
   };
 
@@ -33,6 +35,7 @@ const SignIn = ({ navigation }) => {
     if (!state.networkAvailable) {
       return;
     }
+
     const auth = await authenticateUser(signIn.email, signIn.password, API_KEY);
 
     if (auth.registered) {
@@ -40,15 +43,7 @@ const SignIn = ({ navigation }) => {
 
       const loggedAccount = state.accounts.find(account => account.email === auth.email);
 
-      const storeData = async value => {
-        try {
-          const jsonValue = JSON.stringify(value);
-          await AsyncStorage.setItem('Account', jsonValue);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      storeData(loggedAccount);
+      asyncStorage('setItem', 'Account', loggedAccount);
 
       dispatch({ type: 'LOGGED_USER', payload: loggedAccount });
 
@@ -70,13 +65,16 @@ const SignIn = ({ navigation }) => {
       email: '',
       password: '',
     });
+
     setSignInError(false);
+
     navigation.navigate('Forgot Password');
   };
 
   return (
     <>
       <CustomStatusbar />
+
       <View style={styles.container}>
         <View style={styles.signInUpContainer}>
           <Button pressable={styles.signInUpActiveBtn} text={styles.signInUpActiveTxt}>

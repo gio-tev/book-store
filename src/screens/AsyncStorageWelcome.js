@@ -41,7 +41,7 @@ const AsyncStorageWelcome = ({ navigation }) => {
 
       if (accountResponse !== null) {
         dispatch({ type: 'LOGGED_USER', payload: JSON.parse(accountResponse) });
-        navigation.replace('DrawerNavigation', { screen: 'Home' });
+        navigation.replace('DrawerNavigation', { screen: 'Success' });
       } else {
         navigation.replace('Welcome');
       }

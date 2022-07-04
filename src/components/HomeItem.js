@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { View, StyleSheet, Pressable, Text, Image } from 'react-native';
+import { StyleSheet, Pressable, Image } from 'react-native';
 import { AppContext } from '../store/AppContext';
 
 const HomeItem = ({ item, navigation }) => {

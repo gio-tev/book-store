@@ -6,6 +6,7 @@ const LoginNav = ({ navigation }) => {
   const handleSignInPress = () => {
     navigation.navigate('Sign In');
   };
+
   const handleSignUpPress = () => {
     navigation.navigate('Sign Up');
   };

@@ -1,4 +1,4 @@
-import { View, StyleSheet, Pressable, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 
@@ -16,6 +16,7 @@ const OrderPlaced = ({ navigation }) => {
 
   const iconOrders = <FontAwesome5 name="arrow-right" size={20} color="white" />;
   const iconClose = <Fontisto name="close-a" size={25} color={colors.brown} />;
+
   return (
     <View style={styles.container}>
       <Button

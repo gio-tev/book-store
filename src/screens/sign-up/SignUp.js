@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { View, KeyboardAvoidingView, ScrollView } from 'react-native';
+import Toast from 'react-native-root-toast';
 
 import { AppContext } from '../../store/AppContext';
 import CustomStatusbar from '../../components/CustomStatusBar';
@@ -8,6 +9,7 @@ import SignUpInputs from '../../components/SignUpInputs';
 import Button from '../../components/UI/Button';
 import { saveUser, signupUser } from '../../utils/https';
 import { API_KEY } from '@env';
+import { colors } from '../../utils/colors';
 
 const styles = SignUpStyles;
 
@@ -24,6 +26,17 @@ const SignUp = ({ navigation }) => {
   const [clearInputs, SetClearInputs] = useState(false);
   const [emptyInputs, setEmptyInputs] = useState(false);
 
+  const showToast = text => {
+    Toast.show(text, {
+      position: Toast.positions.CENTER,
+      position: 200,
+      duration: 2000,
+      hideOnPress: false,
+      backgroundColor: colors.teal,
+      opacity: 0.8,
+    });
+  };
+
   const handleSignInPress = () => {
     SetClearInputs(true);
     navigation.navigate('Sign In');
@@ -33,6 +46,10 @@ const SignUp = ({ navigation }) => {
     const sameUser = state.accounts.find(account => {
       return account.email === newUser.email;
     });
+
+    if (sameUser) {
+      return setEmailExists(true);
+    }
 
     if (!state.networkAvailable) {
       return;
@@ -45,11 +62,6 @@ const SignUp = ({ navigation }) => {
       newUser.password.length === 0
     ) {
       setEmptyInputs(true);
-    }
-
-    if (sameUser) {
-      setEmailExists(true);
-      return;
     }
 
     if (
@@ -88,11 +100,9 @@ const SignUp = ({ navigation }) => {
         password: '',
       });
 
-      navigation.navigate('Success', { text: 'Success!' });
+      showToast('Success!');
 
-      setTimeout(() => {
-        navigation.replace('Sign In');
-      }, 2000);
+      navigation.replace('Sign In');
     }
   };
 
