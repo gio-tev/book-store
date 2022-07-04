@@ -4,7 +4,14 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
 
-const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
+const SignInInputs = ({
+  signIn,
+  setSignIn,
+  SignInError,
+  setSignInError,
+  emptyInputs,
+  setEmptyInputs,
+}) => {
   const { state } = useContext(AppContext);
 
   const [emailInputActive, setEmailInputActive] = useState(false);
@@ -13,6 +20,8 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
   const handleEmailFocus = () => setEmailInputActive(true);
   const handleEmailBlur = () => setEmailInputActive(false);
   const handleEmailChange = email => {
+    setSignInError('');
+    setEmptyInputs(false);
     setSignIn(prevState => {
       return { ...prevState, email };
     });
@@ -21,6 +30,8 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
   const handlePasswordFocus = () => setPasswordInputActive(true);
   const handlePasswordBlur = () => setPasswordInputActive(false);
   const handlePasswordChange = password => {
+    setSignInError('');
+    setEmptyInputs(false);
     setSignIn(prevState => {
       return { ...prevState, password };
     });
@@ -46,12 +57,12 @@ const SignInInputs = ({ signIn, setSignIn, SignInError }) => {
         value={signIn.password}
         secureTextEntry={true}
       />
-      {SignInError && (
-        <Text style={styles.error}>Incorrect email address and/or password.</Text>
-      )}
+      {!!SignInError && <Text style={styles.error}>{SignInError}</Text>}
+
       {!state.networkAvailable && (
         <Text style={styles.error}>No internet connection, try again later.</Text>
       )}
+      {emptyInputs && <Text style={styles.error}>Please fill out all the inputs.</Text>}
     </View>
   );
 };

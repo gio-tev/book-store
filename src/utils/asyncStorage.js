@@ -7,6 +7,7 @@ const asyncStorage = async (method, key, value) => {
     return response;
   } catch (e) {
     console.log(e);
+    return e.message;
   }
 };
 

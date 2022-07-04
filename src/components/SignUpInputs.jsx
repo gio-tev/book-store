@@ -12,6 +12,8 @@ const SignUpInputs = ({
   setEmailExists,
   emptyInputs,
   setEmptyInputs,
+  signupError,
+  setSignupError,
 }) => {
   const { state } = useContext(AppContext);
 
@@ -46,6 +48,7 @@ const SignUpInputs = ({
   const handleNameBlur = () => setNameInputActive(false);
   const handleNameChange = name => {
     setEmptyInputs(false);
+    setSignupError('');
     setNameValue(name);
 
     if (name.length > 5) {
@@ -61,6 +64,7 @@ const SignUpInputs = ({
   const handleEmailChange = email => {
     setEmptyInputs(false);
     setEmailExists(false);
+    setSignupError('');
     setEmailValue(email);
 
     if (email.length > 5 && email.includes('@')) {
@@ -76,6 +80,7 @@ const SignUpInputs = ({
   const handlePhoneBlur = () => setPhoneInputActive(false);
   const handlePhoneChange = phone => {
     setEmptyInputs(false);
+    setSignupError('');
     setPhoneValue(phone);
 
     if (phone.length > 5) {
@@ -91,6 +96,7 @@ const SignUpInputs = ({
   const handlePasswordBlur = () => setPasswordInputActive(false);
   const handlePasswordChange = password => {
     setEmptyInputs(false);
+    setSignupError('');
     setPasswordValue(password);
 
     if (password.length > 5) {
@@ -157,6 +163,8 @@ const SignUpInputs = ({
       {!state.networkAvailable && (
         <Text style={styles.error}>No internet connection, try again later.</Text>
       )}
+
+      {!!signupError && <Text style={styles.error}>{signupError}</Text>}
     </View>
   );
 };

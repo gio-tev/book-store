@@ -18,10 +18,11 @@ const SignIn = ({ navigation }) => {
     email: '',
     password: '',
   });
-  const [SignInError, setSignInError] = useState(false);
+  const [SignInError, setSignInError] = useState('');
+  const [emptyInputs, setEmptyInputs] = useState(false);
 
   const handleSignUpPress = () => {
-    setSignInError(false);
+    setSignInError('');
 
     setSignIn({
       email: '',
@@ -36,10 +37,18 @@ const SignIn = ({ navigation }) => {
       return;
     }
 
+    if (signIn.email.length === 0 || signIn.password.length === 0) {
+      return setEmptyInputs(true);
+    }
+
     const auth = await authenticateUser(signIn.email, signIn.password, API_KEY);
 
+    if (auth.error) {
+      return setSignInError(auth.error.message);
+    }
+
     if (auth.registered) {
-      setSignInError(false);
+      setSignInError('');
 
       const loggedAccount = state.accounts.find(account => account.email === auth.email);
 
@@ -55,8 +64,6 @@ const SignIn = ({ navigation }) => {
       });
 
       return;
-    } else {
-      setSignInError(true);
     }
   };
 
@@ -66,7 +73,7 @@ const SignIn = ({ navigation }) => {
       password: '',
     });
 
-    setSignInError(false);
+    setSignInError('');
 
     navigation.navigate('Forgot Password');
   };
@@ -86,7 +93,14 @@ const SignIn = ({ navigation }) => {
           </Button>
         </View>
 
-        <SignInInputs setSignIn={setSignIn} SignInError={SignInError} signIn={signIn} />
+        <SignInInputs
+          signIn={signIn}
+          setSignIn={setSignIn}
+          SignInError={SignInError}
+          setSignInError={setSignInError}
+          emptyInputs={emptyInputs}
+          setEmptyInputs={setEmptyInputs}
+        />
 
         <View style={styles.ContinueForgotContainer}>
           <Button

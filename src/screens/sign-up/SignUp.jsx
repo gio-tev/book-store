@@ -25,6 +25,7 @@ const SignUp = ({ navigation }) => {
   const [emailExists, setEmailExists] = useState(false);
   const [clearInputs, SetClearInputs] = useState(false);
   const [emptyInputs, setEmptyInputs] = useState(false);
+  const [signupError, setSignupError] = useState('');
 
   const showToast = text => {
     Toast.show(text, {
@@ -71,7 +72,11 @@ const SignUp = ({ navigation }) => {
       newUser.phone.length > 5 &&
       newUser.password.length > 5
     ) {
-      await signupUser(newUser.email, newUser.password, API_KEY);
+      const signupResponse = await signupUser(newUser.email, newUser.password, API_KEY);
+
+      if (signupResponse.error) {
+        return setSignupError(signupResponse.error.message);
+      }
 
       const userWithoutPassword = {
         name: newUser.name,
@@ -79,13 +84,13 @@ const SignUp = ({ navigation }) => {
         phone: newUser.phone,
       };
 
-      const res = await saveUser(userWithoutPassword);
+      const saveResponse = await saveUser(userWithoutPassword);
 
       dispatch({
         type: 'NEW_ACCOUNT',
         payload: {
           ...userWithoutPassword,
-          id: res.name,
+          id: saveResponse.name,
           image:
             'https://cdn.dribbble.com/users/6142/screenshots/5679189/media/1b96ad1f07feee81fa83c877a1e350ce.png?compress=1&resize=1000x750&vertical=top',
         },
@@ -130,6 +135,8 @@ const SignUp = ({ navigation }) => {
             setEmailExists={setEmailExists}
             emptyInputs={emptyInputs}
             setEmptyInputs={setEmptyInputs}
+            signupError={signupError}
+            setSignupError={setSignupError}
           />
         </KeyboardAvoidingView>
         <View style={styles.ContinueForgotContainer}>

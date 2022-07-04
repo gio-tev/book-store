@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import Toast from 'react-native-root-toast';
 
-import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
 import CustomStatusbar from '../components/CustomStatusBar';
 import Button from '../components/UI/Button';
@@ -10,36 +9,37 @@ import { resetPassword } from '../utils/https';
 import { API_KEY } from '@env';
 
 const ForgotPassword = ({ navigation }) => {
-  const { state } = useContext(AppContext);
-
   const [emailInput, setEmailInput] = useState('');
   const [emailInputActive, setEmailInputActive] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
   const handleEmailFocus = () => setEmailInputActive(true);
   const handleEmailBlur = () => setEmailInputActive(false);
   const handleEmailChange = email => {
-    setEmailError(false);
+    setEmailError('');
     setEmailInput(email);
   };
 
+  const showToast = text => {
+    Toast.show(text, {
+      position: 100,
+      duration: 2000,
+      hideOnPress: false,
+      backgroundColor: colors.teal,
+      opacity: 0.95,
+    });
+  };
+
   const handleResetPress = async () => {
-    const emailFound = state.accounts.find(account => account.email === emailInput);
+    const response = await resetPassword(emailInput, API_KEY);
 
-    if (!emailFound) {
-      return setEmailError(true);
-    }
+    if (response.error) return setEmailError(response.error.message);
 
-    const res = await resetPassword(emailInput, API_KEY);
-
-    if (res.email)
-      navigation.replace('Success', {
-        text: 'Please check you Email to reset password!',
-      });
+    showToast('Please check you Email to reset password!');
 
     setTimeout(() => {
       navigation.goBack();
-    }, 3000);
+    }, 2000);
   };
 
   return (
@@ -58,7 +58,7 @@ const ForgotPassword = ({ navigation }) => {
             placeholder="Email"
             value={emailInput}
           />
-          {emailError && <Text style={styles.error}>Incorrect email address.</Text>}
+          {!!emailError && <Text style={styles.error}>{emailError}</Text>}
           <Button
             pressable={({ pressed }) => [styles.resetBtn, pressed && styles.pressed]}
             text={styles.resetTxt}
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'Montserrat_500Medium',
-    // fontFamily: 'Montserrat_700Bold',
     fontSize: 20,
     color: colors.darkGrey,
     marginBottom: 10,
