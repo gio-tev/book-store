@@ -1,12 +1,16 @@
 import { useContext } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
 import Button from './UI/Button';
+import asyncStorage from '../utils/asyncStorage';
 
 function CustomDrawerContent(props) {
   const { state, dispatch } = useContext(AppContext);
@@ -15,14 +19,7 @@ function CustomDrawerContent(props) {
   const handleLogoutPress = () => {
     dispatch({ type: 'LOG_OUT' });
 
-    const removeValue = async () => {
-      try {
-        await AsyncStorage.removeItem('Account');
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    removeValue();
+    asyncStorage('removeItem', 'Account');
 
     props.navigation.navigate('Welcome');
   };
@@ -66,6 +63,9 @@ function CustomDrawerContent(props) {
     </View>
   );
 }
+
+export default CustomDrawerContent;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -111,4 +111,3 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
 });
-export default CustomDrawerContent;

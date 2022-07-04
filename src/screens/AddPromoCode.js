@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
 import Button from '../components/UI/Button';
+import asyncStorage from '../utils/asyncStorage';
 
 const AddPromoCode = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -21,9 +21,9 @@ const AddPromoCode = () => {
 
   const handleDiscountPress = () => {
     if (state.discountApplied) {
-      setDiscountApplied(true);
-      return;
+      return setDiscountApplied(true);
     }
+
     if (state.promoCode === promoCode && !state.discountApplied) {
       const discountedTotalPrice = state.totalPrice - state.totalPrice * 0.2;
       const saved = (state.totalPrice * 0.2).toFixed(1);
@@ -36,15 +36,7 @@ const AddPromoCode = () => {
         totalPrice: discountedTotalPrice,
       };
 
-      const storeData = async value => {
-        try {
-          const jsonValue = JSON.stringify(value);
-          await AsyncStorage.setItem('CartTotal', jsonValue);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      storeData(newCartTotal);
+      asyncStorage('setItem', 'CartTotal', newCartTotal);
     }
   };
 

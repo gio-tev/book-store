@@ -1,50 +1,31 @@
 import { useContext } from 'react';
 import { View, StyleSheet, Text, Modal } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppContext } from '../../store/AppContext';
 import Button from './Button';
 import { colors } from '../../utils/colors';
 import addToCart from '../../utils/addToCart';
+import asyncStorage from '../../utils/asyncStorage';
 
 const ModalComp = ({ setModalVisible, modalVisible, item, title, navigation, TYPE }) => {
   const { state, dispatch } = useContext(AppContext);
 
   const handlePress = () => {
-    // let newCartTotal;
-
     if (item?.title) {
       const newCartTotal = addToCart(state, item);
 
-      const storeData = async value => {
-        try {
-          const jsonValue = JSON.stringify(value);
-          await AsyncStorage.setItem('CartTotal', jsonValue);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      storeData(newCartTotal);
+      asyncStorage('setItem', 'CartTotal', newCartTotal);
     }
 
-    setModalVisible(!modalVisible);
-
-    dispatch({ type: `${TYPE}`, payload: item ? item : '' });
-
     if (TYPE === 'PLACE_ORDER') {
-      const removeCartTotal = async () => {
-        try {
-          await AsyncStorage.removeItem('CartTotal');
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      removeCartTotal();
-
-      dispatch({ type: 'RESET_DISCOUNT_APPLIED' });
+      asyncStorage('removeItem', 'CartTotal');
 
       navigation.navigate('OrderPlaced');
     }
+
+    dispatch({ type: `${TYPE}`, payload: item ? item : '' });
+
+    setModalVisible(!modalVisible);
   };
 
   return (

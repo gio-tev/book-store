@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { View, ActivityIndicator, Text } from 'react-native';
+import { View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_KEY } from '@env';
 

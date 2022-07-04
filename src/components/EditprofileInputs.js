@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
 import Button from './UI/Button';
+import asyncStorage from '../utils/asyncStorage';
 
 const EditprofileInputs = ({ picture }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -36,6 +36,7 @@ const EditprofileInputs = ({ picture }) => {
       return { ...prevState, [inputFocused]: true };
     });
   };
+
   const handleBlur = inputBlurred => {
     setFocusedInput(prevState => {
       return { ...prevState, [inputBlurred]: false };
@@ -73,15 +74,7 @@ const EditprofileInputs = ({ picture }) => {
     };
     updateProfile();
 
-    const storeData = async value => {
-      try {
-        const jsonValue = JSON.stringify(value);
-        await AsyncStorage.setItem('Account', jsonValue);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    storeData(updatedUser);
+    asyncStorage('setItem', 'Account', updatedUser);
 
     dispatch({ type: 'EDIT_PROFILE', payload: updatedUser });
 

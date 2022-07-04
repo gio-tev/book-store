@@ -35,6 +35,7 @@ export const authenticateUser = async (email, password, API_KEY) => {
   const data = await res.json();
   return data;
 };
+
 export const resetPassword = async (email, API_KEY) => {
   const res = await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`,

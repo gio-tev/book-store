@@ -36,12 +36,12 @@ const Cart = ({ navigation }) => {
   const handleGetDiscount = () => {
     if (state.promoCode && !toastIsActive) {
       return showToast(
-        'You already generated the promo code, please apply it to your orders.'
+        'You already generated the promo code, please apply it to your orders'
       );
     }
 
     if (state.totalPrice === 0 && !toastIsActive) {
-      return showToast('You do not have any items in the cart.');
+      return showToast('You do not have any items in the cart');
     }
 
     if (!toastIsActive) navigation.navigate('GetPromoCode');
@@ -49,7 +49,7 @@ const Cart = ({ navigation }) => {
 
   const handleAddDiscount = () => {
     if (!state.promoCode && !toastIsActive) {
-      return showToast('You do not have any code yet, please get it first.');
+      return showToast('You do not have promo code yet');
     }
 
     if (!toastIsActive) navigation.navigate('AddPromoCode');

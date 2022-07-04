@@ -6,13 +6,13 @@ import addToCart from '../utils/addToCart';
 export const AppContext = createContext();
 
 const initialState = {
+  networkAvailable: true,
   accounts: [],
   currentLoggedUser: {},
   selectedBook: {},
   cart: [],
   totalPrice: 0,
   orders: [],
-  networkAvailable: false,
   promoCode: '',
   discountApplied: false,
 };
@@ -55,7 +55,14 @@ const reducer = (state, action) => {
     return increaseQuantity(state, action.payload.cost, action.payload.id);
   }
   if (action.type === 'PLACE_ORDER') {
-    return { ...state, orders: [...state.cart], cart: [], totalPrice: 0 };
+    return {
+      ...state,
+      orders: [...state.cart],
+      cart: [],
+      totalPrice: 0,
+      promoCode: '',
+      discountApplied: false,
+    };
   }
   if (action.type === 'EDIT_PROFILE') {
     const accountToUpdateIndex = state.accounts.findIndex(account => {
@@ -82,13 +89,6 @@ const reducer = (state, action) => {
       ...state,
       totalPrice: action.payload,
       discountApplied: true,
-    };
-  }
-  if (action.type === 'RESET_DISCOUNT_APPLIED') {
-    return {
-      ...state,
-      promoCode: '',
-      discountApplied: false,
     };
   }
 };

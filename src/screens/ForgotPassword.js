@@ -26,12 +26,16 @@ const ForgotPassword = ({ navigation }) => {
   const handleResetPress = async () => {
     const emailFound = state.accounts.find(account => account.email === emailInput);
 
-    if (!emailFound) setEmailError(true);
+    if (!emailFound) {
+      return setEmailError(true);
+    }
 
     const res = await resetPassword(emailInput, API_KEY);
 
     if (res.email)
-      navigation.replace('Success', { text: 'Please check you Email to reset password!' });
+      navigation.replace('Success', {
+        text: 'Please check you Email to reset password!',
+      });
 
     setTimeout(() => {
       navigation.goBack();

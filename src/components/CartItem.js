@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AppContext } from '../store/AppContext';
 import Button from './UI/Button';
 import { colors } from '../utils/colors';
 import decreaseQuantity from '../utils/decreaseQuantity';
 import increaseQuantity from '../utils/increaseQuantity';
+import asyncStorage from '../utils/asyncStorage';
 
 const CartItem = ({ item }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -15,16 +15,7 @@ const CartItem = ({ item }) => {
   const handleDecrease = () => {
     const newCartTotal = decreaseQuantity(state, item.cost, item.id);
 
-    const storeData = async value => {
-      try {
-        const jsonValue = JSON.stringify(value);
-        await AsyncStorage.setItem('CartTotal', jsonValue);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    storeData(newCartTotal);
+    asyncStorage('setItem', 'CartTotal', newCartTotal);
 
     dispatch({ type: 'DECREASE_QUANTITY', payload: item });
   };
@@ -32,15 +23,7 @@ const CartItem = ({ item }) => {
   const handleIncrease = () => {
     const newCartTotal = increaseQuantity(state, item.cost, item.id);
 
-    const storeData = async value => {
-      try {
-        const jsonValue = JSON.stringify(value);
-        await AsyncStorage.setItem('CartTotal', jsonValue);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    storeData(newCartTotal);
+    asyncStorage('setItem', 'CartTotal', newCartTotal);
 
     dispatch({ type: 'INCREASE_QUANTITY', payload: item });
   };
