@@ -1,8 +1,12 @@
 import { View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 import { colors } from '../utils/colors';
 import Button from './UI/Button';
 
-const LoginNav = ({ navigation }) => {
+const LoginNav = () => {
+  const navigation = useNavigation();
+
   const handleSignInPress = () => {
     navigation.navigate('Sign In');
   };

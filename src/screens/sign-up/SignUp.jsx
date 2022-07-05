@@ -22,7 +22,7 @@ const SignUp = ({ navigation }) => {
     phone: '',
     password: '',
   });
-  const [emailExists, setEmailExists] = useState(false);
+
   const [clearInputs, SetClearInputs] = useState(false);
   const [emptyInputs, setEmptyInputs] = useState(false);
   const [signupError, setSignupError] = useState('');
@@ -44,14 +44,6 @@ const SignUp = ({ navigation }) => {
   };
 
   const handleRegisterPress = async () => {
-    const sameUser = state.accounts.find(account => {
-      return account.email === newUser.email;
-    });
-
-    if (sameUser) {
-      return setEmailExists(true);
-    }
-
     if (!state.networkAvailable) {
       return;
     }
@@ -72,12 +64,6 @@ const SignUp = ({ navigation }) => {
       newUser.phone.length > 5 &&
       newUser.password.length > 5
     ) {
-      const signupResponse = await signupUser(newUser.email, newUser.password, API_KEY);
-
-      if (signupResponse.error) {
-        return setSignupError(signupResponse.error.message);
-      }
-
       const userWithoutPassword = {
         name: newUser.name,
         email: newUser.email,
@@ -85,6 +71,16 @@ const SignUp = ({ navigation }) => {
       };
 
       const saveResponse = await saveUser(userWithoutPassword);
+
+      if (saveResponse === 'Error') {
+        return setSignupError('Something went wrong, try again later');
+      }
+
+      const signupResponse = await signupUser(newUser.email, newUser.password, API_KEY);
+
+      if (signupResponse.error) {
+        return setSignupError(signupResponse.error.message);
+      }
 
       dispatch({
         type: 'NEW_ACCOUNT',
@@ -131,8 +127,6 @@ const SignUp = ({ navigation }) => {
             setUser={setNewUser}
             clearInputs={clearInputs}
             SetClearInputs={SetClearInputs}
-            emailExists={emailExists}
-            setEmailExists={setEmailExists}
             emptyInputs={emptyInputs}
             setEmptyInputs={setEmptyInputs}
             signupError={signupError}

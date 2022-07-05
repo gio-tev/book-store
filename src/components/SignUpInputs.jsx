@@ -8,8 +8,6 @@ const SignUpInputs = ({
   setUser,
   clearInputs,
   SetClearInputs,
-  emailExists,
-  setEmailExists,
   emptyInputs,
   setEmptyInputs,
   signupError,
@@ -63,7 +61,6 @@ const SignUpInputs = ({
   const handleEmailBlur = () => setEmailInputActive(false);
   const handleEmailChange = email => {
     setEmptyInputs(false);
-    setEmailExists(false);
     setSignupError('');
     setEmailValue(email);
 
@@ -155,8 +152,6 @@ const SignUpInputs = ({
       {!passwordInputIsValid && (
         <Text style={styles.error}>Password must have more than 5 charachters.</Text>
       )}
-
-      {emailExists && <Text style={styles.error}>Email already exists.</Text>}
 
       {emptyInputs && <Text style={styles.error}>Please fill out all the inputs.</Text>}
 
