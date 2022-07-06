@@ -1,14 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-  Text,
-  RefreshControl,
-  ScrollView,
-} from 'react-native';
+import { useState, useEffect, useContext } from 'react';
+import { View, StyleSheet, FlatList, ActivityIndicator, Text } from 'react-native';
 
+import { AppContext } from '../store/AppContext';
 import HomeItem from '../components/HomeItem';
 import { colors } from '../utils/colors';
 import { fetchBooks } from '../utils/https';
@@ -18,22 +11,17 @@ const wait = timeout => {
 };
 
 const Home = ({ navigation }) => {
+  const { state } = useContext(AppContext);
+
   const [booksData, setBooksData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(false);
-
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
 
   useEffect(() => {
     const loadBooks = async () => {
       const books = await fetchBooks();
 
-      if (books === 'Network request failed') {
+      if (!state.networkAvailable) {
         return setFetchError(true);
       }
 
@@ -42,16 +30,10 @@ const Home = ({ navigation }) => {
       setIsLoading(false);
     };
     loadBooks();
-  }, []);
+  }, [state.networkAvailable]);
 
   if (fetchError) {
-    return (
-      <ScrollView
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-      >
-        <Text style={styles.error}>Something went wrong, try again later.</Text>
-      </ScrollView>
-    );
+    return <Text style={styles.error}>Something went wrong, try again later.</Text>;
   }
 
   return (

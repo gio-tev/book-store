@@ -13,18 +13,16 @@ const AsyncStorageWelcome = ({ navigation }) => {
       dispatch({ type: 'NETWORK_INFO', payload: state.isConnected });
     });
 
-    return () => {
-      unsubscribe();
-    };
+    // return () => {
+    //   unsubscribe();
+    // };
   }, []);
 
   useEffect(() => {
     const loadAccounts = async () => {
       const accounts = await fetchAccounts();
 
-      if (accounts === 'Network request failed') {
-        return dispatch({ type: 'NETWORK_INFO', payload: false });
-      }
+      if (accounts === 'Network request failed') return;
 
       dispatch({ type: 'LOAD_ACCOUNTS', payload: accounts });
     };

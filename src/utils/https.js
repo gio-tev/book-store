@@ -145,7 +145,6 @@ export const fetchBooks = async () => {
 
     return transformedBooks;
   } catch (error) {
-    console.log(error, 'error');
     return error.message;
   }
 };
