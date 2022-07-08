@@ -6,6 +6,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import { AntDesign } from '@expo/vector-icons';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import { AppContext } from '../store/AppContext';
 import { colors } from '../utils/colors';
@@ -60,6 +61,21 @@ function CustomDrawerContent(props) {
           />
         </DrawerContentScrollView>
       </View>
+
+      <MapView
+        style={styles.map}
+        provider={PROVIDER_GOOGLE}
+        initialRegion={{
+          latitude: 51.515282,
+          longitude: -0.091392,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+          // latitudeDelta: 0.2522,
+          // longitudeDelta: 0.2521,
+        }}
+      >
+        <Marker coordinate={{ latitude: 51.515282, longitude: -0.091392 }} />
+      </MapView>
     </View>
   );
 }
@@ -109,5 +125,9 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.75,
+  },
+  map: {
+    width: '100%',
+    height: '35%',
   },
 });

@@ -25,7 +25,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.giotev.bookstore"
+      "package": "com.giotev.bookstore",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyC4uLEY3nZHXpsHc6c9yTPHb6QMRRHfQvo"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -3,22 +3,21 @@ import LoginNav from '../components/LoginNav';
 import { colors } from '../utils/colors';
 import CustomStatusbar from '../components/CustomStatusBar';
 
-const Welcome = route => {
-  console.log(route.params, '............');
-
-  return (
-    <View style={styles.container}>
-      <CustomStatusbar />
-      <Image style={styles.img} source={require('../../assets/cover.jpg')} />
-      <View style={styles.text1Container}>
-        <Text style={styles.text1}>Welcome {'\n'} to Book Store</Text>
-      </View>
-      <Text style={styles.text2}>Let's get started!</Text>
-
-      <LoginNav />
+const Welcome = () => (
+  <View style={styles.container}>
+    <CustomStatusbar />
+    <Image style={styles.img} source={require('../../assets/cover.jpg')} />
+    <View style={styles.text1Container}>
+      <Text style={styles.text1}>Welcome {'\n'} to Book Store</Text>
     </View>
-  );
-};
+    <Text style={styles.text2}>Let's get started!</Text>
+
+    <LoginNav />
+  </View>
+);
+
+export default Welcome;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,5 +45,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
-export default Welcome;
