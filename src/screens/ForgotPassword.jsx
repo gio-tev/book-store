@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import Toast from 'react-native-root-toast';
-
-import { colors } from '../utils/colors';
-import CustomStatusbar from '../components/CustomStatusBar';
-import Button from '../components/UI/Button';
-import { resetPassword } from '../utils/https';
 import { API_KEY } from '@env';
 
+import { colors } from '../utils/colors';
+import { resetPassword } from '../utils/https';
+import CustomStatusbar from '../components/CustomStatusBar';
+import Button from '../components/UI/Button';
+import { AppContext } from '../store/AppContext';
+
 const ForgotPassword = ({ navigation }) => {
+  const { state } = useContext(AppContext);
+
   const [emailInput, setEmailInput] = useState('');
   const [emailInputActive, setEmailInputActive] = useState(false);
   const [emailError, setEmailError] = useState('');
@@ -34,6 +37,8 @@ const ForgotPassword = ({ navigation }) => {
     const response = await resetPassword(emailInput, API_KEY);
 
     if (response.error) return setEmailError(response.error.message);
+
+    if (!state.networkAvailable) return setEmailError('No internet connection');
 
     showToast('Please check you Email to reset password!');
 
